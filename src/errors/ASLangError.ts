@@ -1,12 +1,20 @@
 import ErrorCodes from "./ErrorCodes";
 
 interface ASLangErrorOptions {
+    /** The reason for this error. */
     reason: string,
+    /** The code for this error. */
     code?: (string | null),
+    /** The position in the code where this error occurred. */
     position?: number | null,
+    /** The fix for this error, if any. */
     fix?: string | null,
+    /** A note for this error, if any. */
     note?: string | null,
+    /** The error code for this error. */
     errorCode?: ErrorCodes;
+    /** The token that caused the error. */
+    errorToken?: string | null;
 }
 
 /**
@@ -17,20 +25,16 @@ interface ASLangErrorOptions {
  * **NOTE: This does not include errors thrown by the JavaScript runtime**
  */
 export default class ASLangError extends Error {
-    /** The reason for this error. */
     reason;
-    /** The code for this error. */
     code;
-    /** The position in the code where this error occurred. */
     position;
-    /** The fix for this error, if any. */
     fix;
-    /** A note for this error, if any. */
     note
     errorCode;
+    errorToken;
 
     constructor(
-        {reason, code = null, position = null, fix = null, note = null, errorCode = ErrorCodes.GenericError}: ASLangErrorOptions
+        {reason, code = null, position = null, fix = null, note = null, errorCode = ErrorCodes.GenericError, errorToken}: ASLangErrorOptions
     ) {
         super(reason);
         this.reason = reason;
@@ -40,5 +44,6 @@ export default class ASLangError extends Error {
         this.fix = fix;
         this.note = note;
         this.errorCode = errorCode;
+        this.errorToken = errorToken;
     }
 }

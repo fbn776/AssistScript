@@ -6,6 +6,10 @@ export class ArrayTokenizer<T> {
     readonly tokens: T[];
     private index: number = 0;
 
+    public get length() {
+        return this.tokens.length;
+    }
+
     public get currIndex() {
         return this.index
     };
@@ -28,8 +32,20 @@ export class ArrayTokenizer<T> {
     hasMoreTokens(): boolean {
         return this.index < this.tokens.length;
     }
-
     reset(): void {
         this.index = 0;
     }
+}
+
+
+/** Returns the length of the string at the specified token position if all the tokens were joined together. */
+export function getJoinedStrLength(token: ArrayTokenizer<string>, tokenPos: number, offset = 0): number {
+    if(tokenPos > token.length)
+        throw new Error(`Token position ${tokenPos} is greater than the length of the token array (${token.length})`)
+
+    let length = 0;
+    for (let i = 0; i < tokenPos; i++) {
+        length += token.tokens[i].length + offset;
+    }
+    return length - offset;
 }

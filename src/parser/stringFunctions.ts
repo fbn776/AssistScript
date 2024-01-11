@@ -1,4 +1,4 @@
-import {ArrayTokenizer} from "../utils/ArrayTokenizer";
+import {ArrayTokenizer, getJoinedStrLength} from "../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 
@@ -6,15 +6,21 @@ import ErrorCodes from "../errors/ErrorCodes";
  * Takes a string and returns an array of strings split by spaces, but groups strings in quotes together.
  * @throws ASLangError
  */
-export function groupQuotesInStr(str: string): string[] {
-    const tokens = new ArrayTokenizer(str.split(' '));
+
+
+export function groupQuotesInStr(inputTxt: string): string[] {
+    const tokens = new ArrayTokenizer(inputTxt.split(' '));
     const quottedTokens: string[] = [];
+
+    // If the input string is empty, then throw an error.
+    if(inputTxt === '')
+        throw new ASLangError({reason: "Cannot group quotes in an empty string.", errorCode: ErrorCodes.FoundNullToken})
 
     while (tokens.hasMoreTokens()) {
         let curr = tokens.nextToken();
 
         if (curr === null)
-            throw new ASLangError({reason: "Unexpected null token", code: str, errorCode: ErrorCodes.FoundNullToken})
+            break;
 
         // NOTE: DQ = Double Quote, SQ = Single Quote
         const startIndexDQ = curr.indexOf(`"`);
@@ -30,7 +36,8 @@ export function groupQuotesInStr(str: string): string[] {
             const initialIndex = tokens.currIndex;
             // Loops through the string until it finds the next quote; the next quote could be anywhere in the string.
             while (tokens.hasMoreTokens() &&
-            curr!.indexOf(startsWith, tokens.currIndex === initialIndex ? startIndex + 1 : 0) === -1) {
+                curr!.indexOf(startsWith, tokens.currIndex === initialIndex ? startIndex + 1 : 0) === -1
+            ) {
                 str = str.concat(curr + ' ');
                 curr = tokens.nextToken();
             }
@@ -39,6 +46,31 @@ export function groupQuotesInStr(str: string): string[] {
 
             const quoteStartIndex = str.indexOf(startsWith);
             const quoteEndIndex = str.lastIndexOf(startsWith);
+
+            // If the quote is not closed, then throw an error.
+            if(quoteStartIndex === quoteEndIndex) {
+                throw new ASLangError({
+                    reason: `\`${startsWith}\` was found, but not closed.`,
+                    code: inputTxt,
+                    position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
+                    errorCode: ErrorCodes.UnclosedQuote,
+                    errorToken: startsWith
+                })
+            }
+
+            // If there is anything before or after the quote, then throw an error.
+            if((quoteStartIndex > 0 || quoteEndIndex < str.length - 1) &&
+                // Check if `(` is not before the quote, or `)` is not after the quote; This is allowable.
+                (str.substring(0, quoteStartIndex).trim() !== '(' && str.substring(quoteEndIndex + 1).trim() !== ')')
+            ) {
+                throw new ASLangError({
+                    reason: `Unexpected token \`${str.substring(quoteStartIndex, quoteEndIndex + 1)}\`. Spaces or delimiting characters should be provided before or after the quote.`,
+                    code: inputTxt,
+                    position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
+                    errorCode: ErrorCodes.InvalidQuotes,
+                    errorToken: str.substring(quoteStartIndex, quoteEndIndex + 1)
+                })
+            }
 
             // If there is anything before the quote, then add it to the return array.
             if (quoteStartIndex != 0)
