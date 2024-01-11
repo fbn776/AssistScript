@@ -1,30 +1,22 @@
-import {ArrayTokenizer} from "./utils/ArrayTokenizer";
+import {groupQuotesInStr} from "./parser/stringFunctions";
 
-const inputStr = `hello world "this is a string" 'this is another string' "this is a string with a ' in it" 'this is a string with a " in it'`;
+const inputStr = `hello world ("this is a test") 'this is also a test') "this is a test with a 'quote' in it"`;
+//console.log("INPUT: ", inputStr);
+//console.log(groupQuotesInStr(inputStr));
 
-function groupQuotesInStr(str: string): string[] {
-    const tokens = new ArrayTokenizer(str.split(' '));
-    const quottedTokens: string[] = [];
 
-    while (tokens.hasMoreTokens()) {
-        let curr = tokens.nextToken();
-        if (curr.startsWith(`"`) || curr.startsWith(`'`)) {
-            const startsWith = curr[0];
-            let str: string = '';
-
-            while (tokens.hasMoreTokens() &&
-                !curr.endsWith(startsWith)) {
-
-                str = str.concat(curr + ' ');
-                curr = tokens.nextToken();
-            }
-            str = str.concat(curr).substring(1, str.length - 1);
-            quottedTokens.push(str);
-        } else {
-            quottedTokens.push(curr);
-        }
-    }
-    return quottedTokens;
+function test(inputStr: string) {
+    console.log();
+    console.log("INPUT: ", inputStr);
+    console.log("OUTPUT: ", groupQuotesInStr(inputStr));
+    console.log();
 }
 
-console.log(groupQuotesInStr(inputStr));
+test("");
+test("hello world");
+test("hello world (this is a test)");
+test(`"Hello there how are you?"`);
+test(`hello world 'this is a test' "this is a test" "this is 'a' test" 'this is "a" test'`);
+test(`hello world "this is a test"'this is a test'"this is 'a' test"'this is "a" test'`);
+test(`hello world ("wtf is this") (this "is a" test)`);
+test(`This "'is' 'going' 'to' "be fun. ('this is a "test"') `);
