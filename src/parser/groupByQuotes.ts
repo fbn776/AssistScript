@@ -6,8 +6,6 @@ import ErrorCodes from "../errors/ErrorCodes";
  * Takes a string and returns an array of strings split by spaces, but groups strings in quotes together.
  * @throws ASLangError
  */
-
-
 export function groupQuotesInStr(inputTxt: string): string[] {
     const tokens = new ArrayTokenizer(inputTxt.split(' '));
     const quottedTokens: string[] = [];
@@ -17,10 +15,7 @@ export function groupQuotesInStr(inputTxt: string): string[] {
         throw new ASLangError({reason: "Cannot group quotes in an empty string.", errorCode: ErrorCodes.FoundNullToken})
 
     while (tokens.hasMoreTokens()) {
-        let curr = tokens.nextToken();
-
-        if (curr === null)
-            break;
+        let curr = tokens.nextToken() || '';
 
         // NOTE: DQ = Double Quote, SQ = Single Quote
         const startIndexDQ = curr.indexOf(`"`);
@@ -39,7 +34,7 @@ export function groupQuotesInStr(inputTxt: string): string[] {
                 curr!.indexOf(startsWith, tokens.currIndex === initialIndex ? startIndex + 1 : 0) === -1
             ) {
                 str = str.concat(curr + ' ');
-                curr = tokens.nextToken();
+                curr = tokens.nextToken() || '';
             }
             // Adds the last token to the string.
             str = str.concat(curr!);
