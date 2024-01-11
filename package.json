@@ -5,6 +5,7 @@
 	"main": "build/index.js",
 	"scripts": {
 		"start:dev": "npx nodemon",
+		"dev": "npx ts-node ./src/index.ts",
 		"build": "rimraf ./build && tsc",
 		"start": "npm run build && node build/index.js"
 	},
