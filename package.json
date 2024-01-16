@@ -4,8 +4,9 @@
 	"description": "AssistScript is a custom command language",
 	"main": "build/index.js",
 	"scripts": {
-		"start:dev": "npx nodemon",
-		"dev": "npx ts-node ./src/index.ts",
+		"dev:listen": "npx nodemon",
+		"dev:main": "npx ts-node ./src/index.ts",
+		"dev:debug": "node --inspect --require ts-node/register ./src/index.ts",
 		"build": "rimraf ./build && tsc",
 		"start": "npm run build && node build/index.js"
 	},
