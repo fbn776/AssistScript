@@ -1,17 +1,21 @@
 import {ArrayTokenizer, getJoinedStrLength} from "../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
+import {hasOnlyRepeatedChars, splitParenthesis} from "../utils/utils";
 
-/**
- * Takes a string and returns an array of strings split by spaces, but groups strings in quotes together.
+
+/** Takes in a string and splits it into an array.
+ * The split is done with whitespaces and parenthesis.
+ * This also groups strings with in quotes as a single element and throws error if there is an issue with grouping.
+ *
  * @throws ASLangError
- */
-export function groupQuotesInStr(inputTxt: string): string[] {
+ **/
+export function groupQuotesAndSplitTokens(inputTxt: string): string[] {
     const tokens = new ArrayTokenizer(inputTxt.split(' '));
     const quottedTokens: string[] = [];
 
     // If the input string is empty, then throw an error.
-    if(inputTxt === '')
+    if (inputTxt === '')
         throw new ASLangError({reason: "Cannot group quotes in an empty string.", errorCode: ErrorCodes.FoundNullToken})
 
     while (tokens.hasMoreTokens()) {
@@ -32,7 +36,7 @@ export function groupQuotesInStr(inputTxt: string): string[] {
             // Loops through the string until it finds the next quote; the next quote could be anywhere in the string.
             while (tokens.hasMoreTokens() &&
                 curr!.indexOf(startsWith, tokens.currIndex === initialIndex ? startIndex + 1 : 0) === -1
-            ) {
+                ) {
                 str = str.concat(curr + ' ');
                 curr = tokens.nextToken() || '';
             }
@@ -42,8 +46,8 @@ export function groupQuotesInStr(inputTxt: string): string[] {
             const quoteStartIndex = str.indexOf(startsWith);
             const quoteEndIndex = str.lastIndexOf(startsWith);
 
-            // If the quote is not closed, then throw an error.
-            if(quoteStartIndex === quoteEndIndex) {
+            //ERROR Check: If the quote is not closed, then throw an error.
+            if (quoteStartIndex === quoteEndIndex) {
                 throw new ASLangError({
                     reason: `\`${startsWith}\` was found, but not closed.`,
                     code: inputTxt,
@@ -53,13 +57,21 @@ export function groupQuotesInStr(inputTxt: string): string[] {
                 })
             }
 
-            // If there is anything before or after the quote, then throw an error.
-            if((quoteStartIndex > 0 || quoteEndIndex < str.length - 1) &&
-                // Check if `(` is not before the quote, or `)` is not after the quote; This is allowable.
-                (str.substring(0, quoteStartIndex).trim() !== '(' && str.substring(quoteEndIndex + 1).trim() !== ')')
-            ) {
+            const beforeStr = str.substring(0, quoteStartIndex),
+                afterStr = str.substring(quoteEndIndex + 1);
+            
+            // ERROR Check: If there is anything before or after the quote, then throw an error.
+            if ((quoteStartIndex > 0 || quoteEndIndex < str.length - 1) && (
+                // Check if characters before and after the token are '(' or ')'
+                !(hasOnlyRepeatedChars(beforeStr) && hasOnlyRepeatedChars(afterStr)) || (
+                    (beforeStr && beforeStr[0] !== '(') ||
+                    (afterStr && afterStr[0] !== ')')
+                )
+            )) {
+
                 throw new ASLangError({
-                    reason: `Unexpected token \`${str.substring(quoteStartIndex, quoteEndIndex + 1)}\`. Spaces or delimiting characters should be provided before or after the quote.`,
+                    reason: `Error in token \`${str.substring(quoteStartIndex, quoteEndIndex + 1)}\`. Only spaces and delimiting characters are allowed just before or after the quotes.`,
+                    note: `${beforeStr ? 'Found `' + beforeStr + '` before the token' : ''}; ${afterStr ? 'Found `' + afterStr + '` after the token' : ''}`,
                     code: inputTxt,
                     position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
                     errorCode: ErrorCodes.InvalidQuotes,
@@ -67,18 +79,19 @@ export function groupQuotesInStr(inputTxt: string): string[] {
                 })
             }
 
-            // If there is anything before the quote, then add it to the return array.
+            // If there is anything before the quote, then add it to the return array and also split for parenthesis.
             if (quoteStartIndex != 0)
-                quottedTokens.push(str.substring(0, quoteStartIndex));
+                quottedTokens.push(...splitParenthesis(beforeStr));
 
-            // Now add the grouped string to the return array. But strip the quotes off.
+            // Push the grouped string too
             quottedTokens.push(str.substring(quoteStartIndex + 1, quoteEndIndex));
 
-            // If there is anything after the quote, then also add it to the return array too.
+            // If there is anything after the quote, add it to the return array and split for parenthesis.
             if (quoteEndIndex != str.length - 1)
-                quottedTokens.push(str.substring(quoteEndIndex + 1));
+                quottedTokens.push(...splitParenthesis(afterStr));
         } else {
-            quottedTokens.push(curr);
+            // Split for parenthesis
+            quottedTokens.push(...splitParenthesis(curr));
         }
     }
     return quottedTokens;

@@ -1,26 +1,27 @@
-import {groupQuotesInStr} from "./parser/groupByQuotes";
+import {groupQuotesAndSplitTokens} from "./parser/groupQuotesAndSplitTokens";
 import ASLangError from "./errors/ASLangError";
 
-const inputStr = `hello world ("this is a test") 'this is also a test') "this is a test with a 'quote' in it"`;
 
-function test(inputStr: string) {
-    console.log();
-    console.log("INPUT: ", inputStr);
+function test(str: string) {
     try {
+        console.log("Testing: ", str);
+        const tokens = groupQuotesAndSplitTokens(str);
+        console.log(tokens);
 
-        console.log("OUTPUT: ", groupQuotesInStr(inputStr));
     } catch (e) {
-        if (e instanceof ASLangError)
+        if(e instanceof ASLangError)
+            console.error(e.display());
+        else
             console.error(e);
     }
-    console.log();
 }
 
-// test(inputStr);
-// test(`hello world "this is a test"`);
-// test(`hello world ("this is a test")`);
-// test(`"This starts with a quote" haha`);
-// test(`Haha "this ends with a quote"`);
-// test(`Haha "there is quotes in the middle" haha`);
-// test(`Hello there "opened with dq but closed with sq'`);
-// test(`Hello there "     hhjds    jkjds   kjjj" 'some very weird spaces      '   )`)
+test(`helo there "how are you" aaa "h haha"))`);
+test(`hello "haha" 'hi' "Hiii 'hello'"`);
+test(`Hello ('hii')`);
+test(`Hello ('hii'`);
+test(`Hello 'hii')`);
+test(`Hello ('hii')))`);
+test(`Hello ('hii'aa`);
+test(`Hello ('hii'aabvc`);
+test(`Haha this is a simple string`)
