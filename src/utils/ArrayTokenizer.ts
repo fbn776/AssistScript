@@ -19,12 +19,13 @@ export class ArrayTokenizer<T> {
         this.tokens = tokenArray
     }
 
-    /** Returns the next token in the tokens array, or null if there are no more tokens. */
+    /** Returns the next token in the token's array, or null if there are no more tokens. */
     nextToken(): T | null {
         return this.tokens[this.index++] || null
     }
 
-    /** Returns the current token in from the tokens array, or null if there are no more tokens. This does not increment the index*/
+    /** Returns the current token in from the token's array, or null if there are no more tokens.
+     * This does not increment the index*/
     currentToken(): T | null {
         return this.tokens[this.index] || null;
     }
