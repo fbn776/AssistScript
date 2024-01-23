@@ -1,17 +1,17 @@
-import {ArrayTokenizer, getJoinedStrLength} from "../../utils/ArrayTokenizer";
+import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
-import {hasOnlyRepeatedChars} from "../lang_utils";
 import LangToken from "./tokens/LangToken";
 import StringToken from "./tokens/StringToken";
 import ContainerToken from "./tokens/ContainerToken";
+import {TknErrorChecks} from "./TknErrorChecks";
 
 
 /**
  * Splits a string based on parenthesis and converts each to a StringToken
  * @param str
  */
-export function splitParens(str: string): LangToken[] {
+export function tokenizeParens(str: string): LangToken[] {
     return str.split(/([()])/).filter((val) => val).map(e => {
         if(e === ")" || e === "(")
             return new ContainerToken(e);
@@ -19,39 +19,9 @@ export function splitParens(str: string): LangToken[] {
     });
 }
 
-
-function invalidQuoteErrorCheck(quoteStartIndex: number, quoteEndIndex: number, str: string, beforeStr: string, afterStr: string, inputTxt: string, tokens: ArrayTokenizer<string>) {
-    if ((quoteStartIndex > 0 || quoteEndIndex < str.length - 1) && (
-        // Check if characters before and after the token are '(' or ')'
-        !(hasOnlyRepeatedChars(beforeStr) && hasOnlyRepeatedChars(afterStr)) || (
-            (beforeStr && beforeStr[0] !== '(') ||
-            (afterStr && afterStr[0] !== ')')
-        )
-    )) {
-        throw new ASLangError({
-            reason: `Error in token \`${str.substring(quoteStartIndex, quoteEndIndex + 1)}\`. Only spaces and delimiting characters are allowed just before or after the quotes.`,
-            note: `${beforeStr ? 'Found `' + beforeStr + '` before the token' : ''}; ${afterStr ? 'Found `' + afterStr + '` after the token' : ''}`,
-            source: inputTxt,
-            position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
-            errorCode: ErrorCodes.InvalidQuotes,
-            errorToken: str.substring(quoteStartIndex, quoteEndIndex + 1)
-        })
-    }
-}
-
-function unclosedQuoteErrorCheck(quoteStartIndex: number, quoteEndIndex: number, startsWith: string, inputTxt: string, tokens: ArrayTokenizer<string>, str: string) {
-    if (quoteStartIndex === quoteEndIndex)
-        throw new ASLangError({
-            reason: `\`${startsWith}\` was found, but not closed.`,
-            source: inputTxt,
-            position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
-            errorCode: ErrorCodes.UnclosedQuote,
-            errorToken: startsWith
-        })
-}
-
 /** Takes in a string and splits it into tokens based on space.
- * Along with tokenizing, this also groups quotes together, this also splits all the container tokens `(`, `)`
+ * Along with tokenizing this also groups quotes together, split all the container tokens `(`, `)` and
+ * Check parse error like invalid quotes, invalid brackets, etc.
  * @throws ASLangError
  **/
 export function tokenize(inputTxt: string): LangToken[] {
@@ -91,40 +61,30 @@ export function tokenize(inputTxt: string): LangToken[] {
             const quoteEndIndex = str.lastIndexOf(startsWith);
 
             //ERROR Check: If the quote is not closed, then throw an error.
-            unclosedQuoteErrorCheck(quoteStartIndex, quoteEndIndex, startsWith, inputTxt, tokens, str);
+            TknErrorChecks.hasUnclosedQuoteError(quoteStartIndex, quoteEndIndex, startsWith, inputTxt, tokens, str);
 
             const beforeStr = str.substring(0, quoteStartIndex),
                 afterStr = str.substring(quoteEndIndex + 1);
 
             // ERROR Check: If there is anything before or after the quote, then throw an error.
-            invalidQuoteErrorCheck(quoteStartIndex, quoteEndIndex, str, beforeStr, afterStr, inputTxt, tokens);
+            TknErrorChecks.hasInvalidQuoteError(quoteStartIndex, quoteEndIndex, str, beforeStr, afterStr, inputTxt, tokens);
 
             // If there is anything before the quote, then add it to the return array and also split for parenthesis.
             if (quoteStartIndex != 0)
-                quottedTokens.push(...splitParens(beforeStr));
+                quottedTokens.push(...tokenizeParens(beforeStr));
 
             // Push the grouped string too
             quottedTokens.push(new StringToken(str.substring(quoteStartIndex + 1, quoteEndIndex)));
 
             // If there is anything after the quote, add it to the return array and split for parenthesis.
             if (quoteEndIndex != str.length - 1)
-                quottedTokens.push(...splitParens(afterStr));
+                quottedTokens.push(...tokenizeParens(afterStr));
         } else {
-            const bracketPos = curr.search(/([()])/)
-            if(bracketPos !== -1) {
-                const char = curr[bracketPos];
-                throw new ASLangError({
-                    reason: `Found an invalid quote '${char}', possibly because brackets cannot appear in-between characters and need spaces around them`,
-                    errorCode: ErrorCodes.InvalidBracket,
-                    source: inputTxt,
-                    position: getJoinedStrLength(tokens, tokens.currIndex, 1) - curr.length + bracketPos,
-                    errorToken: char,
-                    fix: `Insert space in-between the bracket`
-                });
-            }
+            // Check if curr has invalid brackets in-between them
+            TknErrorChecks.hasInvalidBracketError(curr, inputTxt, tokens);
 
             // Split for parenthesis
-            quottedTokens.push(...splitParens(curr));
+            quottedTokens.push(...tokenizeParens(curr));
         }
     }
     return quottedTokens;
