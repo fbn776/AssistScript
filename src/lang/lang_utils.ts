@@ -6,7 +6,7 @@ export function hasOnlyRepeatedChars(str: string) {
     return true;
 }
 
-/** Splits a string into an array, the split happens when '(' or ')' occurs*/
-export function splitParenthesis(str: string): string[] {
-    return str.split(/([()])/).filter((val) => val);
-}
+// /** Splits a string into an array, the split happens when '(' or ')' occurs*/
+// export function splitParenthesis(str: string): string[] {
+//     return str.split(/([()])/).filter((val) => val);
+// }

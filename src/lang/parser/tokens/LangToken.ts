@@ -1,5 +1,5 @@
 export interface TokenData {
-    allowedSeparator: "(" | ")"
+    allowedContainers: "(" | ")"
 }
 export enum TokenType {
     STRING = "TOKEN_STRING",
