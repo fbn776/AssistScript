@@ -11,7 +11,7 @@ import {TknErrorChecks} from "./TknErrorChecks";
  * Splits a string based on parenthesis and converts each to a StringToken
  * @param str
  */
-export function tokenizeParens(str: string): LangTokenBase[] {
+function tokenizeParens(str: string): LangTokenBase[] {
     return str.split(/([()])/).filter((val) => val).map(e => {
         if(e === ")" || e === "(")
             return new ContainerToken(e);
