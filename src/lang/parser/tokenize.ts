@@ -1,7 +1,7 @@
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
-import LangToken from "./tokens/LangToken";
+import LangTokenBase from "./tokens/LangTokenBase";
 import StringToken from "./tokens/StringToken";
 import ContainerToken from "./tokens/ContainerToken";
 import {TknErrorChecks} from "./TknErrorChecks";
@@ -11,7 +11,7 @@ import {TknErrorChecks} from "./TknErrorChecks";
  * Splits a string based on parenthesis and converts each to a StringToken
  * @param str
  */
-export function tokenizeParens(str: string): LangToken[] {
+export function tokenizeParens(str: string): LangTokenBase[] {
     return str.split(/([()])/).filter((val) => val).map(e => {
         if(e === ")" || e === "(")
             return new ContainerToken(e);
@@ -24,9 +24,9 @@ export function tokenizeParens(str: string): LangToken[] {
  * Check parse error like invalid quotes, invalid brackets, etc.
  * @throws ASLangError
  **/
-export function tokenize(inputTxt: string): LangToken[] {
+export function tokenize(inputTxt: string): LangTokenBase[] {
     const tokens = new ArrayTokenizer(inputTxt.split(' '));
-    const quottedTokens: LangToken[] = [];
+    const quottedTokens: LangTokenBase[] = [];
 
     // If the input string is empty, then throw an error.
     if (inputTxt === '')

@@ -1,9 +1,9 @@
-import LangToken, {TokenType} from "./LangToken";
+import LangTokenBase, {TokenType} from "./LangTokenBase";
 
-export default class CommandToken extends LangToken {
-    readonly params: LangToken[];
+export default class CommandToken extends LangTokenBase {
+    readonly params: LangTokenBase[];
 
-    constructor(value: string, params: LangToken[]) {
+    constructor(value: string, params: LangTokenBase[]) {
         super(value, TokenType.COMMAND);
         this.params = params;
     }
