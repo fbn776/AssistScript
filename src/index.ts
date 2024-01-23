@@ -1,6 +1,5 @@
 import {tokenize} from "./lang/parser/tokenize";
 import ASLangError from "./lang/errors/ASLangError";
-import bracketMatcher from "./lang/parser/bracketMatcher";
 
 function test(str: string) {
     try {
