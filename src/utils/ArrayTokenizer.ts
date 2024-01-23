@@ -39,7 +39,7 @@ export class ArrayTokenizer<T> {
 }
 
 
-/** Returns the length of the string at the specified token position if all the tokens were joined together. */
+/** Returns the position of a token at the specified token position if all the tokens were joined together. */
 export function getJoinedStrLength(token: ArrayTokenizer<string>, tokenPos: number, offset = 0): number {
     if(tokenPos > token.length)
         throw new Error(`Token position ${tokenPos} is greater than the length of the token array (${token.length})`)
