@@ -1,7 +1,7 @@
 // TODO File name should be changed
 
-import {ArrayTokenizer} from "../utils/ArrayTokenizer";
-import Stack from "../utils/Stack";
+import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
+import Stack from "../../utils/Stack";
 
 /**
  *

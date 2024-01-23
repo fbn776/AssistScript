@@ -1,7 +1,7 @@
-import {ArrayTokenizer, getJoinedStrLength} from "../utils/ArrayTokenizer";
+import {ArrayTokenizer, getJoinedStrLength} from "../../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
-import {hasOnlyRepeatedChars, splitParenthesis} from "../utils/utils";
+import {hasOnlyRepeatedChars, splitParenthesis} from "../lang_utils";
 
 
 /** Takes in a string and splits it into an array.

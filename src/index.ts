@@ -1,5 +1,5 @@
-import bracketMatcher from "./parser/bracketMatcher";
-import {groupQuotesAndSplitTokens} from "./parser/groupQuotesAndSplitTokens";
+import bracketMatcher from "./lang/parser/bracketMatcher";
+import {groupQuotesAndSplitTokens} from "./lang/parser/groupQuotesAndSplitTokens";
 
 
 const str = `add 10 20 (sub 40 (add 59 70))`;
