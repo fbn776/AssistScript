@@ -4,8 +4,8 @@ interface ASLangErrorOptions {
     name?: string,
     /** The reason for this error. */
     reason: string,
-    /** The code for this error. */
-    code?: string,
+    /** The source code where the error occurred. */
+    source?: string,
     /** The position in the code where this error occurred. */
     position?: number,
     /** The fix for this error, if any. */
@@ -13,7 +13,7 @@ interface ASLangErrorOptions {
     /** A note for this error, if any. */
     note?: string,
     /** The error code for this error. */
-    errorCode?: ErrorCodes;
+    errorCode: ErrorCodes;
     /** The token that caused the error. */
     errorToken?: string;
 }
@@ -28,12 +28,12 @@ interface ASLangErrorOptions {
 export default class ASLangError extends Error implements ASLangErrorOptions {
 
     constructor(
-        {name = "ASLangError", reason, code, position, fix, note, errorCode = ErrorCodes.GenericError, errorToken}: ASLangErrorOptions
+        {name = "ASLangError", reason, source, position, fix, note, errorCode = ErrorCodes.GenericError, errorToken}: ASLangErrorOptions
     ) {
         super(reason);
         this.reason = reason;
         this.name = name || "ASLangError";
-        this.code = code;
+        this.source = source;
         this.position = position;
         this.fix = fix;
         this.note = note;
@@ -42,21 +42,22 @@ export default class ASLangError extends Error implements ASLangErrorOptions {
     }
 
     reason: string;
-    code?: string | undefined;
+    source?: string | undefined;
     position?: number | undefined;
     fix?: string | undefined;
     note?: string | undefined;
-    errorCode?: ErrorCodes | undefined;
+    errorCode: ErrorCodes;
     errorToken?: string | undefined;
 
     public display(): string {
         let str = `${this.name}\n`;
         str += `\tReason: ${this.reason}\n`;
-        this.code && (str += `\tCode: ${this.code}\n`);
+        this.source && (str += `\tSource: ${this.source}\n`);
         this.errorToken && (str += `\tError token: ${this.errorToken}\n`);
         this.position && (str += `\tPosition: ${this.position}\n`);
         this.fix && (str += `\tFix: ${this.fix}\n`);
         this.note && (str += `\tNote: ${this.note}\n`);
+        str += `\tError code: ${this.errorCode}`;
         return str;
     }
 

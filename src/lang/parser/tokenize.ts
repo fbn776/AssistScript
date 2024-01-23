@@ -31,7 +31,7 @@ function invalidQuoteErrorCheck(quoteStartIndex: number, quoteEndIndex: number, 
         throw new ASLangError({
             reason: `Error in token \`${str.substring(quoteStartIndex, quoteEndIndex + 1)}\`. Only spaces and delimiting characters are allowed just before or after the quotes.`,
             note: `${beforeStr ? 'Found `' + beforeStr + '` before the token' : ''}; ${afterStr ? 'Found `' + afterStr + '` after the token' : ''}`,
-            code: inputTxt,
+            source: inputTxt,
             position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
             errorCode: ErrorCodes.InvalidQuotes,
             errorToken: str.substring(quoteStartIndex, quoteEndIndex + 1)
@@ -43,7 +43,7 @@ function unclosedQuoteErrorCheck(quoteStartIndex: number, quoteEndIndex: number,
     if (quoteStartIndex === quoteEndIndex)
         throw new ASLangError({
             reason: `\`${startsWith}\` was found, but not closed.`,
-            code: inputTxt,
+            source: inputTxt,
             position: getJoinedStrLength(tokens, tokens.currIndex, 1) - str.length + quoteStartIndex,
             errorCode: ErrorCodes.UnclosedQuote,
             errorToken: startsWith
@@ -110,6 +110,19 @@ export function tokenize(inputTxt: string): LangToken[] {
             if (quoteEndIndex != str.length - 1)
                 quottedTokens.push(...splitParens(afterStr));
         } else {
+            const bracketPos = curr.search(/([()])/)
+            if(bracketPos !== -1) {
+                const char = curr[bracketPos];
+                throw new ASLangError({
+                    reason: `Found an invalid quote '${char}', possibly because brackets cannot appear in-between characters and need spaces around them`,
+                    errorCode: ErrorCodes.InvalidBracket,
+                    source: inputTxt,
+                    position: getJoinedStrLength(tokens, tokens.currIndex, 1) - curr.length + bracketPos,
+                    errorToken: char,
+                    fix: `Insert space in-between the bracket`
+                });
+            }
+
             // Split for parenthesis
             quottedTokens.push(...splitParens(curr));
         }

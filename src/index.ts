@@ -16,11 +16,11 @@ function test(str: string) {
 }
 
 test(`helo(there "how are you" aaa "h haha"))`);
-// test(`hello "haha" 'hi' "Hiii 'hello'"`);
-// test(`Hello ('hii')`);
-// test(`Hello ('hii'`);
-// test(`Hello 'hii')`);
-// test(`Hello ('hii')))`);
-// test(`Hello ('hii'aa`);
-// test(`Hello ('hii'aabvc`);
-// test(`Haha this is a simple string`)
+test(`hello "haha" 'hi' "Hiii 'hello'"`);
+test(`Hello ('hii')`);
+test(`Hello ('hii' haha)hello wtf`);
+test(`Hello 'hii')`);
+test(`Hello ('hii')))`);
+test(`Hello ('hii'aa`);
+test(`Hello ('hii'aabvc`);
+test(`Haha this is a simple string`)
