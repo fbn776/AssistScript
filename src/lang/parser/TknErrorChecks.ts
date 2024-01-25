@@ -5,8 +5,8 @@ import ErrorCodes from "../errors/ErrorCodes";
 
 /**
  * Tokenizer Error checks;
- * This is a grouping of common or unnecessarily large error checking codes.
- * Allows the functions calling it to follow Single responsibility and also reduces code cluttering
+ * A grouping of common or unnecessarily large error checking codes.
+ * Allows the functions calling it to follow single responsibility and also reduces code cluttering
  */
 export namespace TknErrorChecks {
     export function hasInvalidQuoteError(quoteStartIndex: number, quoteEndIndex: number, str: string, beforeStr: string, afterStr: string, inputTxt: string, tokens: ArrayTokenizer<string>) {

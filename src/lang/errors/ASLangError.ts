@@ -2,26 +2,17 @@ import ErrorCodes from "./ErrorCodes";
 
 interface ASLangErrorOptions {
     name?: string,
-    /** The reason for this error. */
     reason: string,
-    /** The source code where the error occurred. */
     source?: string,
-    /** The position in the code where this error occurred. */
     position?: number,
-    /** The fix for this error, if any. */
     fix?: string,
-    /** A note for this error, if any. */
     note?: string,
-    /** The error code for this error. */
     errorCode: ErrorCodes;
-    /** The token that caused the error. */
     errorToken?: string;
 }
 
 /**
  * Represents the base error thrown by the ASLang (AssistScript) interpreter.
- * This is the base class for all errors thrown by the ASLang interpreter.
- * All other errors thrown will extend this class.
  *
  * **NOTE: This does not include errors thrown by the JavaScript runtime**
  */
