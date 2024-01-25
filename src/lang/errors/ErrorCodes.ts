@@ -3,7 +3,10 @@ enum ErrorCodes {
     FoundNullToken = "FoundNullToken",
     UnclosedQuote = "UnclosedQuote",
     InvalidQuotes = "InvalidQuote",
-    InvalidBracket = "InvalidBracket"
+    InvalidBracket = "InvalidBracket",
+    EmptyCommand = "EmptyCommand",
+    PlaceholderError = "PlaceholderError",
+    UnclosedBracket = "UnclosedBracket",
 }
 
 export default ErrorCodes;
