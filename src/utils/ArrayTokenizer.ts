@@ -26,7 +26,7 @@ export class ArrayTokenizer<T> {
 
     /** Returns the current token in from the token's array, or null if there are no more tokens.
      * This does not increment the index*/
-    currentToken(): T | null {
+    currToken(): T | null {
         return this.tokens[this.index] || null;
     }
 
