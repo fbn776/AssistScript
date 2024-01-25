@@ -1,5 +1,3 @@
-// TODO File name should be changed
-
 import Stack from "../../utils/Stack";
 import LangTokenBase from "../tokens/LangTokenBase";
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
@@ -21,6 +19,8 @@ export default function generateSyntaxTree(str: string) {
     const tk = tokenize(str);
     const tokens = new ArrayTokenizer<LangTokenBase>(tk);
     const stack = new Stack<LangTokenBase>();
+
+    // For keeping track of brackets to check for errors.
     const bracketTrack = new Stack<I_BracketTrack>();
 
 

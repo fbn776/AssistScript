@@ -3,7 +3,7 @@ import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 import LangTokenBase from "../tokens/LangTokenBase";
 import StringToken from "../tokens/StringToken";
-import ContainerToken, {LeftBracketToken, RightBracketToken} from "../tokens/ContainerToken";
+import {LeftBracketToken, RightBracketToken} from "../tokens/ContainerToken";
 import {ParserErrorChecks} from "./ParserErrorChecks";
 
 
@@ -33,7 +33,7 @@ export function tokenize(inputTxt: string): LangTokenBase[] {
 
     // If the input string is empty, then throw an error.
     if (inputTxt === '')
-        throw new ASLangError({reason: "Cannot group quotes in an empty string.", errorCode: ErrorCodes.FoundNullToken})
+        throw new ASLangError({reason: "Empty string.", errorCode: ErrorCodes.FoundNullToken})
 
     while (tokens.hasMoreTokens()) {
         let curr = tokens.nextToken() || '';

@@ -1,4 +1,3 @@
-import {tokenize} from "./lang/parser/tokenize";
 import ASLangError from "./lang/errors/ASLangError";
 import generateSyntaxTree from "./lang/parser/generateSyntaxTree";
 import {displayAST} from "./lang/lang_utils";
@@ -7,7 +6,7 @@ function test(func: () => any) {
     try {
         func();
     } catch (e) {
-        if(e instanceof ASLangError)
+        if (e instanceof ASLangError)
             console.error(e.display());
         else
             console.error(e);
