@@ -1,5 +1,6 @@
 import {tokenize} from "./lang/parser/tokenize";
 import ASLangError from "./lang/errors/ASLangError";
+import makeSyntaxTree from "./lang/parser/makeSyntaxTree";
 
 function test(str: string) {
     try {
@@ -16,6 +17,8 @@ function test(str: string) {
     }
 }
 
-test(`helo(there "how are you" aaa "h haha")`);
-test(`add 10(( (add 40 20) ((sub 50 70 (add 50 10))`);
-test(`add 10 ((((hhaha (hshs) )jjs)`)
+const tokens = tokenize(`add 10 30 (sub (add 20 20) 30)`)
+console.log("INPUT:\n", tokens, "\n");
+const cmd = makeSyntaxTree(tokens);
+
+console.log(JSON.stringify(cmd));

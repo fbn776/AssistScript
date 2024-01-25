@@ -3,7 +3,7 @@ import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 import LangTokenBase from "./tokens/LangTokenBase";
 import StringToken from "./tokens/StringToken";
-import ContainerToken from "./tokens/ContainerToken";
+import ContainerToken, {LeftBracketToken, RightBracketToken} from "./tokens/ContainerToken";
 import {TknErrorChecks} from "./TknErrorChecks";
 
 
@@ -12,9 +12,12 @@ import {TknErrorChecks} from "./TknErrorChecks";
  */
 function tokenizeParens(str: string): LangTokenBase[] {
     return str.split(/([()])/).filter((val) => val).map(e => {
-        if(e === ")" || e === "(")
-            return new ContainerToken(e);
-        return new StringToken(e)
+        if(e === ")")
+            return new RightBracketToken();
+        else if(e === "(")
+            return new LeftBracketToken();
+
+        return new StringToken(e);
     });
 }
 

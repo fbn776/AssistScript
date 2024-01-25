@@ -6,7 +6,7 @@ import ErrorCodes from "../errors/ErrorCodes";
 /**
  * Tokenizer Error checks;
  * This is a grouping of common or unnecessarily large error checking codes.
- * Allows the functions calling it follow Single responsibility (As lesser code is needed)
+ * Allows the functions calling it to follow Single responsibility and also reduces code cluttering
  */
 export namespace TknErrorChecks {
     export function hasInvalidQuoteError(quoteStartIndex: number, quoteEndIndex: number, str: string, beforeStr: string, afterStr: string, inputTxt: string, tokens: ArrayTokenizer<string>) {
@@ -51,7 +51,7 @@ export namespace TknErrorChecks {
 
         const str = curr.substring(startI, endI);
 
-        // Check if there are brackets b/w the startI and endI, if yes they all are invalid; throw error.
+        // Check if there are brackets b/w the startI and endI; if yes, they all are invalid; throw error.
         const bracketPos = str.search(/([()])/);
         if (bracketPos !== -1) {
             const char = str[bracketPos];

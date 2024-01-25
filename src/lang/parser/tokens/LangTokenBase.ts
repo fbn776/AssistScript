@@ -1,6 +1,7 @@
 export interface TokenData {
     allowedContainers: "(" | ")"
 }
+
 export enum TokenType {
     STRING = "TOKEN_STRING",
     NUMBER = "TOKEN_NUMBER",

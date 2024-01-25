@@ -28,4 +28,6 @@ export default class Stack<E> {
     public display() {
         console.log(this.stack);
     }
+
+    public toArray() {return this.stack};
 }
