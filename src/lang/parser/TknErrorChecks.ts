@@ -11,7 +11,7 @@ import ErrorCodes from "../errors/ErrorCodes";
 export namespace TknErrorChecks {
     export function hasInvalidQuoteError(quoteStartIndex: number, quoteEndIndex: number, str: string, beforeStr: string, afterStr: string, inputTxt: string, tokens: ArrayTokenizer<string>) {
         if ((quoteStartIndex > 0 || quoteEndIndex < str.length - 1) && (
-            // Check if characters before and after the token are '(' or ')'
+            // Check if characters before and after the token contains only '(' or ')'
             !(hasOnlyRepeatedChars(beforeStr) && hasOnlyRepeatedChars(afterStr)) || (
                 (beforeStr && beforeStr[0] !== '(') ||
                 (afterStr && afterStr[0] !== ')')

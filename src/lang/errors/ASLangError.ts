@@ -54,7 +54,7 @@ export default class ASLangError extends Error implements ASLangErrorOptions {
         str += `\tReason: ${this.reason}\n`;
         this.source && (str += `\tSource: ${this.source}\n`);
         this.errorToken && (str += `\tError token: ${this.errorToken}\n`);
-        this.position && (str += `\tPosition: ${this.position}\n`);
+        (this.position != undefined) && (str += `\tPosition: ${this.position}\n`);
         this.fix && (str += `\tFix: ${this.fix}\n`);
         this.note && (str += `\tNote: ${this.note}\n`);
         str += `\tError code: ${this.errorCode}`;
