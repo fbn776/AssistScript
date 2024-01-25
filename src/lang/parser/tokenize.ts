@@ -4,7 +4,7 @@ import ErrorCodes from "../errors/ErrorCodes";
 import LangTokenBase from "../tokens/LangTokenBase";
 import StringToken from "../tokens/StringToken";
 import ContainerToken, {LeftBracketToken, RightBracketToken} from "../tokens/ContainerToken";
-import {TknErrorChecks} from "./TknErrorChecks";
+import {ParserErrorChecks} from "./ParserErrorChecks";
 
 
 /**
@@ -64,13 +64,13 @@ export function tokenize(inputTxt: string): LangTokenBase[] {
             const quoteEndIndex = str.lastIndexOf(startsWith);
 
             //ERROR Check: If the quote is not closed, then throw an error.
-            TknErrorChecks.hasUnclosedQuoteError(quoteStartIndex, quoteEndIndex, startsWith, inputTxt, tokens, str);
+            ParserErrorChecks.hasUnclosedQuoteError_TK(quoteStartIndex, quoteEndIndex, startsWith, inputTxt, tokens, str);
 
             const beforeStr = str.substring(0, quoteStartIndex),
                 afterStr = str.substring(quoteEndIndex + 1);
 
             // ERROR Check: If there is anything before or after the quote, then throw an error.
-            TknErrorChecks.hasInvalidQuoteError(quoteStartIndex, quoteEndIndex, str, beforeStr, afterStr, inputTxt, tokens);
+            ParserErrorChecks.hasInvalidQuoteError_TK(quoteStartIndex, quoteEndIndex, str, beforeStr, afterStr, inputTxt, tokens);
 
             // If there is anything before the quote, then add it to the return array and also split for parenthesis.
             if (quoteStartIndex != 0)
@@ -84,7 +84,7 @@ export function tokenize(inputTxt: string): LangTokenBase[] {
                 quottedTokens.push(...tokenizeParens(afterStr));
         } else {
             // ERROR Check: If there are invalid brackets
-            TknErrorChecks.hasInvalidBracketError(curr, inputTxt, tokens);
+            ParserErrorChecks.hasInvalidBracketError_TK(curr, inputTxt, tokens);
 
             // Split for parenthesis
             quottedTokens.push(...tokenizeParens(curr));

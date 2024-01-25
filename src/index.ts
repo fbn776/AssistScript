@@ -1,6 +1,6 @@
 import {tokenize} from "./lang/parser/tokenize";
 import ASLangError from "./lang/errors/ASLangError";
-import makeSyntaxTree from "./lang/parser/makeSyntaxTree";
+import generateSyntaxTree from "./lang/parser/generateSyntaxTree";
 import {displayAST} from "./lang/lang_utils";
 
 function test(func: () => any) {
@@ -18,35 +18,59 @@ function test(func: () => any) {
 test(() => {
     const input = `add 10 30 (sub (add 20 20) 30)`
     console.log("INPUT:", input);
-    displayAST(makeSyntaxTree(input));
+    displayAST(generateSyntaxTree(input));
 })
 
 test(() => {
     const input = `add 10 30`
     console.log("INPUT:", input);
-    displayAST(makeSyntaxTree(input));
+    displayAST(generateSyntaxTree(input));
 })
 test(() => {
     const input = `add 10 30 (sub`
     console.log("INPUT:", input);
-    displayAST(makeSyntaxTree(input));
+    displayAST(generateSyntaxTree(input));
 })
 
 test(() => {
     const input = `add 10 30 () haha what to do`
     console.log("INPUT:", input);
-    displayAST(makeSyntaxTree(input));
+    displayAST(generateSyntaxTree(input));
 })
 
 test(() => {
     const input = `add 1)0 30) sub`
     console.log("INPUT:", input);
-    displayAST(makeSyntaxTree(input));
+    displayAST(generateSyntaxTree(input));
 })
 
 
 test(() => {
     const input = `add 10 30) sub`
     console.log("INPUT:", input);
-    displayAST(makeSyntaxTree(input));
+    displayAST(generateSyntaxTree(input));
+})
+
+test(() => {
+    const input = `(add 10 30 sub`
+    console.log("INPUT:", input);
+    displayAST(generateSyntaxTree(input));
+})
+
+test(() => {
+    const input = `add 10 30 sub)`
+    console.log("INPUT:", input);
+    displayAST(generateSyntaxTree(input));
+})
+
+test(() => {
+    const input = `(add 10 30 sub)`
+    console.log("INPUT:", input);
+    displayAST(generateSyntaxTree(input));
+})
+
+test(() => {
+    const input = `((()))`
+    console.log("INPUT:", input);
+    displayAST(generateSyntaxTree(input));
 })

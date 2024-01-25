@@ -1,3 +1,5 @@
+import LangTokenBase from "../lang/tokens/LangTokenBase";
+
 /**
  * A simple class to iterate over an array of tokens;
  * @param T the type of the token
@@ -47,6 +49,18 @@ export function getJoinedStrLength(token: ArrayTokenizer<string>, tokenPos: numb
     let length = 0;
     for (let i = 0; i < tokenPos; i++) {
         length += token.tokens[i].length + offset;
+    }
+    return length - offset;
+}
+
+/** Same as `getJoinedStrLength`, but for `LangTokenBase`, sort of like a function overload*/
+export function getJoinedTknLength(token: ArrayTokenizer<LangTokenBase>, tokenPos: number, offset = 0): number {
+    if(tokenPos > token.length)
+        throw new Error(`Token position ${tokenPos} is greater than the length of the token array (${token.length})`)
+
+    let length = 0;
+    for (let i = 0; i < tokenPos; i++) {
+        length += token.tokens[i].value.length + offset;
     }
     return length - offset;
 }
