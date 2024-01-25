@@ -1,9 +1,9 @@
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
-import LangTokenBase from "./tokens/LangTokenBase";
-import StringToken from "./tokens/StringToken";
-import ContainerToken, {LeftBracketToken, RightBracketToken} from "./tokens/ContainerToken";
+import LangTokenBase from "../tokens/LangTokenBase";
+import StringToken from "../tokens/StringToken";
+import ContainerToken, {LeftBracketToken, RightBracketToken} from "../tokens/ContainerToken";
 import {TknErrorChecks} from "./TknErrorChecks";
 
 

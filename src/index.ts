@@ -17,8 +17,6 @@ function test(str: string) {
     }
 }
 
-const tokens = tokenize(`add 10 30 (sub (add 20 20) 30)`)
-console.log("INPUT:\n", tokens, "\n");
-const cmd = makeSyntaxTree(tokens);
+const cmd = makeSyntaxTree(`add 10 30 (sub (add 20 20) 30)`);
 
 console.log(JSON.stringify(cmd));

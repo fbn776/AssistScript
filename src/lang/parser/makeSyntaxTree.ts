@@ -1,16 +1,18 @@
 // TODO File name should be changed
 
 import Stack from "../../utils/Stack";
-import LangTokenBase from "./tokens/LangTokenBase";
+import LangTokenBase from "../tokens/LangTokenBase";
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
-import {LeftBracketToken, RightBracketToken} from "./tokens/ContainerToken";
-import CommandToken from "./tokens/CommandToken";
-import StringToken from "./tokens/StringToken";
+import {LeftBracketToken, RightBracketToken} from "../tokens/ContainerToken";
+import CommandToken from "../tokens/CommandToken";
+import StringToken from "../tokens/StringToken";
+import {tokenize} from "./tokenize";
 
 /**
  *
  */
-export default function makeSyntaxTree(tk: LangTokenBase[]) {
+export default function makeSyntaxTree(str: string) {
+    const tk = tokenize(str);
     const tokens = new ArrayTokenizer<LangTokenBase>(tk);
     const stack = new Stack<LangTokenBase>();
 
@@ -27,6 +29,10 @@ export default function makeSyntaxTree(tk: LangTokenBase[]) {
 
             while(!stack.isEmpty() && !(stack.peek() instanceof LeftBracketToken)) {
                 tempStack.push(stack.pop()!);
+            }
+            // This means that the above while loop didn't find any left bracket for a right bracket
+            if(stack.isEmpty()) {
+
             }
             stack.pop();
 
