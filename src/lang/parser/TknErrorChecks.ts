@@ -5,8 +5,8 @@ import ErrorCodes from "../errors/ErrorCodes";
 
 /**
  * Tokenizer Error checks;
- * This is a grouping of common or unnecessary large error check codes.
- * This allows the functions calling it follow Single responsibility (As lesser code is needed)
+ * This is a grouping of common or unnecessarily large error checking codes.
+ * Allows the functions calling it follow Single responsibility (As lesser code is needed)
  */
 export namespace TknErrorChecks {
     export function hasInvalidQuoteError(quoteStartIndex: number, quoteEndIndex: number, str: string, beforeStr: string, afterStr: string, inputTxt: string, tokens: ArrayTokenizer<string>) {
@@ -40,17 +40,30 @@ export namespace TknErrorChecks {
     }
 
     export function hasInvalidBracketError(curr: string, inputTxt: string, tokens: ArrayTokenizer<string>) {
-        const bracketPos = curr.search(/([()])/)
+        // Match any '(' (any number of them) from the start.
+        const bracketStart = curr.match(/^\(+/);
+        // Match any ')' (any number of them) from the end.
+        const bracketEnd = curr.match(/\)+$/);
+
+        // Get start index and end index everything between matched bracketStart and bracketEnd
+        const startI = bracketStart !== null ? bracketStart[0].length : 0,
+              endI = bracketEnd !== null ? bracketEnd.index! : curr.length;
+
+        const str = curr.substring(startI, endI);
+
+        // Check if there are brackets b/w the startI and endI, if yes they all are invalid; throw error.
+        const bracketPos = str.search(/([()])/);
         if (bracketPos !== -1) {
-            const char = curr[bracketPos];
+            const char = str[bracketPos];
             throw new ASLangError({
-                reason: `Found an invalid quote '${char}', possibly because brackets cannot appear in-between characters and need spaces around them`,
+                reason: `Found an invalid character '${char}'. Possibly because brackets cannot appear in-between characters.`,
                 errorCode: ErrorCodes.InvalidBracket,
                 source: inputTxt,
-                position: getJoinedStrLength(tokens, tokens.currIndex, 1) - curr.length + bracketPos,
-                errorToken: char,
+                position: getJoinedStrLength(tokens, tokens.currIndex, 1) - curr.length + startI + bracketPos,
+                errorToken: str,
                 fix: `Insert space in-between the bracket`
             });
         }
     }
+
 }

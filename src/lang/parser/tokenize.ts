@@ -1,4 +1,4 @@
-import {ArrayTokenizer, getJoinedStrLength} from "../../utils/ArrayTokenizer";
+import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 import LangTokenBase from "./tokens/LangTokenBase";
@@ -8,8 +8,7 @@ import {TknErrorChecks} from "./TknErrorChecks";
 
 
 /**
- * Splits a string based on parenthesis and converts each to a StringToken
- * @param str
+ * Splits a string based on parenthesis and converts each to a token
  */
 function tokenizeParens(str: string): LangTokenBase[] {
     return str.split(/([()])/).filter((val) => val).map(e => {
@@ -18,6 +17,7 @@ function tokenizeParens(str: string): LangTokenBase[] {
         return new StringToken(e)
     });
 }
+
 
 /** Takes in a string and splits it into tokens based on space.
  * Along with tokenizing this also groups quotes together, split all the container tokens `(`, `)` and
@@ -80,37 +80,8 @@ export function tokenize(inputTxt: string): LangTokenBase[] {
             if (quoteEndIndex != str.length - 1)
                 quottedTokens.push(...tokenizeParens(afterStr));
         } else {
-            const bStart = curr.match(/^\(+/);
-            const bEnd = curr.match(/\)+$/);
-            let si = 0, ei = curr.length;
-            if(bStart !== null) {
-                si = bStart[0].length;
-                // console.log(bStart, "Length =", si);
-            }
-            if(bEnd !== null) {
-                ei = bEnd.index!;
-            }
-
-            // Get the string b/w starting brackets, at front '(', at rear ')'
-            const str = curr.substring(si, ei);
-            console.log(`In b/w si: ${si} and ei: ${ei} is substr: ${str}`);
-
-            // Check if str has invalid brackets in-between them;
-            const bracketPos = str.search(/([()])/);
-
-            if (bracketPos !== -1) {
-                //console.log("Position: ", getJoinedStrLength(tokens, tokens.currIndex, 1) - curr.length + si + bracketPos)
-
-                const char = str[bracketPos];
-                throw new ASLangError({
-                    reason: `Found an invalid quote '${char}', possibly because brackets cannot appear in-between characters and need spaces around them`,
-                    errorCode: ErrorCodes.InvalidBracket,
-                    source: inputTxt,
-                    position: getJoinedStrLength(tokens, tokens.currIndex, 1) - curr.length + si + bracketPos,
-                    errorToken: char,
-                    fix: `Insert space in-between the bracket`
-                });
-            }
+            // ERROR Check: If there are invalid brackets
+            TknErrorChecks.hasInvalidBracketError(curr, inputTxt, tokens);
 
             // Split for parenthesis
             quottedTokens.push(...tokenizeParens(curr));
