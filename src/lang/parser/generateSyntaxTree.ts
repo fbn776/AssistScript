@@ -9,6 +9,7 @@ import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 import {ParserErrorChecks} from "./ParserErrorChecks";
 import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
+import preprocessor from "./preprocessor";
 
 
 
@@ -16,7 +17,7 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
  * Takes in a string of text, tokenizes it and then creates the syntax tree and returns a CommandToken as the head.
  */
 export default function generateSyntaxTree(str: string) {
-    const tk = tokenize(str);
+    const tk = preprocessor(tokenize(str));
     const tokens = new ArrayTokenizer<LangTokenBase>(tk);
     const stack = new Stack<LangTokenBase>();
 

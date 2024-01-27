@@ -1,4 +1,5 @@
 import ErrorCodes from "./ErrorCodes";
+import {moveRemove} from "rimraf";
 
 interface ASLangErrorOptions {
     name?: string,
@@ -52,4 +53,5 @@ export default class ASLangError extends Error implements ASLangErrorOptions {
         return str;
     }
 
+    public toString = this.display();
 }
