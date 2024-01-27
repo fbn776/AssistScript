@@ -8,9 +8,8 @@ import {tokenize} from "./tokenize";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 import {ParserErrorChecks} from "./ParserErrorChecks";
-import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 import preprocessor from "./preprocessor";
-
+import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 
 
 /**
@@ -32,7 +31,7 @@ export default function generateSyntaxTree(str: string) {
 
         if (token instanceof LeftBracketToken) {
             stack.push(token);
-            bracketTrack.push({value: token.value, tokenPos: tokens.currIndex});
+            bracketTrack.push({value: token.value as string, tokenPos: tokens.currIndex});
         } else if (token instanceof RightBracketToken) {
             let cmd = new CommandToken('', []);
             const tempStack = new Stack<LangTokenBase>();
@@ -58,7 +57,7 @@ export default function generateSyntaxTree(str: string) {
                     errorCode: ErrorCodes.PlaceholderError
                 })
 
-            cmd.changeName(topCmd.value);
+            cmd.changeName(topCmd.value as string);
             while (!tempStack.isEmpty()) {
                 cmd.appendParam(tempStack.pop()!);
             }
@@ -74,7 +73,7 @@ export default function generateSyntaxTree(str: string) {
 
     const arr = stack.toArray();
     // TODO Check if the tempStack's top is a command, if then the `cmd` is an eval command;
-    const cmd = new CommandToken(arr[0].value, [])
+    const cmd = new CommandToken(arr[0].value as string, [])
     for (let i = 1; i < arr.length; i++) {
         cmd.appendParam(arr[i]);
     }

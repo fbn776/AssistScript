@@ -76,7 +76,7 @@ export namespace ParserErrorChecks {
                 reason: `Found empty command '()'`,
                 source: str,
                 errorToken: '()',
-                position: getJoinedTknLength(tokens, tokens.currIndex, 1) - token.value.length - 2,
+                position: getJoinedTknLength(tokens, tokens.currIndex, 1) - (token.value as string).length - 2,
                 errorCode: ErrorCodes.EmptyCommand,
                 fix: 'Delete the empty command'
             });
@@ -89,7 +89,7 @@ export namespace ParserErrorChecks {
                 reason: `Invalid bracket, no opening bracket found`,
                 errorCode: ErrorCodes.InvalidBracket,
                 source: str,
-                position: getJoinedTknLength(tokens, tokens.currIndex, 1) - token.value.length,
+                position: getJoinedTknLength(tokens, tokens.currIndex, 1) - (token.value as string).length,
                 errorToken: ')',
             })
         }
