@@ -1,4 +1,4 @@
-import LangTokenBase, {TokenType} from "./LangTokenBase";
+import LangTokenBase, {TokenType} from "../LangTokenBase";
 
 export default class CommandToken extends LangTokenBase {
     readonly params: LangTokenBase[];

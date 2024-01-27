@@ -1,9 +1,9 @@
 import Stack from "../../utils/Stack";
 import LangTokenBase from "../tokens/LangTokenBase";
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
-import {LeftBracketToken, RightBracketToken} from "../tokens/ContainerToken";
-import CommandToken from "../tokens/CommandToken";
-import StringToken from "../tokens/StringToken";
+import {LeftBracketToken, RightBracketToken} from "../tokens/lexmes/ContainerToken";
+import CommandToken from "../tokens/lexmes/CommandToken";
+import StringToken from "../tokens/lexmes/StringToken";
 import {tokenize} from "./tokenize";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";

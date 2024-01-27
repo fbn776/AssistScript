@@ -1,4 +1,4 @@
-import CommandToken from "./tokens/CommandToken";
+import CommandToken from "./tokens/lexmes/CommandToken";
 import LangTokenBase from "./tokens/LangTokenBase";
 
 /** Checks if a string only contains unique characters (may/may not repeat)*/

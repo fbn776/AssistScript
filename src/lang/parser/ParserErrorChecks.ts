@@ -3,7 +3,7 @@ import {hasOnlyRepeatedChars} from "../lang_utils";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
 import LangTokenBase from "../tokens/LangTokenBase";
-import {RightBracketToken} from "../tokens/ContainerToken";
+import {RightBracketToken} from "../tokens/lexmes/ContainerToken";
 import Stack from "../../utils/Stack";
 
 /**

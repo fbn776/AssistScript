@@ -1,4 +1,4 @@
-import LangTokenBase, {TokenData, TokenType} from "./LangTokenBase";
+import LangTokenBase, {TokenData, TokenType} from "../LangTokenBase";
 import exp from "node:constants";
 
 
