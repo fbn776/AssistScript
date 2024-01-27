@@ -1,5 +1,5 @@
 import ErrorCodes from "./ErrorCodes";
-import {moveRemove} from "rimraf";
+import ASBaseError from "./ASBaseError";
 
 interface ASLangErrorOptions {
     name?: string,
@@ -17,7 +17,7 @@ interface ASLangErrorOptions {
  *
  * **NOTE: This does not include errors thrown by the JavaScript runtime**
  */
-export default class ASLangError extends Error implements ASLangErrorOptions {
+export default class ASLangError extends ASBaseError implements ASLangErrorOptions {
 
     constructor(
         {name = "ASLangError", reason, source, position, fix, note, errorCode = ErrorCodes.GenericError, errorToken}: ASLangErrorOptions
