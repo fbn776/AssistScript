@@ -1,11 +1,10 @@
-import CommandStore from "./CommandStore";
 import Documentation from "./Documentation";
 
 /**
  * TODO; Ya not a good name :(
- * This represents a basic command unit, this encapsulates all the command logics
+ * This represents a basic command unit, this encapsulates all the information of a command onto a single object;
  */
-export default class CommandRepresentation {
+export default class CommandUnit {
     names: string[];
     docs: Documentation;
     args: string; // TODO Make a Arguments class
