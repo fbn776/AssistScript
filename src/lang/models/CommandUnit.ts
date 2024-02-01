@@ -1,4 +1,5 @@
 import Documentation from "./Documentation";
+import Arguments from "./Arguments";
 
 /**
  * TODO; Ya not a good name :(

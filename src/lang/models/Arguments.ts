@@ -5,7 +5,7 @@ enum ArgType {
 }
 
 
-class Arguments {
+export default class Arguments {
     readonly args: ArgType[] = [];
     readonly num;
 
