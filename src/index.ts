@@ -1,7 +1,7 @@
 import ASLangError from "./lang/errors/ASLangError";
 import ExecutionEngine from "./lang/executer/ExecutionEngine";
 import CommandStore from "./lang/models/CommandStore";
-import {CommandBuilder} from "./lang/models/CommandUnit";
+import {CommandBuilder} from "./lang/models/Command";
 import {DocsBuilder} from "./lang/models/Documentation";
 import Arguments from "./lang/models/Arguments";
 

@@ -1,4 +1,4 @@
-import CommandUnit from "./CommandUnit";
+import Command from "./Command";
 import ASMakeError from "../errors/ASMakeError";
 
 /**
@@ -9,7 +9,7 @@ export default class CommandStore {
     /** A map of each command;
      * The name of the command is mapped to it's corresponding CommandUnit.
      */
-    private _store = new Map<string, CommandUnit>();
+    private _store = new Map<string, Command>();
 
     public static getInstance(): CommandStore {
         if (!CommandStore._instance) {
@@ -25,11 +25,11 @@ export default class CommandStore {
         return this._store.has(name);
     }
 
-    public getCommand(name: string): CommandUnit | null {
+    public getCommand(name: string): Command | null {
         return this._store.get(name) || null;
     }
 
-    public addCommand(cmd: CommandUnit) {
+    public addCommand(cmd: Command) {
         for(let name of cmd.names) {
             if(this._store.has(name))
                 throw new ASMakeError(`The command name '${name}' already exists.`);

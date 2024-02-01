@@ -2,8 +2,12 @@ import Documentation from "./Documentation";
 import Arguments from "./Arguments";
 import ASMakeError from "../errors/ASMakeError";
 
-
-export default class CommandUnit {
+/**
+ * The representation of a Command in AssistScript
+ * This holds all the information about a command,
+ * contains the names (+aliases), documentation, argument info and how to execute.
+ */
+export default class Command {
     /** The names of the command; Can contain manny names (aliases) */
     names: string[];
     docs: Documentation;
@@ -25,32 +29,42 @@ export default class CommandUnit {
 }
 
 
+/**
+ * A builder class that builds a command
+ */
 export class CommandBuilder {
     private _names: string[] | null = null;
     private _docs: Documentation | null = null
     private _args: Arguments | null = null;
     private _exec: (() => unknown) | null = null;
 
+    /**Adds the name and aliases if it exists; REQUIRED*/
     addNames(...names: string[]) {
         this._names = names;
         return this;
     }
 
+    /**Documentation; REQUIRED*/
     addDocs(docs: Documentation) {
         this._docs = docs;
         return this;
     }
 
+    /**Arguments; REQUIRED*/
     addArgs(args: Arguments) {
         this._args = args;
         return this;
     }
 
+    /**Execution function; REQUIRED*/
     addExec(exec: () => unknown) {
         this._exec = exec;
         return this;
     }
 
+    /**
+     * @throws ASMakeError If the required properties are not specified.
+     */
     build() {
         if(!this._names)
             throw new ASMakeError('Command name(s) not specified.');
@@ -64,6 +78,6 @@ export class CommandBuilder {
         if(!this._exec)
             throw new ASMakeError('Command execution function not specified.');
 
-        return new CommandUnit(this._names, this._docs, this._args, this._exec);
+        return new Command(this._names, this._docs, this._args, this._exec);
     }
 }
