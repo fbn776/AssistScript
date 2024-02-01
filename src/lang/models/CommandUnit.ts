@@ -7,9 +7,9 @@ import Documentation from "./Documentation";
 export default class CommandUnit {
     names: string[];
     docs: Documentation;
-    args: string; // TODO Make a Arguments class
+    args: Arguments;
     exec;
-    constructor(names: string[], docs: Documentation, args: string, exec: () => unknown) {
+    constructor(names: string[], docs: Documentation, args: Arguments, exec: () => unknown) {
         this.names = names;
         this.docs = docs;
         this.args = args;

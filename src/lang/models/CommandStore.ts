@@ -25,4 +25,8 @@ export default class CommandStore {
     public hasCommand(name: string): boolean {
         return this._store.has(name);
     }
+
+    public getCommand(name: string): CommandUnit | null {
+        return this._store.get(name) || null;
+    }
 }

@@ -14,6 +14,14 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 
 /**
  * Takes in a string of text, tokenizes it and then creates the syntax tree and returns a CommandToken as the head.
+ *
+ * Output e.g.:
+ * CommandToken {
+ *     name,
+ *     params: [
+ *         BaseTokens...
+ *     ]
+ * }
  */
 export default function generateSyntaxTree(str: string) {
     const tk = preprocessor(tokenize(str));
@@ -77,5 +85,6 @@ export default function generateSyntaxTree(str: string) {
     for (let i = 1; i < arr.length; i++) {
         cmd.appendParam(arr[i]);
     }
+
     return cmd;
 }
