@@ -30,12 +30,13 @@ store.addCommand(
             .build()
         )
         .addArgs(new Arguments(0, 0))
-        .addExec(() => {
-            console.log('add');
+        .addExec((x: number, y: number) => {
+            console.log(x, y);
+            return x + y;
         })
         .build()
 )
 
 const exec = new ExecutionEngine();
 
-exec.execute('add 10 20');
+console.log(exec.execute('add 10 20'));

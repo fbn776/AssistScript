@@ -1,8 +1,12 @@
 import LangTokenBase, {TokenType} from "../LangTokenBase";
 
+/**
+ * Represents a command token, not the actual command object but an element of the syntax tree
+ */
 export default class CommandToken extends LangTokenBase {
     readonly params: LangTokenBase[];
     private cmdName: string;
+
     constructor(name: string, params: LangTokenBase[]) {
         super('command_block', TokenType.COMMAND);
         this.cmdName = name;

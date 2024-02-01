@@ -1,6 +1,7 @@
 import Documentation from "./Documentation";
 import Arguments from "./Arguments";
 import ASMakeError from "../errors/ASMakeError";
+import {CmdExec} from "./util_types";
 
 /**
  * The representation of a Command in AssistScript
@@ -20,7 +21,7 @@ export default class Command {
      * @param args The arguments of the command
      * @param exec The function to execute when the command is called
      */
-    constructor(names: string[], docs: Documentation, args: Arguments, exec: () => unknown) {
+    constructor(names: string[], docs: Documentation, args: Arguments, exec: CmdExec) {
         this.names = names;
         this.docs = docs;
         this.args = args;
@@ -36,7 +37,7 @@ export class CommandBuilder {
     private _names: string[] | null = null;
     private _docs: Documentation | null = null
     private _args: Arguments | null = null;
-    private _exec: (() => unknown) | null = null;
+    private _exec: CmdExec | null = null;
 
     /**Adds the name and aliases if it exists; REQUIRED*/
     addNames(...names: string[]) {
@@ -57,7 +58,7 @@ export class CommandBuilder {
     }
 
     /**Execution function; REQUIRED*/
-    addExec(exec: () => unknown) {
+    addExec(exec: CmdExec) {
         this._exec = exec;
         return this;
     }
