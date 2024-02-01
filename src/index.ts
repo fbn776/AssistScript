@@ -1,6 +1,9 @@
 import ASLangError from "./lang/errors/ASLangError";
-import generateSyntaxTree from "./lang/parser/generateSyntaxTree";
-import {displayAST} from "./lang/lang_utils";
+import ExecutionEngine from "./lang/executer/ExecutionEngine";
+import CommandStore from "./lang/models/CommandStore";
+import {CommandBuilder} from "./lang/models/CommandUnit";
+import {DocsBuilder} from "./lang/models/Documentation";
+import Arguments from "./lang/models/Arguments";
 
 function test(func: () => any) {
     try {
@@ -13,63 +16,26 @@ function test(func: () => any) {
     }
 }
 
-
-test(() => {
-    const input = `add 10 30 (sub (add 20 20) 30)`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
-
-test(() => {
-    const input = `add 10 30`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
-test(() => {
-    const input = `add 10 30 (sub`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
-
-test(() => {
-    const input = `add 10 30 () haha what to do`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
-
-test(() => {
-    const input = `add 1)0 30) sub`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
+const store = CommandStore.getInstance();
 
 
-test(() => {
-    const input = `add 10 30) sub`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
+store.addCommand(
+    new CommandBuilder()
+        .addNames('add')
+        .addDocs(new DocsBuilder()
+            .title('Add')
+            .body('')
+            .syntax('')
+            .example('')
+            .build()
+        )
+        .addArgs(new Arguments(0, 0))
+        .addExec(() => {
+            console.log('add');
+        })
+        .build()
+)
 
-test(() => {
-    const input = `(add 10 30 sub`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
+const exec = new ExecutionEngine();
 
-test(() => {
-    const input = `add 10 30 sub)`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
-
-test(() => {
-    const input = `(add 10 30 sub)`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
-
-test(() => {
-    const input = `((()))`
-    console.log("INPUT:", input);
-    displayAST(generateSyntaxTree(input));
-})
+exec.execute('add 10 20');

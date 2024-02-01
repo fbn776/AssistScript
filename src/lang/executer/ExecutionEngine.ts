@@ -7,15 +7,16 @@ export default class ExecutionEngine {
 
     public execute(str: string) {
         const ast = generateSyntaxTree(str);
-
-        const cmd = this._store.getCommand(ast.commandName);
-
-        if(cmd) {
-
-        }
+        executeCmd(this._store, ast);
     }
 }
 
-function executeCmd(cmd: CommandToken) {
+function executeCmd(store: CommandStore, cmd: CommandToken) {
+    const cmdUnit = store.getCommand(cmd.commandName);
 
+    if(cmdUnit) {
+        const func = cmdUnit.exec();
+
+        console.log(cmdUnit);
+    }
 }

@@ -1,4 +1,5 @@
 import CommandUnit from "./CommandUnit";
+import ASMakeError from "../errors/ASMakeError";
 
 /**
  * A singleton class that acts as the store for all the commands.
@@ -18,9 +19,7 @@ export default class CommandStore {
         return CommandStore._instance;
     }
 
-    private constructor() {
-
-    }
+    private constructor() {}
 
     public hasCommand(name: string): boolean {
         return this._store.has(name);
@@ -28,5 +27,14 @@ export default class CommandStore {
 
     public getCommand(name: string): CommandUnit | null {
         return this._store.get(name) || null;
+    }
+
+    public addCommand(cmd: CommandUnit) {
+        for(let name of cmd.names) {
+            if(this._store.has(name))
+                throw new ASMakeError(`The command name '${name}' already exists.`);
+
+            this._store.set(name, cmd);
+        }
     }
 }
