@@ -1,3 +1,3 @@
 # About
 
-AssistScript is a command based scripting language.
+AssistScript is a command-based scripting language.
