@@ -2,6 +2,8 @@ import Documentation from "./Documentation";
 import Arguments from "./Arguments";
 import ASMakeError from "../errors/ASMakeError";
 import {CmdExec} from "./util_types";
+import DataTypes from "../tokens/DataType";
+import DataType from "../tokens/DataType";
 
 /**
  * The representation of a Command in AssistScript
@@ -13,18 +15,21 @@ export default class Command {
     names: string[];
     docs: Documentation;
     args: Arguments;
+    returnType: DataTypes;
     exec;
 
     /**
      * @param names Array containing the name and aliases of the command
      * @param docs The documentation of the command
      * @param args The arguments of the command
+     * @param returnType The return type of the command
      * @param exec The function to execute when the command is called
      */
-    constructor(names: string[], docs: Documentation, args: Arguments, exec: CmdExec) {
+    constructor(names: string[], docs: Documentation, args: Arguments, returnType: DataTypes, exec: CmdExec) {
         this.names = names;
         this.docs = docs;
         this.args = args;
+        this.returnType = returnType;
         this.exec = exec;
     }
 }
@@ -37,6 +42,7 @@ export class CommandBuilder {
     private _names: string[] | null = null;
     private _docs: Documentation | null = null
     private _args: Arguments | null = null;
+    private _returnType: DataTypes | null = null;
     private _exec: CmdExec | null = null;
 
     /**Adds the name and aliases if it exists; REQUIRED*/
@@ -54,6 +60,11 @@ export class CommandBuilder {
     /**Arguments; REQUIRED*/
     addArgs(args: Arguments) {
         this._args = args;
+        return this;
+    }
+
+    addReturnType(returnType: DataTypes) {
+        this._returnType = returnType;
         return this;
     }
 
@@ -79,6 +90,9 @@ export class CommandBuilder {
         if(!this._exec)
             throw new ASMakeError('Command execution function not specified.');
 
-        return new Command(this._names, this._docs, this._args, this._exec);
+        if(!this._returnType)
+            throw new ASMakeError('Command return type not specified.');
+
+        return new Command(this._names, this._docs, this._args, this._returnType, this._exec);
     }
 }

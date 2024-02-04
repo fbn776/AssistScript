@@ -4,6 +4,7 @@ import CommandStore from "./lang/models/CommandStore";
 import {CommandBuilder} from "./lang/models/Command";
 import {DocsBuilder} from "./lang/models/Documentation";
 import Arguments from "./lang/models/Arguments";
+import DataTypes from "./lang/tokens/DataType";
 
 function test(func: () => any) {
     try {
@@ -29,7 +30,8 @@ store.addCommand(
             .example('')
             .build()
         )
-        .addArgs(new Arguments(0, 0))
+        .addArgs(new Arguments(DataTypes.number, DataTypes.number))
+        .addReturnType(DataTypes.number)
         .addExec((x: number, y: number) => {
             console.log(x, y);
             return x + y;

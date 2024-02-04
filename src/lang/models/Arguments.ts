@@ -1,15 +1,11 @@
-enum ArgType {
-    number,
-    string,
-    command
-}
+import DataTypes from "../tokens/DataType";
 
 
 export default class Arguments {
-    readonly args: ArgType[] = [];
+    readonly args: DataTypes[] = [];
     readonly num;
 
-    constructor(...args: ArgType[]) {
+    constructor(...args: DataTypes[]) {
         this.args = args;
         this.num = args.length;
     }
