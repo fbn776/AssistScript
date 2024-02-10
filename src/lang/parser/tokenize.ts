@@ -76,8 +76,8 @@ export function tokenize(inputTxt: string): LangTokenBase[] {
             if (quoteStartIndex != 0)
                 quottedTokens.push(...tokenizeParens(beforeStr));
 
-            // Push the grouped string too
-            quottedTokens.push(new StringToken(str.substring(quoteStartIndex + 1, quoteEndIndex)));
+            // Push the grouped string too; If the quotes are there, then push those too.
+            quottedTokens.push(new StringToken(str.substring(quoteStartIndex, quoteEndIndex + 1)));
 
             // If there is anything after the quote, add it to the return array and split for parenthesis.
             if (quoteEndIndex != str.length - 1)
