@@ -3,6 +3,7 @@ import ContainerToken from "../../specs/tokens/lexmes/ContainerToken";
 import NumberToken from "../../specs/tokens/lexmes/NumberToken";
 import BooleanToken from "../../specs/tokens/lexmes/BooleanToken";
 
+/** Converts a base token to it's matching type token*/
 function convertToPossibleType(token: LangTokenBase<unknown>) {
     if(!isNaN(Number(token.value)))
         return new NumberToken(+(token.value as string));
@@ -14,9 +15,8 @@ function convertToPossibleType(token: LangTokenBase<unknown>) {
 }
 
 /**
- * Probably does something like convert 'number' type stuffs to number, 'booleans' to booleans and some other conversions..
- *
- * Takes in the output of `parser()` and does some pre-processing to it.
+ * Takes in the partial parsed output and then does some postprocess to it.
+ * Like conversion of base tokens to its matching token type
  */
 export default function postprocessor(tokensIn: LangTokenBase<unknown>[]) {
     return tokensIn.map((token) => {
