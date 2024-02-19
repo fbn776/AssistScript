@@ -53,7 +53,7 @@ export function getJoinedStrLength(token: ArrayTokenizer<string>, tokenPos: numb
 }
 
 /** Same as `getJoinedStrLength`, but for `LangTokenBase`, sort of like a function overload*/
-export function getJoinedTknLength(token: ArrayTokenizer<LangTokenBase>, tokenPos: number, offset = 0): number {
+export function getJoinedTknLength(token: ArrayTokenizer<LangTokenBase<unknown>>, tokenPos: number, offset = 0): number {
     if(tokenPos > token.length)
         throw new Error(`Token position ${tokenPos} is greater than the length of the token array (${token.length})`)
 

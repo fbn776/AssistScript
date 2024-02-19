@@ -69,8 +69,7 @@ export namespace ParserErrorChecks {
         }
     }
 
-    /** Checks for the specs tree step**/
-    export function hasEmptyBracketError_ST(topCmd: LangTokenBase | undefined, str: string, tokens: ArrayTokenizer<LangTokenBase>, token: RightBracketToken) {
+    export function hasEmptyBracketError_ST(topCmd: LangTokenBase<unknown> | undefined, str: string, tokens: ArrayTokenizer<LangTokenBase<unknown>>, token: RightBracketToken) {
         if (topCmd === undefined) {
             throw new ASLangError({
                 reason: `Found empty command '()'`,
@@ -83,7 +82,7 @@ export namespace ParserErrorChecks {
         }
     }
 
-    export function hasRougeRightBracketError_ST(stack: Stack<LangTokenBase>, str: string, tokens: ArrayTokenizer<LangTokenBase>, token: RightBracketToken) {
+    export function hasRougeRightBracketError_ST(stack: Stack<LangTokenBase<unknown>>, str: string, tokens: ArrayTokenizer<LangTokenBase<unknown>>, token: RightBracketToken) {
         if (stack.isEmpty()) {
             throw new ASLangError({
                 reason: `Invalid bracket, no opening bracket found`,
@@ -99,7 +98,7 @@ export namespace ParserErrorChecks {
         value: string,
         tokenPos: number
     }
-    export function hasRougeLeftBracketError_ST(bracketTrack: Stack<I_BracketTrack>, tokens: ArrayTokenizer<LangTokenBase>, str: string) {
+    export function hasRougeLeftBracketError_ST(bracketTrack: Stack<I_BracketTrack>, tokens: ArrayTokenizer<LangTokenBase<unknown>>, str: string) {
         if (!bracketTrack.isEmpty()) {
             let top = bracketTrack.pop()!;
             throw new ASLangError({

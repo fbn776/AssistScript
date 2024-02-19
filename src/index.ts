@@ -13,9 +13,13 @@ function test(func: () => any) {
 }
 
 test(() => {
-    parser("hello jjs'haha' 2 3")
+    console.log(parser("hello jjs'haha' 2 3"))
 });
 
 test(() => {
-    parser("hello (('haha') 2 3")
+    console.log(parser("hello (('haha') 2 3"))
+});
+
+test(() => {
+    console.log(parser("add 10 43 24.234 34+13 true (sub -422 -42.44 +23 false) False True"))
 });
