@@ -1,5 +1,5 @@
 import readline from "readline";
-import {displayAST} from "./lang-core/lang_utils";
+import {displayAST} from "./lang-core/utils/lang_utils";
 import generateSyntaxTree from "./lang-core/interpreter/parser/generateSyntaxTree";
 import ASLangError from "./lang-core/errors/ASLangError";
 

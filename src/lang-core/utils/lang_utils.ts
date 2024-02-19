@@ -1,5 +1,5 @@
-import CommandToken from "./specs/tokens/lexmes/CommandToken";
-import LangTokenBase from "./specs/tokens/LangTokenBase";
+import CommandToken from "../specs/tokens/lexmes/CommandToken";
+import LangTokenBase from "../specs/tokens/LangTokenBase";
 
 /** Checks if a string only contains unique characters (may/may not repeat)*/
 export function hasOnlyRepeatedChars(str: string) {

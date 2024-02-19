@@ -1,5 +1,5 @@
 import {ArrayTokenizer, getJoinedStrLength, getJoinedTknLength} from "../../../utils/ArrayTokenizer";
-import {hasOnlyRepeatedChars} from "../../lang_utils";
+import {hasOnlyRepeatedChars} from "../../utils/lang_utils";
 import ASLangError from "../../errors/ASLangError";
 import ErrorCodes from "../../errors/ErrorCodes";
 import LangTokenBase from "../../specs/tokens/LangTokenBase";
