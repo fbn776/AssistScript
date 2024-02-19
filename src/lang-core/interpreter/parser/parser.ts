@@ -10,7 +10,7 @@ import {ParserErrorChecks} from "./ParserErrorChecks";
 /**
  * Splits a string based on parenthesis and converts each to a token
  */
-function tokenizeParens(str: string): LangTokenBase[] {
+function tokenizeParens(str: string): LangTokenBase<unknown>[] {
     return str.split(/([()])/).filter((val) => val).map(e => {
         if(e === ")")
             return new RightBracketToken();
@@ -28,9 +28,9 @@ function tokenizeParens(str: string): LangTokenBase[] {
  * Check parse error like invalid quotes, invalid brackets, etc.
  * @throws ASLangError
  **/
-export function parser(inputTxt: string): LangTokenBase[] {
+export function parser(inputTxt: string): LangTokenBase<unknown>[] {
     const tokens = new ArrayTokenizer(inputTxt.split(' '));
-    const quottedTokens: LangTokenBase[] = [];
+    const parsedTokens: LangTokenBase<unknown>[] = [];
 
     // If the input string is empty, then throw an error.
     if (inputTxt === '')
@@ -75,21 +75,23 @@ export function parser(inputTxt: string): LangTokenBase[] {
 
             // If there is anything before the quote, then add it to the return array and also split for parenthesis.
             if (quoteStartIndex != 0)
-                quottedTokens.push(...tokenizeParens(beforeStr));
+                parsedTokens.push(...tokenizeParens(beforeStr));
 
             // Push the grouped string too; If the quotes are there, then push those too.
-            quottedTokens.push(new StringToken(str.substring(quoteStartIndex, quoteEndIndex + 1)));
+            parsedTokens.push(new StringToken(str.substring(quoteStartIndex, quoteEndIndex + 1)));
 
             // If there is anything after the quote, add it to the return array and split for parenthesis.
             if (quoteEndIndex != str.length - 1)
-                quottedTokens.push(...tokenizeParens(afterStr));
+                parsedTokens.push(...tokenizeParens(afterStr));
         } else {
             // ERROR Check: If there are invalid brackets
             ParserErrorChecks.hasInvalidBracketError_TK(curr, inputTxt, tokens);
 
             // Split for parenthesis
-            quottedTokens.push(...tokenizeParens(curr));
+            parsedTokens.push(...tokenizeParens(curr));
         }
     }
-    return quottedTokens;
+
+    console.log(parsedTokens);
+    return parsedTokens;
 }

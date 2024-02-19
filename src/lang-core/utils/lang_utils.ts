@@ -10,7 +10,7 @@ export function hasOnlyRepeatedChars(str: string) {
 }
 
 /** Displays the syntax tree to the console in a formatted way*/
-export function displayAST(base: LangTokenBase, level: number = 0, sep: string  = "  ") {
+export function displayAST(base: LangTokenBase<unknown>, level: number = 0, sep: string  = "  ") {
     if (base instanceof CommandToken) {
         console.log(`${sep.repeat(level)}>`, base.commandName);
 
