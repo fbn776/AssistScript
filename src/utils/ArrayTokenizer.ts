@@ -1,4 +1,4 @@
-import LangTokenBase from "../lang/tokens/LangTokenBase";
+import LangTokenBase from "../lang-core/specs/tokens/LangTokenBase";
 
 /**
  * A simple class to iterate over an array of tokens;
@@ -39,7 +39,6 @@ export class ArrayTokenizer<T> {
         this.index = 0;
     }
 }
-
 
 /** Returns the position of a token at the specified token position if all the tokens were joined together. */
 export function getJoinedStrLength(token: ArrayTokenizer<string>, tokenPos: number, offset = 0): number {

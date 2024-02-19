@@ -1,10 +1,10 @@
-import {ArrayTokenizer, getJoinedStrLength, getJoinedTknLength} from "../../utils/ArrayTokenizer";
-import {hasOnlyRepeatedChars} from "../lang_utils";
-import ASLangError from "../errors/ASLangError";
-import ErrorCodes from "../errors/ErrorCodes";
-import LangTokenBase from "../tokens/LangTokenBase";
-import {RightBracketToken} from "../tokens/lexmes/ContainerToken";
-import Stack from "../../utils/Stack";
+import {ArrayTokenizer, getJoinedStrLength, getJoinedTknLength} from "../../../utils/ArrayTokenizer";
+import {hasOnlyRepeatedChars} from "../../utils/lang_utils";
+import ASLangError from "../../errors/ASLangError";
+import ErrorCodes from "../../errors/ErrorCodes";
+import LangTokenBase from "../../specs/tokens/LangTokenBase";
+import {RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
+import Stack from "../../../utils/Stack";
 
 /**
  * A grouping of common or unnecessarily large error checking codes.
@@ -69,7 +69,7 @@ export namespace ParserErrorChecks {
         }
     }
 
-    /** Checks for the syntax tree step**/
+    /** Checks for the specs tree step**/
     export function hasEmptyBracketError_ST(topCmd: LangTokenBase | undefined, str: string, tokens: ArrayTokenizer<LangTokenBase>, token: RightBracketToken) {
         if (topCmd === undefined) {
             throw new ASLangError({

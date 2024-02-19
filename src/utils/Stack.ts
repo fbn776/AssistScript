@@ -1,3 +1,6 @@
+/**
+ * Stack data structure.
+ */
 export default class Stack<E> {
     private stack: E[] = [];
 

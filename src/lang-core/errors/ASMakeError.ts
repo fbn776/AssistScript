@@ -1,7 +1,7 @@
 import ASBaseError from "./ASBaseError";
 
 /**
- * Represents errors' throw during the make process, like loading up the stdlib, documentations etc.
+ * Represents errors' thrown during the make or startup process, like loading up the stdlib, documentations etc.
  * These are errors throws during the compilation process, not the runtime.
  * For e.g., If there is an invalid command name given to a CommandUnit, then this will be thrown;
  *
