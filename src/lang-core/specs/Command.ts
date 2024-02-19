@@ -2,8 +2,8 @@ import Documentation from "./Documentation";
 import Arguments from "./Arguments";
 import ASMakeError from "../errors/ASMakeError";
 import {CmdExec} from "./util_types";
-import DataTypes from "../tokens/DataType";
-import DataType from "../tokens/DataType";
+import DataTypes from "./tokens/DataType";
+import DataType from "./tokens/DataType";
 
 /**
  * The representation of a Command in AssistScript

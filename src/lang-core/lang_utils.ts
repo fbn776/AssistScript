@@ -1,5 +1,5 @@
-import CommandToken from "./tokens/lexmes/CommandToken";
-import LangTokenBase from "./tokens/LangTokenBase";
+import CommandToken from "./specs/tokens/lexmes/CommandToken";
+import LangTokenBase from "./specs/tokens/LangTokenBase";
 
 /** Checks if a string only contains unique characters (may/may not repeat)*/
 export function hasOnlyRepeatedChars(str: string) {
@@ -9,7 +9,7 @@ export function hasOnlyRepeatedChars(str: string) {
     return true;
 }
 
-/** Displays a syntax tree and also does the formatting*/
+/** Displays a specs tree and also does the formatting*/
 export function displayAST(base: LangTokenBase, level: number = 0, sep: string  = "  ") {
     if (base instanceof CommandToken) {
         console.log(`${sep.repeat(level)}>`, base.commandName);

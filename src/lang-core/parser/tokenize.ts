@@ -1,9 +1,9 @@
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
-import LangTokenBase from "../tokens/LangTokenBase";
-import StringToken from "../tokens/lexmes/StringToken";
-import {LeftBracketToken, RightBracketToken} from "../tokens/lexmes/ContainerToken";
+import LangTokenBase from "../specs/tokens/LangTokenBase";
+import StringToken from "../specs/tokens/lexmes/StringToken";
+import {LeftBracketToken, RightBracketToken} from "../specs/tokens/lexmes/ContainerToken";
 import {ParserErrorChecks} from "./ParserErrorChecks";
 
 

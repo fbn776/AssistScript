@@ -1,9 +1,9 @@
 import Stack from "../../utils/Stack";
-import LangTokenBase from "../tokens/LangTokenBase";
+import LangTokenBase from "../specs/tokens/LangTokenBase";
 import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
-import {LeftBracketToken, RightBracketToken} from "../tokens/lexmes/ContainerToken";
-import CommandToken from "../tokens/lexmes/CommandToken";
-import StringToken from "../tokens/lexmes/StringToken";
+import {LeftBracketToken, RightBracketToken} from "../specs/tokens/lexmes/ContainerToken";
+import CommandToken from "../specs/tokens/lexmes/CommandToken";
+import StringToken from "../specs/tokens/lexmes/StringToken";
 import {tokenize} from "./tokenize";
 import ASLangError from "../errors/ASLangError";
 import ErrorCodes from "../errors/ErrorCodes";
@@ -13,7 +13,7 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 
 
 /**
- * Takes in a string of text, tokenizes it and then creates the syntax tree and returns a CommandToken as the head.
+ * Takes in a string of text, tokenizes it and then creates the specs tree and returns a CommandToken as the head.
  *
  * Output e.g.:
  * CommandToken {

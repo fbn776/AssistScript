@@ -1,7 +1,7 @@
-import CommandStore from "../models/CommandStore";
+import CommandStore from "../specs/CommandStore";
 import generateSyntaxTree from "../parser/generateSyntaxTree";
-import CommandToken from "../tokens/lexmes/CommandToken";
-import NumberToken from "../tokens/lexmes/NumberToken";
+import CommandToken from "../specs/tokens/lexmes/CommandToken";
+import NumberToken from "../specs/tokens/lexmes/NumberToken";
 import ASRuntimeError from "../errors/ASRuntimeError";
 
 export default class ExecutionEngine {

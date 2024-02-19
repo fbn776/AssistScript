@@ -1,4 +1,4 @@
-import LangTokenBase from "../lang/tokens/LangTokenBase";
+import LangTokenBase from "../lang-core/specs/tokens/LangTokenBase";
 
 /**
  * A simple class to iterate over an array of tokens;

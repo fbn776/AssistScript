@@ -1,4 +1,4 @@
-import LangTokenBase from "../tokens/LangTokenBase";
+import LangTokenBase from "../specs/tokens/LangTokenBase";
 
 /**TODO - Currently tis doesnt do anything
  * Probably does something like convert 'number' type stuffs to number, 'booleans' to booleans and some other conversions..

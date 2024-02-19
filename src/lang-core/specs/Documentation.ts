@@ -47,7 +47,7 @@ export class DocsBuilder {
         return this;
     }
 
-    /** Sets the syntax of the documentation; REQUIRED*/
+    /** Sets the specs of the documentation; REQUIRED*/
     syntax(syntax: string): DocsBuilder {
         this.syntax1 = syntax;
         return this;
