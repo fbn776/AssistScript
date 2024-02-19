@@ -1,9 +1,9 @@
-import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
-import ASLangError from "../errors/ASLangError";
-import ErrorCodes from "../errors/ErrorCodes";
-import LangTokenBase from "../specs/tokens/LangTokenBase";
-import StringToken from "../specs/tokens/lexmes/StringToken";
-import {LeftBracketToken, RightBracketToken} from "../specs/tokens/lexmes/ContainerToken";
+import {ArrayTokenizer} from "../../../utils/ArrayTokenizer";
+import ASLangError from "../../errors/ASLangError";
+import ErrorCodes from "../../errors/ErrorCodes";
+import LangTokenBase from "../../specs/tokens/LangTokenBase";
+import StringToken from "../../specs/tokens/lexmes/StringToken";
+import {LeftBracketToken, RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
 import {ParserErrorChecks} from "./ParserErrorChecks";
 
 
@@ -22,12 +22,13 @@ function tokenizeParens(str: string): LangTokenBase[] {
 }
 
 
-/** Takes in a string and splits it into tokens based on space.
- * Along with tokenizing this also groups quotes together, split all the container tokens `(`, `)` and
+/** Takes in a string and splits it into tokens and return an array of tokens.
+ * This does steps like: quote matching, bracket matching.
+ *
  * Check parse error like invalid quotes, invalid brackets, etc.
  * @throws ASLangError
  **/
-export function tokenize(inputTxt: string): LangTokenBase[] {
+export function parser(inputTxt: string): LangTokenBase[] {
     const tokens = new ArrayTokenizer(inputTxt.split(' '));
     const quottedTokens: LangTokenBase[] = [];
 

@@ -1,19 +1,20 @@
-import Stack from "../../utils/Stack";
-import LangTokenBase from "../specs/tokens/LangTokenBase";
-import {ArrayTokenizer} from "../../utils/ArrayTokenizer";
-import {LeftBracketToken, RightBracketToken} from "../specs/tokens/lexmes/ContainerToken";
-import CommandToken from "../specs/tokens/lexmes/CommandToken";
-import StringToken from "../specs/tokens/lexmes/StringToken";
-import {tokenize} from "./tokenize";
-import ASLangError from "../errors/ASLangError";
-import ErrorCodes from "../errors/ErrorCodes";
+import Stack from "../../../utils/Stack";
+import LangTokenBase from "../../specs/tokens/LangTokenBase";
+import {ArrayTokenizer} from "../../../utils/ArrayTokenizer";
+import {LeftBracketToken, RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
+import CommandToken from "../../specs/tokens/lexmes/CommandToken";
+import StringToken from "../../specs/tokens/lexmes/StringToken";
+import {parser} from "./parser";
+import ASLangError from "../../errors/ASLangError";
+import ErrorCodes from "../../errors/ErrorCodes";
 import {ParserErrorChecks} from "./ParserErrorChecks";
 import preprocessor from "./preprocessor";
 import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 
 
 /**
- * Takes in a string of text, tokenizes it and then creates the specs tree and returns a CommandToken as the head.
+ * Takes in a string of text, tokenizes it and then creates the syntax tree and returns a CommandToken,
+ * which is the root node and contains all the other components as it's child element.
  *
  * Output e.g.:
  * CommandToken {
@@ -24,7 +25,7 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
  * }
  */
 export default function generateSyntaxTree(str: string) {
-    const tk = preprocessor(tokenize(str));
+    const tk = preprocessor(parser(str));
     const tokens = new ArrayTokenizer<LangTokenBase>(tk);
     const stack = new Stack<LangTokenBase>();
 

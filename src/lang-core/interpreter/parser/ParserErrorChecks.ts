@@ -1,10 +1,10 @@
-import {ArrayTokenizer, getJoinedStrLength, getJoinedTknLength} from "../../utils/ArrayTokenizer";
-import {hasOnlyRepeatedChars} from "../lang_utils";
-import ASLangError from "../errors/ASLangError";
-import ErrorCodes from "../errors/ErrorCodes";
-import LangTokenBase from "../specs/tokens/LangTokenBase";
-import {RightBracketToken} from "../specs/tokens/lexmes/ContainerToken";
-import Stack from "../../utils/Stack";
+import {ArrayTokenizer, getJoinedStrLength, getJoinedTknLength} from "../../../utils/ArrayTokenizer";
+import {hasOnlyRepeatedChars} from "../../lang_utils";
+import ASLangError from "../../errors/ASLangError";
+import ErrorCodes from "../../errors/ErrorCodes";
+import LangTokenBase from "../../specs/tokens/LangTokenBase";
+import {RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
+import Stack from "../../../utils/Stack";
 
 /**
  * A grouping of common or unnecessarily large error checking codes.

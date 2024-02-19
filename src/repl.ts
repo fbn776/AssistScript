@@ -1,6 +1,6 @@
 import readline from "readline";
 import {displayAST} from "./lang-core/lang_utils";
-import generateSyntaxTree from "./lang-core/parser/generateSyntaxTree";
+import generateSyntaxTree from "./lang-core/interpreter/parser/generateSyntaxTree";
 import ASLangError from "./lang-core/errors/ASLangError";
 
 console.log("REPL MODE: ")

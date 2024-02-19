@@ -9,7 +9,7 @@ export function hasOnlyRepeatedChars(str: string) {
     return true;
 }
 
-/** Displays a specs tree and also does the formatting*/
+/** Displays the syntax tree to the console in a formatted way*/
 export function displayAST(base: LangTokenBase, level: number = 0, sep: string  = "  ") {
     if (base instanceof CommandToken) {
         console.log(`${sep.repeat(level)}>`, base.commandName);

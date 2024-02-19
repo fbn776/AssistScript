@@ -1,10 +1,10 @@
-import CommandStore from "../specs/CommandStore";
+import CommandStore from "../../specs/CommandStore";
 import generateSyntaxTree from "../parser/generateSyntaxTree";
-import CommandToken from "../specs/tokens/lexmes/CommandToken";
-import NumberToken from "../specs/tokens/lexmes/NumberToken";
-import ASRuntimeError from "../errors/ASRuntimeError";
+import CommandToken from "../../specs/tokens/lexmes/CommandToken";
+import NumberToken from "../../specs/tokens/lexmes/NumberToken";
+import ASRuntimeError from "../../errors/ASRuntimeError";
 
-export default class ExecutionEngine {
+export default class Runner {
     private _store = CommandStore.getInstance();
 
     public execute(str: string) {
