@@ -1,4 +1,4 @@
-import CommandStore from "../../specs/CommandStore";
+import CommandStore from "../CommandStore";
 import generateSyntaxTree from "../parser/generateSyntaxTree";
 import CommandToken from "../../specs/tokens/lexmes/CommandToken";
 import NumberToken from "../../specs/tokens/lexmes/NumberToken";
