@@ -1,9 +1,9 @@
 import Documentation from "./lang-units/Documentation";
 import Arguments from "./lang-units/Arguments";
 import DataTypes from "./tokens/DataType";
-import {CmdExec} from "./lang-units/util_types";
 import ASMakeError from "../errors/ASMakeError";
 import Command from "./lang-units/Command";
+import {CmdExec} from "../utils/lang_utils";
 
 /**
  * A builder class that builds a command

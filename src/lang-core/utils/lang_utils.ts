@@ -21,3 +21,6 @@ export function displayAST(base: LangTokenBase, level: number = 0, sep: string  
         console.log(`${sep.repeat(level)}|`, base.value);
     }
 }
+
+/** The command executable function type.*/
+export type CmdExec = (...args: any[]) => any;
