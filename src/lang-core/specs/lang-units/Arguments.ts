@@ -1,4 +1,4 @@
-import DataTypes from "./tokens/DataType";
+import DataTypes from "../tokens/DataType";
 
 
 export default class Arguments {

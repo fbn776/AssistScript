@@ -1,39 +1,9 @@
-import Documentation from "./Documentation";
-import Arguments from "./Arguments";
-import ASMakeError from "../errors/ASMakeError";
-import {CmdExec} from "./util_types";
+import Documentation from "./lang-units/Documentation";
+import Arguments from "./lang-units/Arguments";
 import DataTypes from "./tokens/DataType";
-import DataType from "./tokens/DataType";
-
-/**
- * The representation of a Command in AssistScript
- * This holds all the information about a command,
- * contains the names (+aliases), documentation, argument info and how to execute.
- */
-export default class Command {
-    /** The names of the command; Can contain manny names (aliases) */
-    names: string[];
-    docs: Documentation;
-    args: Arguments;
-    returnType: DataTypes;
-    exec;
-
-    /**
-     * @param names Array containing the name and aliases of the command
-     * @param docs The documentation of the command
-     * @param args The arguments of the command
-     * @param returnType The return type of the command
-     * @param exec The function to execute when the command is called
-     */
-    constructor(names: string[], docs: Documentation, args: Arguments, returnType: DataTypes, exec: CmdExec) {
-        this.names = names;
-        this.docs = docs;
-        this.args = args;
-        this.returnType = returnType;
-        this.exec = exec;
-    }
-}
-
+import {CmdExec} from "./lang-units/util_types";
+import ASMakeError from "../errors/ASMakeError";
+import Command from "./lang-units/Command";
 
 /**
  * A builder class that builds a command
@@ -78,19 +48,19 @@ export class CommandBuilder {
      * @throws ASMakeError If the required properties are not specified.
      */
     build() {
-        if(!this._names)
+        if (!this._names)
             throw new ASMakeError('Command name(s) not specified.');
 
-        if(!this._docs)
+        if (!this._docs)
             throw new ASMakeError('Command documentation not specified.');
 
-        if(!this._args)
+        if (!this._args)
             throw new ASMakeError('Command arguments not specified.');
 
-        if(!this._exec)
+        if (!this._exec)
             throw new ASMakeError('Command execution function not specified.');
 
-        if(!this._returnType)
+        if (!this._returnType)
             throw new ASMakeError('Command return type not specified.');
 
         return new Command(this._names, this._docs, this._args, this._returnType, this._exec);

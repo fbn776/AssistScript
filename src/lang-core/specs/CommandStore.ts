@@ -1,4 +1,4 @@
-import Command from "./Command";
+import Command from "./lang-units/Command";
 import ASMakeError from "../errors/ASMakeError";
 
 /**
