@@ -1,8 +1,9 @@
 import LangTokenBase from "../../specs/tokens/LangTokenBase";
 import ContainerToken from "../../specs/tokens/lexmes/ContainerToken";
 import NumberToken from "../../specs/tokens/lexmes/NumberToken";
+import BooleanToken from "../../specs/tokens/lexmes/BooleanToken";
 
-function convertToPossibleType(token: LangTokenBase) {
+function convertToPossibleType(token: LangTokenBase<unknown>) {
     if(isNaN(Number(token.value)))
         return new NumberToken(+(token.value as string));
 
@@ -17,7 +18,7 @@ function convertToPossibleType(token: LangTokenBase) {
  *
  * Takes in the output of `parser()` and does some pre-processing to it.
  */
-export default function preprocessor(tokensIn: LangTokenBase[]) {
+export default function preprocessor(tokensIn: LangTokenBase<unknown>[]) {
     tokensIn = tokensIn.map((token) => {
         if(token instanceof ContainerToken)
             return token;
