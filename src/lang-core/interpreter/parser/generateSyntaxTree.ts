@@ -32,7 +32,6 @@ export default function generateSyntaxTree(str: string) {
     // For keeping track of brackets to check for errors.
     const bracketTrack = new Stack<I_BracketTrack>();
 
-
     while (tokens.hasMoreTokens()) {
         const token = tokens.nextToken();
         if (token === null)

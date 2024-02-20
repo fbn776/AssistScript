@@ -15,38 +15,39 @@ export class CommandBuilder {
     private _returnType: DataTypes | null = null;
     private _exec: CmdExec | null = null;
 
-    /**Adds the name and aliases if it exists; REQUIRED*/
-    addNames(...names: string[]) {
+    /**Adds the name and aliases(if it exists); REQUIRED*/
+    names(...names: string[]) {
         this._names = names;
         return this;
     }
 
     /**Documentation; REQUIRED*/
-    addDocs(docs: Documentation) {
+    docs(docs: Documentation) {
         this._docs = docs;
         return this;
     }
 
     /**Arguments; REQUIRED*/
-    addArgs(args: Arguments) {
+    args(args: Arguments) {
         this._args = args;
         return this;
     }
 
-    addReturnType(returnType: DataTypes) {
+    /**Return type; REQUIRED*/
+    returnType(returnType: DataTypes) {
         this._returnType = returnType;
         return this;
     }
 
-    /**Execution function; REQUIRED*/
-    addExec(exec: CmdExec) {
+    /**The code to execute when this command is called; REQUIRED*/
+    run(exec: CmdExec) {
         this._exec = exec;
         return this;
     }
 
     /**
-     * @throws ASMakeError If the required properties are not specified.
-     */
+     * Builds the command; REQUIRED
+     * @throws ASMakeError If the required properties are not specified*/
     build() {
         if (!this._names)
             throw new ASMakeError('Command name(s) not specified.');
