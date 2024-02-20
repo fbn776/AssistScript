@@ -1,5 +1,7 @@
 import CommandToken from "../specs/tokens/lexmes/CommandToken";
 import LangTokenBase from "../specs/tokens/LangTokenBase";
+import NumberToken from "../specs/tokens/lexmes/NumberToken";
+import BooleanToken from "../specs/tokens/lexmes/BooleanToken";
 
 /** Checks if a string only contains unique characters (may/may not repeat)*/
 export function hasOnlyRepeatedChars(str: string) {
@@ -24,3 +26,14 @@ export function displayAST(base: LangTokenBase<unknown>, level: number = 0, sep:
 
 /** The command executable function type.*/
 export type CmdExec = (...args: any[]) => any;
+
+/** Converts a base token to it's matching type token*/
+export function convertToPossibleType(token: LangTokenBase<unknown>) {
+    if (!isNaN(Number(token.value)))
+        return new NumberToken(+(token.value as string));
+
+    if (token.value === "true" || token.value === "false")
+        return new BooleanToken(token.value === "true");
+
+    return token;
+}
