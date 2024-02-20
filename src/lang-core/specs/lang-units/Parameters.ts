@@ -21,6 +21,7 @@ import ASMakeError from "../../errors/ASMakeError";
  *    and for the rest of them the last parameter type is assumed to be type for the rest of the arguments
  *
  * If any of these fail, an error will be thrown.
+ * @throws ASMakeError
  */
 export default class Parameters {
     readonly types: DataType[] = [];

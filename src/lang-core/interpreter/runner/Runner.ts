@@ -9,16 +9,28 @@ import BooleanToken from "../../specs/tokens/lexmes/BooleanToken";
 import StringToken from "../../specs/tokens/lexmes/StringToken";
 import Parameters from "../../specs/lang-units/Parameters";
 
+    /**
+ * The command runner class. Responsible for providing the runtime.
+ * @throws ASRuntimeError
+ */
 export default class Runner {
     private _store = CommandStore.getInstance();
 
-    public run(str: string) {
+    /** Takes in a string and runs it and returns the value of the command*/
+    public run(str: string): unknown {
         const ast = generateSyntaxTree(str);
         return runCommand(ast, this._store);
     }
 }
 
-function runCommand(commandToken: CommandToken, store: CommandStore, ): unknown {
+/**
+ * The actual implementation of the runner method.
+ * A recursive method that goes through each command and its arguments.
+ * Also, responsible for argument type validation
+ * @param commandToken The command to execute
+ * @param store The command store instance
+ */
+export function runCommand(commandToken: CommandToken, store: CommandStore, ): unknown {
     const commandDef = store.getCommand(commandToken.commandName);
     if (!commandDef)
         throw new ASRuntimeError(`Command '${commandToken.commandName}' not found.`);
@@ -27,8 +39,12 @@ function runCommand(commandToken: CommandToken, store: CommandStore, ): unknown 
     const commandParams = commandDef.params;
 
     // TODO Make this a proper error;
-    if(!commandParams.isVariable && tokenParams.length < commandParams.num) {
-        throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but found ${tokenParams.length}`);
+    if(!commandParams.isVariable) {
+        if(tokenParams.length < commandParams.num)
+            throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but found ${tokenParams.length}`);
+
+        if(tokenParams.length > commandParams.num)
+            throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but received more than required (${tokenParams.length})`);
     }
 
     const paramsCP = tokenParams.map((token, index) => {
@@ -55,7 +71,7 @@ function runCommand(commandToken: CommandToken, store: CommandStore, ): unknown 
 function hasProperArgType(token: LangTokenBase<unknown>, params: Parameters, index: number) {
     let type: DataType;
 
-    /** If the index is greater than param lengths, the assume the remaining types to be the last parameter type*/
+    /** If the index is greater than param lengths, then assume the remaining types to be the last parameter type*/
     if(index > params.getParamsLen - 1)
         type = params.lastParam;
     else
