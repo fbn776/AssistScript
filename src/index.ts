@@ -17,21 +17,6 @@ function test(func: () => any) {
     }
 }
 
-// test(() => {
-//     console.log(parser("hello jjs'haha' 2 3"))
-// });
-//
-// test(() => {
-//     console.log(parser("hello (('haha') 2 3"))
-// });
-//
-// test(() => {
-//     console.log(parser("add 10 43 24.234 34+13 true (sub -422 -42.44 +23 false) False True"))
-// });
-
-
-
-
 const store = CommandStore.getInstance();
 
 
@@ -45,7 +30,7 @@ store.addCommand(
             .example('')
             .build()
         )
-        .args(new Parameters(2, DataType.number, DataType.number))
+        .args(new Parameters(2, DataType.number))
         .returnType(DataType.number)
         .run((x: number, y: number) => {
             console.log(x, y);
@@ -56,4 +41,4 @@ store.addCommand(
 
 const exec = new Runner();
 
-console.log(exec.run('add true false'));
+console.log(exec.run('add 20.32 42.4'));
