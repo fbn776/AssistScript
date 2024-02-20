@@ -8,7 +8,6 @@ import {parser} from "./parser";
 import ASLangError from "../../errors/ASLangError";
 import ErrorCodes from "../../errors/ErrorCodes";
 import {ParserErrorChecks} from "./ParserErrorChecks";
-import postprocessor from "./postprocessor";
 import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 
 
@@ -25,7 +24,7 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
  * }
  */
 export default function generateSyntaxTree(str: string) {
-    const tk = postprocessor(parser(str));
+    const tk = parser(str);
     const tokens = new ArrayTokenizer<LangTokenBase<unknown>>(tk);
     const stack = new Stack<LangTokenBase<unknown>>();
 

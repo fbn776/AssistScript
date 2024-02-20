@@ -4,7 +4,8 @@ import {convertToPossibleType} from "../../utils/lang_utils";
 
 /**
  * Takes in the partial parsed output and then does some postprocess to it.
- * Like conversion of base tokens to its matching token type
+ * Like conversion of base tokens to its matching token type.
+ * NOTE: Use this only for the first pass of the raw token data.
  */
 export default function postprocessor(tokensIn: LangTokenBase<unknown>[]) {
     return tokensIn.map((token) => {
