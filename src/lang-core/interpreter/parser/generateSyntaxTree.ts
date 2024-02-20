@@ -26,8 +26,8 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
  */
 export default function generateSyntaxTree(str: string) {
     const tk = postprocessor(parser(str));
-    const tokens = new ArrayTokenizer<LangTokenBase>(tk);
-    const stack = new Stack<LangTokenBase>();
+    const tokens = new ArrayTokenizer<LangTokenBase<unknown>>(tk);
+    const stack = new Stack<LangTokenBase<unknown>>();
 
     // For keeping track of brackets to check for errors.
     const bracketTrack = new Stack<I_BracketTrack>();
@@ -43,7 +43,7 @@ export default function generateSyntaxTree(str: string) {
             bracketTrack.push({value: token.value as string, tokenPos: tokens.currIndex});
         } else if (token instanceof RightBracketToken) {
             let cmd = new CommandToken('', []);
-            const tempStack = new Stack<LangTokenBase>();
+            const tempStack = new Stack<LangTokenBase<unknown>>();
 
             while (!stack.isEmpty() && !(stack.peek() instanceof LeftBracketToken)) {
                 tempStack.push(stack.pop()!);
