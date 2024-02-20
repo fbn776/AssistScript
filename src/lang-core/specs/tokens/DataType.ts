@@ -1,9 +1,9 @@
-enum DataTypes {
+enum DataType {
     number = "number",
     string = "string",
     boolean = "boolean",
     command = "command",
-    void = "void",
+    any = "any",
 }
 
-export default DataTypes;
+export default DataType;

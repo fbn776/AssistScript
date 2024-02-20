@@ -1,6 +1,6 @@
 import Documentation from "./lang-units/Documentation";
-import Arguments from "./lang-units/Arguments";
-import DataTypes from "./tokens/DataType";
+import Parameters from "./lang-units/Parameters";
+import DataType from "./tokens/DataType";
 import ASMakeError from "../errors/ASMakeError";
 import Command from "./lang-units/Command";
 import {CmdExec} from "../utils/lang_utils";
@@ -11,8 +11,8 @@ import {CmdExec} from "../utils/lang_utils";
 export class CommandBuilder {
     private _names: string[] | null = null;
     private _docs: Documentation | null = null
-    private _args: Arguments | null = null;
-    private _returnType: DataTypes | null = null;
+    private _args: Parameters | null = null;
+    private _returnType: DataType | null = null;
     private _exec: CmdExec | null = null;
 
     /**Adds the name and aliases(if it exists); REQUIRED*/
@@ -28,13 +28,13 @@ export class CommandBuilder {
     }
 
     /**Arguments; REQUIRED*/
-    args(args: Arguments) {
+    args(args: Parameters) {
         this._args = args;
         return this;
     }
 
     /**Return type; REQUIRED*/
-    returnType(returnType: DataTypes) {
+    returnType(returnType: DataType) {
         this._returnType = returnType;
         return this;
     }

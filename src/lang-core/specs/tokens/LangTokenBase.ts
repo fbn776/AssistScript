@@ -14,7 +14,7 @@ export enum TokenType {
  * The base class of the token representation in AssistScript
  */
 export default class LangTokenBase<T> {
-    readonly value: T;
+    value: T;
     readonly type: TokenType;
     constructor(value: T, type: TokenType) {
         this.value = value;

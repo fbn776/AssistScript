@@ -5,21 +5,18 @@ import LangTokenBase, {TokenType} from "../LangTokenBase";
  */
 export default class CommandToken extends LangTokenBase<string> {
     readonly params: LangTokenBase<unknown>[];
-    private cmdName: string;
-
     constructor(name: string, params: LangTokenBase<unknown>[]) {
-        super('command_block', TokenType.COMMAND);
-        this.cmdName = name;
+        super(name, TokenType.COMMAND);
         this.params = params;
     }
 
     changeName(name: string){
-        this.cmdName = name;
+        this.value = name;
     }
 
     /** The command name*/
     get commandName() {
-        return this.cmdName;
+        return this.value;
     }
 
     appendParam(param: LangTokenBase<unknown>) {
