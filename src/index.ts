@@ -5,7 +5,9 @@ import {DocsBuilder} from "./lang-core/specs/DocsBuilder";
 import Parameters from "./lang-core/specs/lang-units/Parameters";
 import DataType from "./lang-core/specs/tokens/DataType";
 import Runner from "./lang-core/interpreter/runner/Runner";
+import randomTokenID from "./utils/randomTokenID";
 
+console.time("Start");
 function test(func: () => any) {
     try {
         func();
@@ -33,12 +35,17 @@ store.addCommand(
         .args(new Parameters(2, DataType.number))
         .returnType(DataType.number)
         .run((x: number, y: number) => {
-            console.log(x, y);
             return x + y;
         })
         .build()
 )
 
 const exec = new Runner();
+console.time("Add command")
+exec.run('add 20.32 (add 13 (add 32 (add 13 1)))');
+console.timeEnd("Add command")
 
-console.log(exec.run('add 20.32 42.4'));
+for(let i = 0; i < 20; i++)
+    console.log(randomTokenID())
+
+console.timeEnd("Start")

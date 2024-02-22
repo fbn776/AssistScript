@@ -1,3 +1,5 @@
+import randomTokenID from "../../../utils/randomTokenID";
+
 export interface TokenData {
     allowedContainers: "(" | ")"
 }
@@ -12,13 +14,16 @@ export enum TokenType {
 
 /**
  * The base class of the token representation in AssistScript
+ * All tokens extends this class
  */
 export default class LangTokenBase<T> {
     value: T;
     readonly type: TokenType;
+    readonly tokenID;
     constructor(value: T, type: TokenType) {
         this.value = value;
         this.type = type;
+        this.tokenID = randomTokenID();
     }
 }
 

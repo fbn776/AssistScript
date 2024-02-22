@@ -39,13 +39,9 @@ export function runCommand(commandToken: CommandToken, store: CommandStore, ): u
     const commandParams = commandDef.params;
 
     // TODO Make this a proper error;
-    if(!commandParams.isVariable) {
-        if(tokenParams.length < commandParams.num)
-            throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but found ${tokenParams.length}`);
+    if(!commandParams.isVariable && tokenParams.length !== commandParams.num)
+        throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but found ${tokenParams.length}`);
 
-        if(tokenParams.length > commandParams.num)
-            throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but received more than required (${tokenParams.length})`);
-    }
 
     const paramsCP = tokenParams.map((token, index) => {
         // TODO Make this a proper error;
@@ -80,14 +76,21 @@ function hasProperArgType(token: LangTokenBase<unknown>, params: Parameters, ind
     if(type === DataType.any)
         return true;
 
+    //If the type required is command but token is not a CommandToken then return false
+    if(type === DataType.command && !(token instanceof CommandToken))
+        return false;
+
+    if(token instanceof CommandToken) {
+        // TODO
+        //type = token.
+    }
+
     if(token instanceof NumberToken && type != DataType.number)
         return false;
 
     if(token instanceof BooleanToken && type != DataType.boolean)
         return false;
 
-    if(token instanceof CommandToken && type != DataType.command)
-        return false;
 
     return !(token instanceof StringToken && type != DataType.string);
 }
