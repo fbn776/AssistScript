@@ -1,6 +1,7 @@
 import CommandStore from "./lang-core/interpreter/CommandStore";
 import Runner from "./lang-core/interpreter/runner/Runner";
 import BaseContextProvider from "./lang-core/BaseContextProvider";
+import {CommandBuilder} from "./lang-core/specs/CommandBuilder";
 
 /**
  * The AssistScript class is the main entry point for the AssistScript language.
@@ -8,7 +9,6 @@ import BaseContextProvider from "./lang-core/BaseContextProvider";
  */
 export default class AssistScript<T extends BaseContextProvider> {
     contextProvider: T;
-
     store: CommandStore = CommandStore.getInstance();
 
     constructor(ctxProvider: T) {
@@ -21,6 +21,6 @@ export default class AssistScript<T extends BaseContextProvider> {
      * @throws ASRuntimeError
      */
     execute(str: string): unknown {
-        return Runner.run(str, this.store);
+        return Runner.run(str, this);
     }
 }

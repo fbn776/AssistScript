@@ -1,2 +1,4 @@
+import BaseContextProvider from "../BaseContextProvider";
+
 /** The command executable function type.*/
-export type CmdExec = (...args: any[]) => any;
+export type CmdExec = (ctx: unknown, ...args: any[]) => any;
