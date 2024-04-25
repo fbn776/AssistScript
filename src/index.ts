@@ -4,10 +4,7 @@ import Parameters from "./lang-core/specs/lang-units/Parameters";
 import DataType from "./lang-core/specs/tokens/DataType";
 import AssistScript from "./AssistScript";
 import sandboxRun from "./utils/sandboxRun";
-import LangTokenBase from "./lang-core/specs/tokens/LangTokenBase";
-import CommandToken from "./lang-core/specs/tokens/lexmes/CommandToken";
-import generateSyntaxTree from "./lang-core/interpreter/parser/generateSyntaxTree";
-import {displayAST} from "./lang-core/utils/lang_utils";
+
 
 const as = new AssistScript();
 

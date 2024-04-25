@@ -1,4 +1,4 @@
-import LangTokenBase, {TokenType} from "../../specs/tokens/LangTokenBase";
+import LangTokenBase from "../../specs/tokens/LangTokenBase";
 import Parameters from "../../specs/lang-units/Parameters";
 import DataType from "../../specs/tokens/DataType";
 import CommandToken from "../../specs/tokens/lexmes/CommandToken";

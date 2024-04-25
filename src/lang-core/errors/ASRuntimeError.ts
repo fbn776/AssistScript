@@ -1,8 +1,6 @@
 import ASBaseError from "./ASBaseError";
 import LangTokenBase from "../specs/tokens/LangTokenBase";
 import {T_InitialState} from "../interpreter/runner/runCommand";
-import CommandToken from "../specs/tokens/lexmes/CommandToken";
-import {displayAST} from "../utils/lang_utils";
 import {ASTErrorDisplay} from "../utils/ASTErrorDisplay";
 
 interface I_ErrorData {
