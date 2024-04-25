@@ -2,6 +2,8 @@ import CommandToken from "../../specs/tokens/lexmes/CommandToken";
 import CommandStore from "../CommandStore";
 import ASRuntimeError from "../../errors/ASRuntimeError";
 import {hasProperArgType} from "./hasProperArgType";
+import AssistScript from "../../../AssistScript";
+import BaseContextProvider from "../../BaseContextProvider";
 
 export type T_InitialState = {
     rootToken: CommandToken,
@@ -13,12 +15,12 @@ export type T_InitialState = {
  * A recursive method that goes through each command and its arguments.
  * Also, responsible for argument type validation
  * @param commandToken The command to execute
- * @param store The command store instance
+ * @param asInstance The command store instance
  * @param initial Used for better error reporting.
  * Contains the original string and the root token
  */
-export function runCommand(commandToken: CommandToken, store: CommandStore, initial: T_InitialState): unknown {
-    const commandDef = store.getCommand(commandToken.commandName);
+export function runCommand<T extends BaseContextProvider>(commandToken: CommandToken, asInstance: AssistScript<T>, initial: T_InitialState): unknown {
+    const commandDef = asInstance.store.getCommand(commandToken.commandName);
 
     if (!commandDef)
         throw new ASRuntimeError(`Command '${commandToken.commandName}' not found.`, {
@@ -49,11 +51,11 @@ Found: ${token.type.substring(6).toLowerCase()}`, {
             });
 
         if (token instanceof CommandToken) {
-            return runCommand(token, store, initial);
+            return runCommand(token, asInstance, initial);
         }
 
         return token.value;
     });
 
-    return commandDef.exec(...paramsCP);
+    return commandDef.exec(asInstance.contextProvider, ...paramsCP);
 }

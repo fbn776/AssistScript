@@ -6,7 +6,13 @@ import AssistScript from "./AssistScript";
 import sandboxRun from "./utils/sandboxRun";
 import BaseContextProvider from "./lang-core/BaseContextProvider";
 
-const as = new AssistScript(new BaseContextProvider());
+class TestContextProvider extends BaseContextProvider {
+    clear() {
+        console.clear();
+    }
+}
+
+const as = new AssistScript(new TestContextProvider());
 
 as.store.addCommand(
     new CommandBuilder()
@@ -20,17 +26,19 @@ as.store.addCommand(
         )
         .args(new Parameters(2, DataType.number))
         .returnType(DataType.number)
-        .run((x: number, y: number) => {
+        .run((_, x: number, y: number) => {
+            const ctx = _ as TestContextProvider;
+            ctx.clear();
 
             return x + y;
         })
         .build()
 )
 
-// sandboxRun(as, 'add 1 (add hi 32)');
-// sandboxRun(as, 'sub');
-// sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');
-// sandboxRun(as, 'add 12 (add 34 (add 23 43))');
+sandboxRun(as, 'add 1 (add hi 32)');
+sandboxRun(as, 'sub');
+sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');
+sandboxRun(as, 'add 12 (add 34 (add 23 43))');
 sandboxRun(as, 'add 12 (add 34 (add 23 43)');
 sandboxRun(as, 'print "hello" "hi');
 sandboxRun(as, 'print "hello" "hi" 2 4) 3344');
@@ -42,6 +50,7 @@ sandboxRun(as, 'add 10 30 (sub 24 (add 24 13) (mult 2 4');
 sandboxRun(as, 'add 10 30 sub 24 add 24 13) 2 4');
 
 
+sandboxRun(as, 'add 30 3')
 
 
 
