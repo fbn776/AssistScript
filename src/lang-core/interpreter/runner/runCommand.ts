@@ -26,22 +26,24 @@ export function runCommand(commandToken: CommandToken, store: CommandStore, init
             occurredAt: commandToken
         });
 
-
     const tokenParams = commandToken.params;
     const commandParams = commandDef.params;
 
     // TODO Make this a proper error;
     if (!commandParams.isVariable && tokenParams.length !== commandParams.num)
-        throw new ASRuntimeError(`The command expects ${commandParams.num} arguments, but found ${tokenParams.length}`, {
+        throw new ASRuntimeError(`The command '${commandToken.commandName}' expects ${commandParams.num} arguments, but found ${tokenParams.length}.`, {
             initial: initial,
             occurredAt: commandToken
         });
 
 
     const paramsCP = tokenParams.map((token, index) => {
+        const checkParam = hasProperArgType(token, commandParams, index);
         // TODO Make this a proper error;
-        if (!hasProperArgType(token, commandParams, index))
-            throw new ASRuntimeError(`Token type doesn't match the required type`, {
+        if (!checkParam.success)
+            throw new ASRuntimeError(`The argument '${token.value}' doesn't match the required type
+Required: ${checkParam.foundType}
+Found: ${token.type.substring(6).toLowerCase()}`, {
                 initial: initial,
                 occurredAt: token
             });

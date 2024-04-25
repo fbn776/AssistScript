@@ -33,6 +33,7 @@ export default function generateSyntaxTree(str: string) {
 
     while (tokens.hasMoreTokens()) {
         const token = tokens.nextToken();
+
         if (token === null)
             continue;
 
@@ -43,9 +44,8 @@ export default function generateSyntaxTree(str: string) {
             let cmd = new CommandToken('', []);
             const tempStack = new Stack<LangTokenBase<unknown>>();
 
-            while (!stack.isEmpty() && !(stack.peek() instanceof LeftBracketToken)) {
+            while (!stack.isEmpty() && !(stack.peek() instanceof LeftBracketToken))
                 tempStack.push(stack.pop()!);
-            }
 
             // ERROR Check; If the stack is empty throw;
             ParserErrorChecks.hasRougeRightBracketError_ST(stack, str, tokens, token);
@@ -54,6 +54,7 @@ export default function generateSyntaxTree(str: string) {
             stack.pop();
 
             const topCmd = tempStack.pop();
+
             // ERROR Check: is the command empty?
             ParserErrorChecks.hasEmptyBracketError_ST(topCmd, str, tokens, token);
 

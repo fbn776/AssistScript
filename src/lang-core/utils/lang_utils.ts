@@ -14,7 +14,7 @@ export function hasOnlyRepeatedChars(str: string) {
 /** Displays the syntax tree to the console in a formatted way*/
 export function displayAST(base: LangTokenBase<unknown>, level: number = 0, sep: string  = "  ") {
     if (base instanceof CommandToken) {
-        console.log(`${sep.repeat(level)}>`, base.commandName);
+        console.log(`${sep.repeat(level)}+`, base.commandName);
 
         for (let i of base.params) {
             displayAST(i, level + 1, sep);
@@ -23,6 +23,7 @@ export function displayAST(base: LangTokenBase<unknown>, level: number = 0, sep:
         console.log(`${sep.repeat(level)}|`, base.value);
     }
 }
+
 
 /** The command executable function type.*/
 export type CmdExec = (...args: any[]) => any;

@@ -1,6 +1,5 @@
 import CommandStore from "../CommandStore";
 import generateSyntaxTree from "../parser/generateSyntaxTree";
-import CommandToken from "../../specs/tokens/lexmes/CommandToken";
 import {runCommand} from "./runCommand";
 
 /**

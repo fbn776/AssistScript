@@ -4,6 +4,10 @@ import Parameters from "./lang-core/specs/lang-units/Parameters";
 import DataType from "./lang-core/specs/tokens/DataType";
 import AssistScript from "./AssistScript";
 import sandboxRun from "./utils/sandboxRun";
+import LangTokenBase from "./lang-core/specs/tokens/LangTokenBase";
+import CommandToken from "./lang-core/specs/tokens/lexmes/CommandToken";
+import generateSyntaxTree from "./lang-core/interpreter/parser/generateSyntaxTree";
+import {displayAST} from "./lang-core/utils/lang_utils";
 
 const as = new AssistScript();
 
@@ -25,6 +29,11 @@ as.store.addCommand(
         .build()
 )
 
-sandboxRun(as, 'add 10 (sub 2 a)');
+sandboxRun(as, 'add 1 (add hi 32)');
+sandboxRun(as, 'sub');
+sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');
 
+
+
+// displayAST(generateSyntaxTree('add      10 (sub 2 a)'))
 

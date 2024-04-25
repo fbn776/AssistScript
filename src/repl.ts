@@ -2,6 +2,8 @@ import readline from "readline";
 import {displayAST} from "./lang-core/utils/lang_utils";
 import generateSyntaxTree from "./lang-core/interpreter/parser/generateSyntaxTree";
 import ASLangError from "./lang-core/errors/ASLangError";
+import LangTokenBase from "./lang-core/specs/tokens/LangTokenBase";
+import CommandToken from "./lang-core/specs/tokens/lexmes/CommandToken";
 
 console.log("REPL MODE: ")
 
@@ -15,6 +17,9 @@ rl.prompt();
 rl.on('line', (line) => {
     try {
         displayAST(generateSyntaxTree(line));
+
+        // console.log(ASTToStr(generateSyntaxTree(line)));
+
     } catch (e) {
         if(e instanceof ASLangError) {
             console.log(e.display())
@@ -28,4 +33,5 @@ rl.on('line', (line) => {
     console.log("REPL MODE END")
     process.exit(0);
 });
+
 
