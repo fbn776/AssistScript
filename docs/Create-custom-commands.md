@@ -1,4 +1,3 @@
-
-# How to create custom command in AssistScript
+# How to create custom commands
 
 TODO

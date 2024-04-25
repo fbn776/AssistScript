@@ -6,7 +6,11 @@ import ASMakeError from "../../errors/ASMakeError";
  *
  * ## RULES
  * 1. If no of parameters is negative,
- *    then it means that the command can take variable number of parameters.
+ *    then it means that the command can take variable number of parameters.<br/>
+ *    If no of parameters
+ *      1. is -1, then the command can take zero to any number of parameters.
+ *      2. is -2, then the command can take one to any number of parameters.
+ *
  *    At least one parameter type should be specified.
  *    If more than one is provided,
  *    then the type checks for that many arguments will be done,
@@ -43,10 +47,10 @@ export default class Parameters {
      * @param params The parameter types listed out
      */
     constructor(num: number, ...params: DataType[]) {
-        if(params.length === 0 && num !== 0)
-            throw new ASMakeError(`The command expects ${num <= -1 ? 'variable number of' : num} parameter. But none found.`);
+        if(params.length === 0 && num === -2)
+            throw new ASMakeError(`The command expects at least one parameter. But none found.`);
 
-        if(num !== -1 && params.length > num)
+        if(num > -1 && params.length > num)
             throw new ASMakeError(`The command expects ${num} parameter(s), but found more than enough parameters (${params.length})`);
 
         this.types = params;

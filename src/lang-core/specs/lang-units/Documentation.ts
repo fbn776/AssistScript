@@ -9,12 +9,12 @@ export default class Documentation {
     readonly example;
     readonly note;
 
-    constructor(title: string, aliases: string[], body: string, syntax: string, example: string, note?: string) {
+    constructor(title: string, aliases: string[], body: string, syntax: string, example?: string, note?: string) {
         this.title = title;
         this.aliases = aliases;
         this.body = body;
         this.syntax = syntax;
-        this.example = example;
+        this.example = example || null;
         this.note = note || null;
     }
 }

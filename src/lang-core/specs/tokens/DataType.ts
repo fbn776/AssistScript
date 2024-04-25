@@ -4,6 +4,7 @@ enum DataType {
     boolean = "boolean",
     command = "command",
     any = "any",
+    void = "void",
 }
 
 export default DataType;

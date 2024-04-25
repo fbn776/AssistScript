@@ -31,17 +31,22 @@ export function runCommand<T extends BaseContextProvider>(commandToken: CommandT
     const tokenParams = commandToken.params;
     const commandParams = commandDef.params;
 
-    // TODO Make this a proper error;
+    // Check if the command got the correct number of arguments
     if (!commandParams.isVariable && tokenParams.length !== commandParams.num)
         throw new ASRuntimeError(`The command '${commandToken.commandName}' expects ${commandParams.num} arguments, but found ${tokenParams.length}.`, {
             initial: initial,
             occurredAt: commandToken
         });
 
+    // If no of args is -2 (that means at least one should be present) and no arg is found throw error;
+    if(commandParams.isVariable && commandParams.num === -2 && tokenParams.length === 0)
+        throw new ASRuntimeError(`The command '${commandToken.commandName}' expects at least one argument. But none found.`, {
+            initial: initial,
+            occurredAt: commandToken
+        });
 
     const paramsCP = tokenParams.map((token, index) => {
         const checkParam = hasProperArgType(token, commandParams, index);
-        // TODO Make this a proper error;
         if (!checkParam.success)
             throw new ASRuntimeError(`The argument '${token.value}' doesn't match the required type
 Required: ${checkParam.foundType}

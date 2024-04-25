@@ -14,27 +14,6 @@ class TestContextProvider extends BaseContextProvider {
 
 const as = new AssistScript(new TestContextProvider());
 
-as.store.addCommand(
-    new CommandBuilder()
-        .names('add')
-        .docs(new DocsBuilder()
-            .title('Add')
-            .body('')
-            .syntax('')
-            .example('')
-            .build()
-        )
-        .args(new Parameters(2, DataType.number))
-        .returnType(DataType.number)
-        .run((_, x: number, y: number) => {
-            const ctx = _ as TestContextProvider;
-            ctx.clear();
-
-            return x + y;
-        })
-        .build()
-)
-
 sandboxRun(as, 'add 1 (add hi 32)');
 sandboxRun(as, 'sub');
 sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');

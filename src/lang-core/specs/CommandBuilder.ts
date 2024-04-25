@@ -7,7 +7,9 @@ import Command from "./lang-units/Command";
 import {CmdExec} from "../utils/lang_types";
 
 /**
- * A builder class that builds a command
+ * A builder class that builds and returns new command.
+ *
+ * This command should then be added to the command store, or do something else with it.
  */
 export class CommandBuilder {
     private _names: string[] | null = null;
@@ -22,15 +24,36 @@ export class CommandBuilder {
         return this;
     }
 
-    /**Documentation; REQUIRED*/
+    /**
+     * Adds the documentation for the command; REQUIRED
+     * @param title title or heading of the command
+     * @param aliases aliases of the command
+     * @param body body of the command
+     * @param syntax syntax of the command
+     * @param example example of the command [optional]
+     * @param note note of the command [optional]
+     */
+    directDocs(title: string, aliases: string[] | null, body: string, syntax: string, example?: string, note?: string) {
+        this._docs = new Documentation(title, aliases || [], body, syntax, example, note);
+        return this;
+    }
+
+    /**
+     * Same as `directDocs` but takes a `Documentation` object. Can be used with `DocsBuilder`
+     * @param docs
+     */
     docs(docs: Documentation) {
         this._docs = docs;
         return this;
     }
 
-    /**Arguments; REQUIRED*/
-    args(args: Parameters) {
-        this._args = args;
+    /**
+     * Adds the arguments for the command; REQUIRED
+     * @param num number of arguments
+     * @param params the parameter types listed out
+     */
+    args(num: number, ...params: DataType[]) {
+        this._args = new Parameters(num, ...params);
         return this;
     }
 
@@ -65,6 +88,17 @@ export class CommandBuilder {
         if (!this._returnType)
             throw new ASMakeError('Command return type not specified.');
 
-        return new Command(this._names, this._docs, this._args, this._returnType, this._exec);
+
+        const cmd = new Command(this._names, this._docs, this._args, this._returnType, this._exec);
+        this.reset();
+        return cmd;
+    }
+
+    reset() {
+        this._names = null;
+        this._docs = null
+        this._args = null;
+        this._returnType = null;
+        this._exec = null;
     }
 }
