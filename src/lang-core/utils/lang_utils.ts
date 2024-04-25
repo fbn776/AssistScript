@@ -25,9 +25,6 @@ export function displayAST(base: LangTokenBase<unknown>, level: number = 0, sep:
 }
 
 
-/** The command executable function type.*/
-export type CmdExec = (...args: any[]) => any;
-
 /** Converts a base token to it's matching type token*/
 export function convertToPossibleType(token: LangTokenBase<unknown>) {
     if (!isNaN(Number(token.value)))

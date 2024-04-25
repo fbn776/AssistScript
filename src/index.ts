@@ -4,8 +4,9 @@ import Parameters from "./lang-core/specs/lang-units/Parameters";
 import DataType from "./lang-core/specs/tokens/DataType";
 import AssistScript from "./AssistScript";
 import sandboxRun from "./utils/sandboxRun";
+import BaseContextProvider from "./lang-core/BaseContextProvider";
 
-const as = new AssistScript();
+const as = new AssistScript(new BaseContextProvider());
 
 as.store.addCommand(
     new CommandBuilder()
@@ -20,6 +21,7 @@ as.store.addCommand(
         .args(new Parameters(2, DataType.number))
         .returnType(DataType.number)
         .run((x: number, y: number) => {
+
             return x + y;
         })
         .build()

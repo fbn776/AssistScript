@@ -3,7 +3,8 @@ import Parameters from "./lang-units/Parameters";
 import DataType from "./tokens/DataType";
 import ASMakeError from "../errors/ASMakeError";
 import Command from "./lang-units/Command";
-import {CmdExec} from "../utils/lang_utils";
+
+import {CmdExec} from "../utils/lang_types";
 
 /**
  * A builder class that builds a command
