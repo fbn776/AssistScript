@@ -4,6 +4,6 @@
 export default class ASBaseError extends Error {
     constructor(message: string) {
         super(message);
-        this.name = 'ASBaseError';
+        this.name = this.constructor.name;
     }
 }

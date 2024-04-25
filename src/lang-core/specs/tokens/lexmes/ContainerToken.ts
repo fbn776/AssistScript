@@ -1,6 +1,4 @@
 import LangTokenBase, {TokenData, TokenType} from "../LangTokenBase";
-import exp from "node:constants";
-
 
 export default class ContainerToken extends LangTokenBase<string> {
     constructor(value: TokenData["allowedContainers"]) {
