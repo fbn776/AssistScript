@@ -1,14 +1,12 @@
 import AssistScript from "../AssistScript";
-import ASRuntimeError from "../lang-core/errors/ASRuntimeError";
 import ASBaseError from "../lang-core/errors/ASBaseError";
+import BaseContextProvider from "../lang-core/BaseContextProvider";
 
-
-export default function sandboxRun(as: AssistScript, str: string) {
-    console.log('Running: ', str);
+export default function sandboxRun(as: AssistScript<BaseContextProvider>, str: string) {
     console.time("Execution time");
     try {
         const result = as.execute(str);
-        console.log('Result: ', result);
+        console.log(result);
     } catch (e) {
         if (e instanceof ASBaseError)
             console.error(e.prettify());

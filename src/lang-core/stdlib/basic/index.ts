@@ -43,9 +43,12 @@ store.addCommand(builder
         .syntax('help <command>')
         .example('help print')
         .build())
-    .args(1, DataType.string)
+    .args(-1, DataType.string)
     .returnType(DataType.void)
     .run((_, command: string) => {
+        if(!command)
+            return `Help commands helps you read the documentation of the given command.\n\nSyntax: help <command>`;
+
         const cmd = store.getCommand(command);
         if(!cmd)
             return `Command '${command}' not found.`;
