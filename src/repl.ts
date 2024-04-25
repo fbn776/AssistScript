@@ -4,8 +4,11 @@ import generateSyntaxTree from "./lang-core/interpreter/parser/generateSyntaxTre
 import ASLangError from "./lang-core/errors/ASLangError";
 import LangTokenBase from "./lang-core/specs/tokens/LangTokenBase";
 import CommandToken from "./lang-core/specs/tokens/lexmes/CommandToken";
+import AssistScript from "./AssistScript";
+import sandboxRun from "./utils/sandboxRun";
 
-console.log("REPL MODE: ")
+const as = new AssistScript();
+
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -13,13 +16,11 @@ const rl = readline.createInterface({
     prompt: '> '
 });
 
+console.log("REPL MODE: ");
 rl.prompt();
 rl.on('line', (line) => {
     try {
-        displayAST(generateSyntaxTree(line));
-
-        // console.log(ASTToStr(generateSyntaxTree(line)));
-
+        sandboxRun(as, line);
     } catch (e) {
         if(e instanceof ASLangError) {
             console.log(e.display())

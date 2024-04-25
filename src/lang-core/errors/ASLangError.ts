@@ -4,7 +4,7 @@ import ASBaseError from "./ASBaseError";
 interface ASLangErrorOptions {
     name?: string,
     reason: string,
-    source?: string,
+    source: string,
     position?: number,
     fix?: string,
     note?: string,
@@ -34,24 +34,29 @@ export default class ASLangError extends ASBaseError implements ASLangErrorOptio
     }
 
     reason: string;
-    source?: string | undefined;
+    source: string;
     position?: number | undefined;
     fix?: string | undefined;
     note?: string | undefined;
     errorCode: ErrorCodes;
     errorToken?: string | undefined;
 
-    public display(): string {
-        let str = `${this.name}\n`;
-        str += `\tReason: ${this.reason}\n`;
-        this.source && (str += `\tSource: ${this.source}\n`);
-        this.errorToken && (str += `\tError token: ${this.errorToken}\n`);
-        (this.position != undefined) && (str += `\tPosition: ${this.position}\n`);
-        this.fix && (str += `\tFix: ${this.fix}\n`);
-        this.note && (str += `\tNote: ${this.note}\n`);
-        str += `\tError code: ${this.errorCode}`;
+
+    public prettify(): string {
+        let str = this.name + '\n';
+        str += `Reason: ${this.reason}\n`;
+        str += '\n> ' + this.source + '\n'
+
+        const pos = (this.position || 0) - 1
+        str += '  ' + (pos > 0 ? '┌' : '│') + '─'.repeat(pos < 0 ? 0 : pos)  + (pos > 0 ? '┘' : '') + '\n'
+
+        this.errorToken && (str += `  ├ error token: ${this.errorToken}\n`);
+        (this.position != undefined) && (str += `  ├ position: ${this.position}\n`);
+        this.fix && (str += `  ├ fix: ${this.fix}\n`);
+        this.note && (str += `  ├ note: ${this.note}\n`);
+        str += `  └ error code: ${this.errorCode}`;
         return str;
     }
 
-    public toString = this.display();
+    public toString = this.prettify();
 }

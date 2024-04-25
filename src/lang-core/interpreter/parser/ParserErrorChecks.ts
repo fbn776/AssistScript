@@ -50,7 +50,7 @@ export namespace ParserErrorChecks {
 
         // Get start index and end index everything between matched bracketStart and bracketEnd
         const startI = bracketStart !== null ? bracketStart[0].length : 0,
-              endI = bracketEnd !== null ? bracketEnd.index! : curr.length;
+            endI = bracketEnd !== null ? bracketEnd.index! : curr.length;
 
         const str = curr.substring(startI, endI);
 
@@ -98,6 +98,7 @@ export namespace ParserErrorChecks {
         value: string,
         tokenPos: number
     }
+
     export function hasRougeLeftBracketError_ST(bracketTrack: Stack<I_BracketTrack>, tokens: ArrayTokenizer<LangTokenBase<unknown>>, str: string) {
         if (!bracketTrack.isEmpty()) {
             let top = bracketTrack.pop()!;

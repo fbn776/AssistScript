@@ -15,7 +15,7 @@ export default class ASRuntimeError extends ASBaseError {
         this.data = data;
     }
 
-    public prettyPrint(): string {
+    public prettify(): string {
         return `${this.name}
 Reason: ${this.message}
 

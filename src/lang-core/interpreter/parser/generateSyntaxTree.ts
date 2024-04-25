@@ -62,7 +62,8 @@ export default function generateSyntaxTree(str: string) {
             if (!(topCmd instanceof StringToken))
                 throw new ASLangError({
                     reason: "This is a TODO; The command name is taken as the first token inside brackets and they must be strings too",
-                    errorCode: ErrorCodes.PlaceholderError
+                    errorCode: ErrorCodes.PlaceholderError,
+                    source: str,
                 })
 
             cmd.changeName(topCmd.value as string);

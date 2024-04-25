@@ -6,4 +6,10 @@ export default class ASBaseError extends Error {
         super(message);
         this.name = this.constructor.name;
     }
+
+    /** Returns a prettified string representation of the error */
+    public prettify(): string {
+        return `${this.name}
+Reason: ${this.message}`
+    }
 }
