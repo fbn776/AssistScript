@@ -6,7 +6,7 @@ import {DocsBuilder} from "../../specs/DocsBuilder";
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
 
-/** Test command*/
+// TEST
 store.addCommand(builder
     .names('test')
     .directDocs('test', null, 'A test command to check if AssistScript is working', 'test', 'test')
@@ -16,7 +16,7 @@ store.addCommand(builder
     .build()
 );
 
-/** Print command*/
+// PRINT
 store.addCommand(builder
     .names('print', 'p', 'display', 'show', 'echo', 'log')
     .docs(new DocsBuilder()
@@ -32,3 +32,24 @@ store.addCommand(builder
     .build()
 )
 
+// HELP
+store.addCommand(builder
+    .names('help', 'h', '?')
+    .docs(new DocsBuilder()
+        .title('Help')
+        .aliases('h', '?')
+        .body('Displays the help message for the given command.')
+        .syntax('help <command>')
+        .example('help print')
+        .build())
+    .args(1, DataType.string)
+    .returnType(DataType.void)
+    .run((_, command: string) => {
+        //TODO: Implement help command
+        const cmd = store.getCommand(command);
+        if(!cmd)
+            return `Command '${command}' not found.`;
+        return cmd.docs.toString();
+    })
+    .build()
+)

@@ -6,5 +6,10 @@
  * This file is then imported in the AssistScript.ts file.
  */
 
-import  "./io/index";
-import "./math/basic";
+/** MATHS **/
+import  "./basic/index";
+import "./math/arthemetic";
+import "./math/modfifiers";
+import "./math/trigonometry";
+import "./math/random";
+import "./math/constants";
