@@ -2,6 +2,7 @@ import CommandStore from "../../interpreter/CommandStore";
 import {CommandBuilder} from "../../specs/CommandBuilder";
 import DataType from "../../specs/tokens/DataType";
 import {DocsBuilder} from "../../specs/DocsBuilder";
+import {prettyHelp} from "./utils";
 
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
@@ -45,11 +46,10 @@ store.addCommand(builder
     .args(1, DataType.string)
     .returnType(DataType.void)
     .run((_, command: string) => {
-        //TODO: Implement help command
         const cmd = store.getCommand(command);
         if(!cmd)
             return `Command '${command}' not found.`;
-        return cmd.docs.toString();
+        return prettyHelp(cmd);
     })
     .build()
 )
