@@ -27,7 +27,7 @@ export function ASTErrorDisplay(base: LangTokenBase<unknown>, errorAT: string) {
     function ASTErrorDisplay(base: LangTokenBase<unknown>, level: number = 0, sep: string = "  ") {
         const isError = base.tokenID === errorAT;
         if (base instanceof CommandToken) {
-            str += drawVerLine(level, sep) + (level > 0 ? '├> ' : '└>') + base.value + (isError ? ' <-- Here' : '') + '\n';
+            str += drawVerLine(level, sep) + (level > 0 ? '├>' : '└>') + base.value + (isError ? ' <-- Here' : '') + '\n';
 
             for (let i of base.params)
                 ASTErrorDisplay(i, level + 1, sep);
