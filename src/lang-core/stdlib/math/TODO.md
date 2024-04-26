@@ -1,5 +1,7 @@
 # Math lib
 
+- Includes all the basic math functions and constants
+
 ## Arithmetic
 - [x] Add
 - [x] Subtract
