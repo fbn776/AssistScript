@@ -1,5 +1,7 @@
+import ASMakeError from "./errors/ASMakeError";
+
 /**
- * Context provider provides the provisions to access external or custom services.
+ * Context provider provides the provisions to access internal, external or custom services.
  *
  * The default AssistScript class has the BaseContextProvider as the default context provider.
  * If the user wants to use custom services, they can extend this class and provide the necessary services.
@@ -8,16 +10,9 @@
  * @see [how to create custom commands](/docs/Create-custom-commands.md)
  */
 export default class BaseContextProvider {
-    //TODO
+    /** No of times a loop can run */
+    readonly LOOP_LIMIT: number = 10;
 
-    /**
-     * A TEST method that returns the current date and time.
-     *
-     * Returns the current date and time.
-     *
-     * @returns {Date}
-     */
-    public getDate(): Date {
-        return new Date();
-    }
+
+
 }
