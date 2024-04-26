@@ -7,9 +7,9 @@
  */
 
 /** MATHS **/
-import  "./basic/index";
+import  "./common/index";
 import "./math/arthemetic";
-import "./math/modfifiers";
+import "./math/functions";
 import "./math/trigonometry";
 import "./math/random";
 import "./math/constants";

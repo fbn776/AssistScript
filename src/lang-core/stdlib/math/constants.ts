@@ -57,23 +57,6 @@ store.addCommand(builder
     .build()
 )
 
-// SQRT 1/2
-store.addCommand(builder
-    .names('sqrt1/2', 'root1/2')
-    .docs(new DocsBuilder()
-        .title('Square Root of 1/2')
-        .aliases('root1/2')
-        .body('Returns the square root of 1/2.')
-        .syntax('sqrt1/2')
-        .example('sqrt1/2')
-        .build()
-    )
-    .args(0)
-    .returnType(DataType.number)
-    .run(() => Math.SQRT1_2)
-    .build()
-)
-
 // LN2
 store.addCommand(builder
     .names('ln2')
