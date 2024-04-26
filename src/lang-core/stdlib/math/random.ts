@@ -10,7 +10,7 @@ const builder = new CommandBuilder();
 store.addCommand(builder
     .names('random', 'rand', 'randf')
     .docs(new DocsBuilder()
-        .title('Random')
+        .name('random')
         .aliases('rand', 'randf')
         .body('Returns a random float between the specified ranges (optional). If no range is given then random float b/w 0 and 1, if one is specified number b/w 0 and that num.')
         .syntax('random <min?> <max?>')
@@ -34,7 +34,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('randomInt', 'randInt', 'randi')
     .docs(new DocsBuilder()
-        .title('Random Integer')
+        .name('randomInt')
         .aliases('randInt', 'randi')
         .body('Returns a random integer between the specified ranges (optional). If no range is given then random integer b/w 0 and 1, if one is specified number b/w 0 and that num.')
         .syntax('randomInt <min?> <max?>')
@@ -58,7 +58,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('randomBool', 'randBool', 'randb')
     .docs(new DocsBuilder()
-        .title('Random Boolean')
+        .name('randomBool')
         .aliases('randBool', 'randb')
         .body('Returns a random boolean value.')
         .syntax('randomBool')
@@ -75,7 +75,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('randomChar', 'randChar', 'randc')
     .docs(new DocsBuilder()
-        .title('Random Character')
+        .name('randomChar')
         .aliases('randChar', 'randc')
         .body('Returns a random character from the ASCII table.')
         .syntax('randomChar')

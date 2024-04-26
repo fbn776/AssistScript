@@ -11,7 +11,7 @@ const builder = new CommandBuilder();
 store.addCommand(builder
     .names('add', 'sum', 'plus', 'addition')
     .docs(new DocsBuilder()
-        .title('Addition')
+        .name('add')
         .aliases('sum', 'plus', 'addition')
         .body('Adds the given numbers together and returns the result.')
         .syntax('add <number1> <number2> ...')
@@ -28,7 +28,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('subtract', 'sub', 'minus', 'subtraction')
     .docs(new DocsBuilder()
-        .title('Subtraction')
+        .name('sub')
         .aliases('sub', 'minus', 'subtraction')
         .body('Subtracts the given numbers and returns the result.')
         .syntax('subtract <number1> <number2> ...')
@@ -45,8 +45,8 @@ store.addCommand(builder
 store.addCommand(builder
     .names('multiply', 'mult', 'mul', 'product', 'multiplication')
     .docs(new DocsBuilder()
-        .title('Multiplication')
-        .aliases('mul', 'product', 'multiplication')
+        .name('mult')
+        .aliases('multiply', 'mul', 'product', 'multiplication')
         .body('Multiplies the given numbers and returns the result.')
         .syntax('multiply <number1> <number2> ...')
         .example('multiply 2 3 4')
@@ -62,8 +62,8 @@ store.addCommand(builder
 store.addCommand(builder
     .names('divide', 'div', 'division')
     .docs(new DocsBuilder()
-        .title('Division')
-        .aliases('div', 'division')
+        .name('div')
+        .aliases('divide', 'division')
         .body('Divides the given numbers and returns the result.')
         .syntax('divide <number1> <number2> ...')
         .example('divide 10 2 2')
@@ -79,8 +79,8 @@ store.addCommand(builder
 store.addCommand(builder
     .names('modulo', 'mod', 'remainder')
     .docs(new DocsBuilder()
-        .title('Modulo')
-        .aliases('mod', 'remainder')
+        .name('mod')
+        .aliases('modulo', 'remainder')
         .body('Calculates the remainder of the division of the given numbers.')
         .syntax('modulo <number1> <number2>')
         .example('modulo 10 3')

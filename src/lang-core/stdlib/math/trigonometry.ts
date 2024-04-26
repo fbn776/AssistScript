@@ -10,7 +10,7 @@ const builder = new CommandBuilder();
 store.addCommand(builder
     .names('sin', 'sine')
     .docs(new DocsBuilder()
-        .title('Sine')
+        .name('sin')
         .aliases('sine')
         .body('Returns the sine of the given angle in radians.')
         .syntax('sin <angle>')
@@ -27,7 +27,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('cos', 'cosine')
     .docs(new DocsBuilder()
-        .title('Cosine')
+        .name('cos')
         .aliases('cosine')
         .body('Returns the cosine of the given angle in radians.')
         .syntax('cos <angle>')
@@ -44,7 +44,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('tan', 'tangent')
     .docs(new DocsBuilder()
-        .title('Tangent')
+        .name('tan')
         .aliases('tangent')
         .body('Returns the tangent of the given angle in radians.')
         .syntax('tan <angle>')
@@ -61,7 +61,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('asin', 'arcsine')
     .docs(new DocsBuilder()
-        .title('Arcsine')
+        .name('asin')
         .aliases('arcsine')
         .body('Returns the arcsine of the given angle in radians.')
         .syntax('asin <angle>')
@@ -78,7 +78,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('acos', 'arccosine')
     .docs(new DocsBuilder()
-        .title('Arccosine')
+        .name('acos')
         .aliases('arccosine')
         .body('Returns the arccosine of the given angle in radians.')
         .syntax('acos <angle>')
@@ -95,7 +95,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('atan', 'arctangent')
     .docs(new DocsBuilder()
-        .title('Arctangent')
+        .name('atan')
         .aliases('arctangent')
         .body('Returns the arctangent of the given angle in radians.')
         .syntax('atan <angle>')
@@ -112,7 +112,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('atan2', 'arctangent2')
     .docs(new DocsBuilder()
-        .title('Arctangent2')
+        .name('atan2')
         .aliases('arctangent2')
         .body('Returns the arctangent of the quotient of its arguments.')
         .syntax('atan2 <y> <x>')
@@ -129,7 +129,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('sinh', 'hsine')
     .docs(new DocsBuilder()
-        .title('Hyperbolic Sine')
+        .name('sinh')
         .aliases('hsine')
         .body('Returns the hyperbolic sine of the given angle in radians.')
         .syntax('sinh <angle>')
@@ -146,7 +146,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('cosh', 'hcosine')
     .docs(new DocsBuilder()
-        .title('Hyperbolic Cosine')
+        .name('cosh')
         .aliases('hcosine')
         .body('Returns the hyperbolic cosine of the given angle in radians.')
         .syntax('cosh <angle>')
@@ -163,7 +163,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('tanh', 'htangent')
     .docs(new DocsBuilder()
-        .title('Hyperbolic Tangent')
+        .name('tanh')
         .aliases('htangent')
         .body('Returns the hyperbolic tangent of the given angle in radians.')
         .syntax('tanh <angle>')
@@ -180,7 +180,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('asinh', 'arcsineh')
     .docs(new DocsBuilder()
-        .title('Hyperbolic Arcsine')
+        .name('asinh')
         .aliases('arcsineh')
         .body('Returns the hyperbolic arcsine of the given angle in radians.')
         .syntax('asinh <angle>')
@@ -197,7 +197,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('acosh', 'arccosineh')
     .docs(new DocsBuilder()
-        .title('Hyperbolic Arccosine')
+        .name('acosh')
         .aliases('arccosineh')
         .body('Returns the hyperbolic arccosine of the given angle in radians.')
         .syntax('acosh <angle>')
@@ -214,7 +214,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('atanh', 'arctangenth')
     .docs(new DocsBuilder()
-        .title('Hyperbolic Arctangent')
+        .name('atanh')
         .aliases('arctangenth')
         .body('Returns the hyperbolic arctangent of the given angle in radians.')
         .syntax('atanh <angle>')
@@ -231,8 +231,8 @@ store.addCommand(builder
 store.addCommand(builder
     .names('degToRad', 'd2r', 'deg2rad', 'deg')
     .docs(new DocsBuilder()
-        .title('Degrees to Radians')
-        .aliases('d2r', 'deg2rad', 'deg')
+        .name('deg')
+        .aliases('d2r', 'deg2rad', 'degToRad')
         .body('Converts the given angle in degrees to radians.')
         .syntax('degToRad <angle>')
         .example('degToRad 90')
@@ -248,8 +248,8 @@ store.addCommand(builder
 store.addCommand(builder
     .names('radToDeg', 'r2d', 'rad2deg', 'rad')
     .docs(new DocsBuilder()
-        .title('Radians to Degrees')
-        .aliases('r2d', 'rad2deg', 'rad')
+        .name('rad')
+        .aliases('r2d', 'rad2deg', 'radToDeg')
         .body('Converts the given angle in radians to degrees.')
         .syntax('radToDeg <angle>')
         .example('radToDeg 1.57')

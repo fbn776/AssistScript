@@ -21,7 +21,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('print', 'p', 'display', 'show', 'echo', 'log')
     .docs(new DocsBuilder()
-        .title('Print')
+        .name('print')
         .aliases('p', 'display', 'show', 'echo', 'log')
         .body('Prints the given message to the console.')
         .syntax('print <message>')
@@ -37,7 +37,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('help', 'h', '?')
     .docs(new DocsBuilder()
-        .title('Help')
+        .name('help')
         .aliases('h', '?')
         .body('Displays the help message for the given command.')
         .syntax('help <command>')
@@ -50,6 +50,7 @@ store.addCommand(builder
             return `Help commands helps you read the documentation of the given command.\n\nSyntax: help <command>`;
 
         const cmd = store.getCommand(command);
+
         if(!cmd)
             return `Command '${command}' not found.`;
         return prettyHelp(cmd);

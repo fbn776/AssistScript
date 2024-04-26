@@ -10,7 +10,7 @@ const builder = new CommandBuilder();
 store.addCommand(builder
     .names('pi', 'PI')
     .docs(new DocsBuilder()
-        .title('Pi')
+        .name('pi')
         .aliases('PI')
         .body('Returns the mathematical constant π.')
         .syntax('pi')
@@ -27,8 +27,8 @@ store.addCommand(builder
 store.addCommand(builder
     .names('e', 'E')
     .docs(new DocsBuilder()
-        .title('E')
-        .aliases('E')
+        .name('E')
+        .aliases('e')
         .body('Returns the mathematical constant e.')
         .syntax('e')
         .example('e')
@@ -44,7 +44,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('sqrt2', 'root2')
     .docs(new DocsBuilder()
-        .title('Square Root of 2')
+        .name('sqrt2')
         .aliases('root2')
         .body('Returns the square root of 2.')
         .syntax('sqrt2')
@@ -61,7 +61,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('ln2')
     .docs(new DocsBuilder()
-        .title('Natural Logarithm of 2')
+        .name('ln2')
         .body('Returns the natural logarithm of 2.')
         .syntax('ln2')
         .example('ln2')
@@ -77,7 +77,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('ln10')
     .docs(new DocsBuilder()
-        .title('Natural Logarithm of 10')
+        .name('ln10')
         .body('Returns the natural logarithm of 10.')
         .syntax('ln10')
         .example('ln10')
@@ -93,7 +93,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('log2e')
     .docs(new DocsBuilder()
-        .title('Base 2 Logarithm of E')
+        .name('log2e')
         .body('Returns the base 2 logarithm of e.')
         .syntax('log2e')
         .example('log2e')
@@ -109,7 +109,7 @@ store.addCommand(builder
 store.addCommand(builder
     .names('log10e')
     .docs(new DocsBuilder()
-        .title('Base 10 Logarithm of E')
+        .name('log10e')
         .body('Returns the base 10 logarithm of e.')
         .syntax('log10e')
         .example('log10e')

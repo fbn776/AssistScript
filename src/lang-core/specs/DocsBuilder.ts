@@ -10,7 +10,7 @@ export class DocsBuilder {
     private note1: string | null = null;
 
     /** The title or name of the command; REQUIRED*/
-    title(title: string): DocsBuilder {
+    name(title: string): DocsBuilder {
         this.title1 = title;
         return this;
     }
