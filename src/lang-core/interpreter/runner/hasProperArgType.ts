@@ -24,7 +24,7 @@ export function hasProperArgType(token: LangTokenBase<unknown>, params: Paramete
     if (index > params.getParamsLen - 1)
         type = params.lastParam;
     else
-        type = params.types[index];
+        type = params.types[index]!;
 
     if (type === DataType.any)
         return {success: true}

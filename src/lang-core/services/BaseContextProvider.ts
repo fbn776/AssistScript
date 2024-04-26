@@ -1,4 +1,4 @@
-import ASMakeError from "./errors/ASMakeError";
+import VariableStore from "./VariableStore";
 
 /**
  * Context provider provides the provisions to access internal, external or custom services.
@@ -13,6 +13,6 @@ export default class BaseContextProvider {
     /** No of times a loop can run */
     readonly LOOP_LIMIT: number = 10;
 
-
-
+    /** A service that handles the storage of variables. */
+    readonly storeService: VariableStore = new VariableStore();
 }

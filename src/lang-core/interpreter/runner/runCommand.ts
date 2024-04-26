@@ -1,9 +1,7 @@
 import CommandToken from "../../specs/tokens/lexmes/CommandToken";
-import CommandStore from "../CommandStore";
 import ASRuntimeError from "../../errors/ASRuntimeError";
 import {hasProperArgType} from "./hasProperArgType";
 import AssistScript from "../../../AssistScript";
-import BaseContextProvider from "../../BaseContextProvider";
 
 export type T_InitialState = {
     rootToken: CommandToken,
@@ -19,7 +17,7 @@ export type T_InitialState = {
  * @param initial Used for better error reporting.
  * Contains the original string and the root token
  */
-export function runCommand<T extends BaseContextProvider>(commandToken: CommandToken, asInstance: AssistScript<T>, initial: T_InitialState): unknown {
+export function runCommand(commandToken: CommandToken, asInstance: AssistScript, initial: T_InitialState): unknown {
     const commandDef = asInstance.store.getCommand(commandToken.commandName);
 
     if (!commandDef)
@@ -62,5 +60,6 @@ Found: ${token.type.substring(6).toLowerCase()}`, {
         return token.value;
     });
 
+    console.log(asInstance);
     return commandDef.exec(asInstance.contextProvider, ...paramsCP);
 }

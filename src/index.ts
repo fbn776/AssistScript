@@ -1,10 +1,6 @@
-import {CommandBuilder} from "./lang-core/specs/CommandBuilder";
-import {DocsBuilder} from "./lang-core/specs/DocsBuilder";
-import Parameters from "./lang-core/specs/lang-units/Parameters";
-import DataType from "./lang-core/specs/tokens/DataType";
 import AssistScript from "./AssistScript";
 import sandboxRun from "./utils/sandboxRun";
-import BaseContextProvider from "./lang-core/BaseContextProvider";
+import BaseContextProvider from "./lang-core/services/BaseContextProvider";
 
 class TestContextProvider extends BaseContextProvider {
     clear() {
@@ -13,6 +9,8 @@ class TestContextProvider extends BaseContextProvider {
 }
 
 const as = new AssistScript(new TestContextProvider());
+
+console.log(as);
 
 sandboxRun(as, 'add 1 (add hi 32)');
 sandboxRun(as, 'sub');

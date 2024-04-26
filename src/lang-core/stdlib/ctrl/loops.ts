@@ -2,7 +2,7 @@ import CommandStore from "../../interpreter/CommandStore";
 import {CommandBuilder} from "../../specs/CommandBuilder";
 import DataType from "../../specs/tokens/DataType";
 import {DocsBuilder} from "../../specs/DocsBuilder";
-import BaseContextProvider from "../../BaseContextProvider";
+import BaseContextProvider from "../../services/BaseContextProvider";
 import ASRuntimeError from "../../errors/ASRuntimeError";
 import ASGracefulExitError from "../../errors/ASGracefulExitError";
 
