@@ -9,37 +9,37 @@ export class DocsBuilder {
     private example1: string | null = null;
     private note1: string | null = null;
 
-    /** Sets the title of the documentation; REQUIRED*/
+    /** The title or name of the command; REQUIRED*/
     title(title: string): DocsBuilder {
         this.title1 = title;
         return this;
     }
 
-    /** Sets the aliases of the documentation; OPTIONAL*/
+    /** The aliases (if it exists) of the command; OPTIONAL*/
     aliases(...aliases: string[]): DocsBuilder {
         this.aliases1 = aliases;
         return this;
     }
 
-    /** Sets the body of the documentation; REQUIRED*/
+    /** The explanation body of the command; REQUIRED*/
     body(body: string): DocsBuilder {
         this.body1 = body;
         return this;
     }
 
-    /** Sets the specs of the documentation; REQUIRED*/
+    /** The basic syntax of the command; REQUIRED*/
     syntax(syntax: string): DocsBuilder {
         this.syntax1 = syntax;
         return this;
     }
 
-    /** Sets the example of the documentation; REQUIRED*/
+    /** The basic example showing how to use the command; REQUIRED*/
     example(example: string): DocsBuilder {
         this.example1 = example;
         return this;
     }
 
-    /** Sets the note of the documentation; OPTIONAL*/
+    /** The notes or special information to be shown; OPTIONAL*/
     note(note: string): DocsBuilder {
         this.note1 = note;
         return this;
@@ -47,7 +47,7 @@ export class DocsBuilder {
 
     /**
      * Builds the documentation object
-     *
+     * This should be called only on the final step.
      * @throws {ASMakeError} If any of the required fields are not set
      */
     build(): Documentation {
@@ -62,7 +62,6 @@ export class DocsBuilder {
 
         if (this.example1 === null)
             throw new ASMakeError("Example is a required field for documentation, it is not set");
-
 
         return new Documentation(this.title1, this.aliases1, this.body1, this.syntax1, this.example1, this.note1 || undefined);
     }
