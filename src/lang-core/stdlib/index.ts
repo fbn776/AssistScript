@@ -13,3 +13,8 @@ import "./math/functions";
 import "./math/trigonometry";
 import "./math/random";
 import "./math/constants";
+
+/** CONTROL FLOW **/
+import "./ctrl/loops";
+import "./ctrl/conditionals";
+import "./ctrl/varibles";

@@ -21,8 +21,8 @@ export class DocsBuilder {
         return this;
     }
 
-    /** The explanation body of the command; REQUIRED*/
-    body(body: string): DocsBuilder {
+    /** The description of the command; REQUIRED*/
+    description(body: string): DocsBuilder {
         this.body1 = body;
         return this;
     }
