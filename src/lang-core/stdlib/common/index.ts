@@ -35,10 +35,10 @@ store.addCommand(builder
 
 // HELP
 store.addCommand(builder
-    .names('help', 'h', '?')
+    .names('help', 'h')
     .docs(new DocsBuilder()
         .name('help')
-        .aliases('h', '?')
+        .aliases('h')
         .description('Displays the help message for the given command.')
         .syntax('help <command>')
         .example('help print')
