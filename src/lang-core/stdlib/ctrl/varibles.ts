@@ -8,12 +8,13 @@ import ASRuntimeError from "../../errors/ASRuntimeError";
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
 
+// SET
 store.addCommand(builder
     .names('set', 'set-variable', 'var')
     .docs(new DocsBuilder()
         .name('set')
         .aliases('set-variable', 'var')
-        .description('Creates a new variable or updates an existing one.')
+        .description('Used to create a new variable, if the variable name already exits it updates the existing one.')
         .syntax('set <variable-name> <value>')
         .example('set x 5')
         .build()
@@ -35,12 +36,13 @@ store.addCommand(builder
     .build()
 );
 
+// GET
 store.addCommand(builder
     .names('get', 'get-variable')
     .docs(new DocsBuilder()
         .name('get')
         .aliases('get-variable')
-        .description('Gets the value of a variable.')
+        .description('Returns the value of a variable.')
         .syntax('get <variable-name>')
         .example('get x')
         .build()
@@ -52,7 +54,31 @@ store.addCommand(builder
         if (variable)
             return variable.value;
 
-        return null;
+        throw new ASRuntimeError(`Variable ${name} does not exist.`, {
+            state: _.currentState!,
+            occurredCmd: _.currentCommand?.params[0]!,
+        });
     })
     .build()
 );
+
+// DELETE
+store.addCommand(builder
+    .names('delete', 'delete-variable')
+    .docs(new DocsBuilder()
+        .name('delete')
+        .aliases('delete-variable')
+        .description('Deletes a variable. Returns true if the variable existed and is deleted, false otherwise.')
+        .syntax('delete <variable-name>')
+        .example('delete x')
+        .build()
+    )
+    .returnType(DataType.boolean)
+    .args(1, DataType.string)
+    .run((_, name: string) => {
+        let hasVar = _.storeService.exists(name);
+        _.storeService.deleteVariable(name);
+        return hasVar;
+    })
+    .build()
+)

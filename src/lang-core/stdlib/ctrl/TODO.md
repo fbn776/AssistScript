@@ -4,7 +4,13 @@
 
 ## Variables
 
-- [ ] Set variables
-- [ ] Get variables
-- [ ] Delete variables
-- [ ] If exists variables
+- [x] Set variables
+- [x] Get variables
+- [x] Delete variables
+
+### Arrays
+
+- [ ] Set arrays
+- [ ] Get arrays
+- [ ] Delete arrays
+- [ ] Array operations
