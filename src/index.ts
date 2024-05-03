@@ -1,4 +1,4 @@
-import AssistScript from "./AssistScript";
+import AssistScript from "./lang-core/AssistScript";
 import sandboxRun from "./utils/sandboxRun";
 import BaseContextProvider from "./lang-core/services/BaseContextProvider";
 
@@ -29,5 +29,25 @@ sandboxRun(as, 'add 10 30 sub 24 add 24 13) 2 4');
 
 sandboxRun(as, 'add 30 3')
 
+const testScript = `
+(set n 5)
+(array input 3 5 7 9 1)
 
+(set key 9)
+(set found false)
 
+(for (set i 0) (lt (get i) (get n)) (incr i) (
+        if (is (get input (get i)) (get key)) (
+                        (set found true)
+                        (break)
+        )
+)
+
+if (get found) (
+        (p "Found key")
+) else (
+        (p "Key not found")
+)
+`
+
+sandboxRun(as, testScript);

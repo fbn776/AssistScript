@@ -1,6 +1,6 @@
 import generateSyntaxTree from "../parser/generateSyntaxTree";
 import {runCommand} from "./runCommand";
-import AssistScript from "../../../AssistScript";
+import AssistScript from "../../AssistScript";
 
 /**
  * The command runner class.

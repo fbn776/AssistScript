@@ -3,7 +3,6 @@ import {CommandBuilder} from "../../specs/CommandBuilder";
 import DataType from "../../specs/tokens/DataType";
 import {DocsBuilder} from "../../specs/DocsBuilder";
 import BaseContextProvider from "../../services/BaseContextProvider";
-import ASRuntimeError from "../../errors/ASRuntimeError";
 import ASGracefulExitError from "../../errors/ASGracefulExitError";
 
 const store = CommandStore.getInstance();

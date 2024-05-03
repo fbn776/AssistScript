@@ -1,6 +1,6 @@
 import readline from "readline";
 import ASLangError from "./lang-core/errors/ASLangError";
-import AssistScript from "./AssistScript";
+import AssistScript from "./lang-core/AssistScript";
 import sandboxRun from "./utils/sandboxRun";
 
 const as = new AssistScript();

@@ -1,8 +1,8 @@
-import CommandStore from "./lang-core/interpreter/CommandStore";
-import Runner from "./lang-core/interpreter/runner/Runner";
-import BaseContextProvider from "./lang-core/services/BaseContextProvider";
+import CommandStore from "./interpreter/CommandStore";
+import Runner from "./interpreter/runner/Runner";
+import BaseContextProvider from "./services/BaseContextProvider";
 
-import "./lang-core/stdlib/index"; // Import the standard library
+import "./stdlib"; // Import the standard library
 
 /**
  * The AssistScript class is the main entry point for the AssistScript language.

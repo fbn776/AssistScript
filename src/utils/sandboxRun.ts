@@ -1,4 +1,4 @@
-import AssistScript from "../AssistScript";
+import AssistScript from "../lang-core/AssistScript";
 import ASBaseError from "../lang-core/errors/ASBaseError";
 
 export default function sandboxRun(as: AssistScript, str: string) {
