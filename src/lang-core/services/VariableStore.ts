@@ -1,4 +1,5 @@
 import DataType from "../specs/tokens/DataType";
+import {getRoughType} from "../utils/lang_utils";
 
 interface I_Var {
     value: unknown,
@@ -28,8 +29,9 @@ export default class VariableStore {
         return this.store.has(name);
     }
 
-    setVariable(name: string, value: unknown, type: DataType): void {
-        this.store.set(name, { value, type });
+    setVariable(name: string, value: unknown, type?: DataType): void {
+        let calcT = type || getRoughType(value);
+        this.store.set(name, {value, type: calcT});
     }
 
     getVariable(name: string): I_Var | undefined {
@@ -37,11 +39,11 @@ export default class VariableStore {
     }
 
     deleteVariable(name: string): void {
-        if(this.store.has(name))
+        if (this.store.has(name))
             this.store.delete(name);
     }
 
     updateVariable(name: string, value: unknown, type: DataType): void {
-        this.store.set(name, { value, type });
+        this.store.set(name, {value, type});
     }
 }
