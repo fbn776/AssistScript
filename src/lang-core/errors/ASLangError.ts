@@ -50,7 +50,7 @@ export default class ASLangError extends ASBaseError implements ASLangErrorOptio
         const pos = (this.position || 0) - 1
         str += '  ' + (pos > 0 ? '┌' : '│') + '─'.repeat(pos < 0 ? 0 : pos)  + (pos > 0 ? '┘' : '') + '\n'
 
-        this.errorToken && (str += `  ├ error token: ${this.errorToken}\n`);
+        this.errorToken && (str += `  ├ error token: ${String(this.errorToken).trim()}\n`);
         (this.position != undefined) && (str += `  ├ position: ${this.position}\n`);
         this.fix && (str += `  ├ fix: ${this.fix}\n`);
         this.note && (str += `  ├ note: ${this.note}\n`);
