@@ -3,6 +3,7 @@ import {CommandBuilder} from "../../specs/CommandBuilder";
 import {DocsBuilder} from "../../specs/DocsBuilder";
 import DataType from "../../specs/tokens/DataType";
 import {gcd} from "./utils";
+import ASRuntimeError from "../../errors/ASRuntimeError";
 
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
@@ -247,10 +248,16 @@ store.addCommand(builder
     .returnType(DataType.number)
     .args(-2, DataType.number)
     .run((_, ...args: number[]) => {
-        let result = args[0];
-        for (let i = 1; i < args.length; i++) {
-            result = result * args[i] / gcd(result, args[i]);
-        }
+        if (args.length < 2)
+            throw new ASRuntimeError('At least 2 numbers are required for lcm', {
+                state: _.currentState!,
+                occurredCmd: _.currentCommand!,
+            });
+
+        let result = args[0]!;
+        for (let i = 1; i < args.length; i++)
+            result = result * args[i]! / gcd(result, args[i]!);
+
         return result;
     })
     .build()
