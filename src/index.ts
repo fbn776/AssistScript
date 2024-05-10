@@ -30,28 +30,28 @@ sandboxRun(as, txt);
 
 
 
-// const testScript = `
-// (set n 5)
-// (array input 3 5 7 9 1)
-//
-// (set key 9)
-// (set found false)
-//
-// (for (set i 0) (lt (get i) (get n)) (incr i) (
-//         if (is (get input (get i)) (get key)) (
-//                         (set found true)
-//                         (break)
-//         )
-// )
-//
-// if (get found) (
-//         (p "Found key")
-// ) else (
-//         (p "Key not found")
-// )
-// `
-//
-// sandboxRun(as, testScript);
+const testScript = `
+(set n 5)
+(array input 3 5 7 9 1)
+
+(set key 9)
+(set found false)
+
+(for (set i 0) (lt (get i) (get n)) (incr i) (
+        if (is (get input (get i)) (get key)) (
+                        (set found true)
+                        (break)
+        )
+)
+
+if (get found) (
+        (p "Found key")
+) else (
+        (p "Key not found")
+)
+`
+
+sandboxRun(as, testScript);
 
 
 //

@@ -3,11 +3,8 @@ import {runCommand} from "./runCommand";
 import AssistScript from "../../AssistScript";
 
 function prettifyString(str: string) {
-    str = str.trim();
-
-    str = str.replace(/\n+/g, ' ')
-
-    return str;
+    /** Removes extra spaces and newlines from the string, but ignores spaces between quotes. Double quotes ONLY */
+    return str.trim().replace(/\s+(?=(?:[^"]*"[^"]*")*[^"]*$)/g, ' ');
 }
 
 /**
@@ -21,7 +18,7 @@ export default class Runner {
      */
     public static run(str: string, asInstance: AssistScript): unknown {
         str = prettifyString(str);
-        console.log(str)
+
         const ast = generateSyntaxTree(str);
 
         return runCommand(ast, asInstance, {rootToken: ast, originalStr: str});
