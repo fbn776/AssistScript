@@ -16,7 +16,7 @@ store.addCommand(builder
         .name('while')
         .description('Loops while the condition is true.')
         .syntax('while <condition> <command>')
-        .example('while {x < 5} {set x = {x + 1}}')
+        .example('TODO') // TODO
         .build()
     )
     .returnType(DataType.void)
@@ -24,7 +24,7 @@ store.addCommand(builder
         const ctx = _ as BaseContextProvider;
 
         let limit = 0;
-        while (condition) {
+        while (condition()) {
             if(limit >= ctx.LOOP_LIMIT) {
                 throw new ASGracefulExitError(`Loop limit of ${ctx.LOOP_LIMIT} exceeded.`);
             }

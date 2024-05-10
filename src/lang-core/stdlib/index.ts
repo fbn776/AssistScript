@@ -6,8 +6,15 @@
  * This file is then imported in the AssistScript.ts file.
  */
 
+/** BASIC **/
+import  "./basic/basic";
+
+
+/** OPERATORS **/
+import './operators/logical'
+import './operators/comparison'
+
 /** MATHS **/
-import  "./common/index";
 import "./math/arthemetic";
 import "./math/functions";
 import "./math/trigonometry";

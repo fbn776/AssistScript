@@ -6,3 +6,4 @@
 - [x] test
 - [x] print
 - [x] help
+- [x] eval

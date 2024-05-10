@@ -29,7 +29,9 @@ store.addCommand(builder
         .build())
     .args(-2, DataType.string)
     .returnType(DataType.void)
-    .run((_, ...args) => args.join(' '))
+    .run((_, ...args) => {
+        _.stdout.log(args.join(' '));
+    })
     .build()
 )
 
@@ -53,8 +55,35 @@ store.addCommand(builder
 
         if(!cmd)
             return `Command '${command}' not found.`;
-        return prettyHelp(cmd);
+
+        _.stdout.log(prettyHelp(cmd));
     })
     .build()
 )
 
+// EVAL
+store.addCommand(builder
+    .names('exec', 'execute', 'eval', 'evaluate')
+    .docs(new DocsBuilder()
+        .name('execute')
+        .aliases('eval', 'evaluate')
+        .description('Takes in any number of commands and executes them sequentially and returns the last executed command\'s return. Useful when you want to run multiple commands sequentially')
+        .syntax('eval <cmd1> <cmd2> ... <cmdN>')
+        .example('eval (set x 10) (set y 30) (print (get x)) (print (get y))')
+        .build()
+    )
+    .args(-1, DataType.command)
+    .returnType(DataType.any)
+    .run((_, ...args: (() => any)[]) => {
+        let res;
+        for(let cmd of args) {
+            res = cmd();
+        }
+
+        return res;
+    })
+    .build()
+);
+
+//eval (set x 10) (set y 20) (print (get x)) (print (get y))
+//eval (set x 10) (set y 3) (p (get x)) (p (get y))

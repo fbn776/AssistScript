@@ -13,6 +13,7 @@ export default class Runner {
      */
     public static run(str: string, asInstance: AssistScript): unknown {
         const ast = generateSyntaxTree(str);
+
         return runCommand(ast, asInstance, {rootToken: ast, originalStr: str});
     }
 }

@@ -82,9 +82,9 @@ export default function generateSyntaxTree(str: string) {
 
     const arr = stack.toArray();
     // TODO Check if the tempStack's top is a command, if then the `cmd` is an eval command;
-    const cmd = new CommandToken(arr[0].value as string, [])
+    const cmd = new CommandToken(arr[0]!.value as string, [])
     for (let i = 1; i < arr.length; i++) {
-        cmd.appendParam(arr[i]);
+        cmd.appendParam(arr[i]!);
     }
 
     return cmd;

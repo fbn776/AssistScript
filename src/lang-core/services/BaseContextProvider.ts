@@ -12,6 +12,8 @@ import {T_InitialState} from "../interpreter/runner/runCommand";
  * @see [how to create custom commands](/docs/Create-custom-commands.md)
  */
 export default class BaseContextProvider {
+    readonly stdout = console;
+
     /** No of times a loop can run */
     readonly LOOP_LIMIT: number = 10;
 

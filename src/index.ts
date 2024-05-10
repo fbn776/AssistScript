@@ -10,44 +10,45 @@ class TestContextProvider extends BaseContextProvider {
 
 const as = new AssistScript(new TestContextProvider());
 
-console.log(as);
+sandboxRun(as, 'add 10 20');
 
-sandboxRun(as, 'add 1 (add hi 32)');
-sandboxRun(as, 'sub');
-sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');
-sandboxRun(as, 'add 12 (add 34 (add 23 43))');
-sandboxRun(as, 'add 12 (add 34 (add 23 43)');
-sandboxRun(as, 'print "hello" "hi');
-sandboxRun(as, 'print "hello" "hi" 2 4) 3344');
-sandboxRun(as, 'print "hello" "hi" 2 4 () 3344');
-sandboxRun(as, 'print :"hi" 2 4 3344');
-sandboxRun(as, 'print hello"  3344');
-sandboxRun(as, 'print "hello" "hi" 2 4)23 3344');
-sandboxRun(as, 'add 10 30 (sub 24 (add 24 13) (mult 2 4');
-sandboxRun(as, 'add 10 30 sub 24 add 24 13) 2 4');
-
-
-sandboxRun(as, 'add 30 3')
-
-const testScript = `
-(set n 5)
-(array input 3 5 7 9 1)
-
-(set key 9)
-(set found false)
-
-(for (set i 0) (lt (get i) (get n)) (incr i) (
-        if (is (get input (get i)) (get key)) (
-                        (set found true)
-                        (break)
-        )
-)
-
-if (get found) (
-        (p "Found key")
-) else (
-        (p "Key not found")
-)
-`
-
-sandboxRun(as, testScript);
+//
+// sandboxRun(as, 'add 1 (add hi 32)');
+// sandboxRun(as, 'sub');
+// sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');
+// sandboxRun(as, 'add 12 (add 34 (add 23 43))');
+// sandboxRun(as, 'add 12 (add 34 (add 23 43)');
+// sandboxRun(as, 'print "hello" "hi');
+// sandboxRun(as, 'print "hello" "hi" 2 4) 3344');
+// sandboxRun(as, 'print "hello" "hi" 2 4 () 3344');
+// sandboxRun(as, 'print :"hi" 2 4 3344');
+// sandboxRun(as, 'print hello"  3344');
+// sandboxRun(as, 'print "hello" "hi" 2 4)23 3344');
+// sandboxRun(as, 'add 10 30 (sub 24 (add 24 13) (mult 2 4');
+// sandboxRun(as, 'add 10 30 sub 24 add 24 13) 2 4');
+//
+//
+// sandboxRun(as, 'add 30 3')
+//
+// const testScript = `
+// (set n 5)
+// (array input 3 5 7 9 1)
+//
+// (set key 9)
+// (set found false)
+//
+// (for (set i 0) (lt (get i) (get n)) (incr i) (
+//         if (is (get input (get i)) (get key)) (
+//                         (set found true)
+//                         (break)
+//         )
+// )
+//
+// if (get found) (
+//         (p "Found key")
+// ) else (
+//         (p "Key not found")
+// )
+// `
+//
+// sandboxRun(as, testScript);
