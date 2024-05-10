@@ -1,7 +1,7 @@
 import ASBaseError from "./ASBaseError";
 import LangTokenBase from "../specs/tokens/LangTokenBase";
 import {T_InitialState} from "../interpreter/runner/runCommand";
-import {ASTErrorDisplay} from "../utils/ASTErrorDisplay";
+import {ASTDisplay} from "../utils/ASTDisplay";
 
 interface I_ErrorData {
     /** The initial state of the command. i.e., contains the root command and original execution string */
@@ -31,7 +31,7 @@ export default class ASRuntimeError extends ASBaseError {
 Reason: ${this.message}
 
 ${this.data?.state.originalStr}
-${ASTErrorDisplay(this.data!.state.rootToken, this.data!.occurredCmd.tokenID)}
+${ASTDisplay(this.data!.state.rootToken, this.data!.occurredCmd.tokenID)}
 `
     }
 }

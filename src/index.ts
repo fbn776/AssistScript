@@ -10,8 +10,8 @@ class TestContextProvider extends BaseContextProvider {
 
 const as = new AssistScript(new TestContextProvider());
 
-sandboxRun(as, 'add 10 20');
-
+sandboxRun(as, 'eval (print ONE) (print TWO (print THREE))')
+sandboxRun(as, 'eval (set x 10) (set y 30) (print (get x)) (print (get y))')
 //
 // sandboxRun(as, 'add 1 (add hi 32)');
 // sandboxRun(as, 'sub');

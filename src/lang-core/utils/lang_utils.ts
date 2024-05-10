@@ -1,4 +1,3 @@
-import CommandToken from "../specs/tokens/lexmes/CommandToken";
 import LangTokenBase from "../specs/tokens/LangTokenBase";
 import NumberToken from "../specs/tokens/lexmes/NumberToken";
 import BooleanToken from "../specs/tokens/lexmes/BooleanToken";
@@ -12,22 +11,6 @@ export function hasOnlyRepeatedChars(str: string) {
     }
     return true;
 }
-
-/** Displays the syntax tree to the console in a formatted way
- * @internal
- */
-export function displayAST(base: LangTokenBase<unknown>, level: number = 0, sep: string  = "  ") {
-    if (base instanceof CommandToken) {
-        console.log(`${sep.repeat(level)}+`, base.commandName);
-
-        for (let i of base.params) {
-            displayAST(i, level + 1, sep);
-        }
-    } else {
-        console.log(`${sep.repeat(level)}|`, base.value);
-    }
-}
-
 
 /** Converts a base token to it's matching type token
  * @internal

@@ -18,10 +18,10 @@ function drawVerLine(level: number, sep: string = "  ") {
 /**
  * Takes in a base token (the generated syntax tree) and then displays the AST with the error token highlighted.
  * @param base
- * @param errorAT
+ * @param errorAT If this is used to show the error token, then this is the tokenID of the error token.
  * @constructor
  */
-export function ASTErrorDisplay(base: LangTokenBase<unknown>, errorAT: string) {
+export function ASTDisplay(base: LangTokenBase<unknown>, errorAT?: string) {
     let str = ''
 
     function ASTErrorDisplay(base: LangTokenBase<unknown>, level: number = 0, sep: string = "  ") {

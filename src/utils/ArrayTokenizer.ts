@@ -62,6 +62,5 @@ export function getJoinedTknLength(token: ArrayTokenizer<LangTokenBase<unknown>>
         length += (String(token.tokens[i]!.value)).length + offset;
     }
 
-    console.log(tokenPos, length, offset)
     return length - offset;
 }

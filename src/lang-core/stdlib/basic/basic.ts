@@ -72,15 +72,10 @@ store.addCommand(builder
         .example('eval (set x 10) (set y 30) (print (get x)) (print (get y))')
         .build()
     )
-    .args(-1, DataType.command)
+    .args(-1, DataType.any)
     .returnType(DataType.any)
-    .run((_, ...args: (() => any)[]) => {
-        let res;
-        for(let cmd of args) {
-            res = cmd();
-        }
-
-        return res;
+    .run((_, ...args: unknown[]) => {
+        return args[args.length - 1]
     })
     .build()
 );
