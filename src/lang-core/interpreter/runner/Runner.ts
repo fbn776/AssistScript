@@ -1,7 +1,14 @@
 import generateSyntaxTree from "../parser/generateSyntaxTree";
 import {runCommand} from "./runCommand";
 import AssistScript from "../../AssistScript";
-import {ASTDisplay} from "../../utils/ASTDisplay";
+
+function prettifyString(str: string) {
+    str = str.trim();
+
+    str = str.replace(/\n+/g, ' ')
+
+    return str;
+}
 
 /**
  * The command runner class.
@@ -13,9 +20,9 @@ export default class Runner {
      * @throws ASRuntimeError
      */
     public static run(str: string, asInstance: AssistScript): unknown {
+        str = prettifyString(str);
+        console.log(str)
         const ast = generateSyntaxTree(str);
-
-        console.log(ASTDisplay(ast));
 
         return runCommand(ast, asInstance, {rootToken: ast, originalStr: str});
     }

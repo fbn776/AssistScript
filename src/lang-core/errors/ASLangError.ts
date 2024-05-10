@@ -43,9 +43,9 @@ export default class ASLangError extends ASBaseError implements ASLangErrorOptio
 
 
     public prettify(): string {
-        let str = this.name + '\n';
+        let str = this.name.trim() + '\n';
         str += `Reason: ${this.reason}\n`;
-        str += '\n> ' + this.source + '\n'
+        str += '\n> ' + String(this.source).trim() + '\n'
 
         const pos = (this.position || 0) - 1
         str += '  ' + (pos > 0 ? '┌' : '│') + '─'.repeat(pos < 0 ? 0 : pos)  + (pos > 0 ? '┘' : '') + '\n'
