@@ -1,6 +1,6 @@
 {
 	"name": "assistscript",
-	"version": "1.6.0",
+	"version": "0.6.0",
 	"description": "AssistScript is a custom command language",
 	"main": "src/index.ts",
 	"scripts": {
