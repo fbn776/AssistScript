@@ -2,11 +2,52 @@ import CommandToken from "../../specs/tokens/lexmes/CommandToken";
 import ASRuntimeError from "../../errors/ASRuntimeError";
 import {hasProperArgType} from "./hasProperArgType";
 import AssistScript from "../../AssistScript";
+import LangTokenBase from "../../specs/tokens/LangTokenBase";
+import Command from "../../specs/lang-units/Command";
+import Parameters from "../../specs/lang-units/Parameters";
 
 export type T_InitialState = {
     rootToken: CommandToken,
     originalStr: string
 };
+
+/** The function that actually executes the command.
+ * This is extracted out to a separate function, because if a command is lazily evaluated,
+ * then this a call to this function is enclosed in an anonymous function, which will be called on demand.
+ *
+ * For eg:
+ ```
+ (set i 0)
+    (while (TRUE) (
+    (print i = (get i) ; i + 1 = (add (get i) 1))
+    (incr i)
+ )
+ ```
+ * Previously, the `get i` and `add (get i) 1` would be evaluated immediately,
+ * but now it will be evaluated only when the `print` command is executed.
+ * And the print will only be executed when the while loop is executed.
+ **/
+function execCmd(actualParams: LangTokenBase<unknown>[], defParams: Parameters, initial: T_InitialState, context: AssistScript, commandDef: Command) {
+    // Goes through the actual arguments and evaluates it, and then returns an array of final values.
+    const finalParam = actualParams.map((token, index) => {
+        const checkParams = hasProperArgType(token, defParams, index);
+        if (!checkParams.success) {
+            throw new ASRuntimeError(`The argument '${token.value}' doesn't match the required type\nRequired: ${checkParams.foundType}\nFound: ${token.type.substring(6).toLowerCase()}`, {
+                state: initial,
+                occurredCmd: token
+            });
+        }
+
+        if (token instanceof CommandToken) {
+            return runCommand(token, context, initial, checkParams.lazyEval);
+        }
+
+        return token.value;
+    });
+
+
+    return commandDef.exec(context.contextProvider, ...finalParam);
+}
 
 /**
  * The actual implementation of the runner method.
@@ -35,7 +76,6 @@ export function runCommand(inputTkn: CommandToken, context: AssistScript, initia
     const actualParams = inputTkn.params;
     const defParams = commandDef.params;
 
-
     // Check if the command got the correct number of arguments
     if (!defParams.isVariable && actualParams.length !== defParams.num) {
         throw new ASRuntimeError(`The command '${inputTkn.commandName}' expects ${defParams.num} arguments, but found ${actualParams.length}.`, {
@@ -51,28 +91,10 @@ export function runCommand(inputTkn: CommandToken, context: AssistScript, initia
         });
     }
 
-    // Goes through the actual arguments and evaluates it, and then returns an array of final values.
-    const finalParam = actualParams.map((token, index) => {
-        const checkParams = hasProperArgType(token, defParams, index);
-        if (!checkParams.success) {
-            throw new ASRuntimeError(`The argument '${token.value}' doesn't match the required type
-Required: ${checkParams.foundType}
-Found: ${token.type.substring(6).toLowerCase()}`, {
-                state: initial,
-                occurredCmd: token
-            });
-        }
-
-        if (token instanceof CommandToken) {
-            return runCommand(token, context, initial, checkParams.lazyEval);
-        }
-
-        return token.value;
-    });
 
     // If the command is lazyEval, then return a function that will execute the command
     if (lazyEval)
-        return () => commandDef.exec(context.contextProvider, ...finalParam)
+        return () => execCmd(actualParams, defParams, initial, context, commandDef);
 
-    return commandDef.exec(context.contextProvider, ...finalParam);
+    return execCmd(actualParams, defParams, initial, context, commandDef);
 }
