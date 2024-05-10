@@ -41,6 +41,18 @@ export function getRoughType(value: unknown): DataType {
     }
 }
 
+export function getRoughArrayType(value: unknown[]): DataType {
+    let type = getRoughType(value[0]);
+    for(let val of value) {
+        if(type === "string" || type === "any")
+            break;
+
+        type = getRoughType(val);
+    }
+
+    return type;
+}
+
 /**
  * Checks if a string is a valid command or variable name.
  *

@@ -69,7 +69,7 @@ store.addCommand(builder
         .aliases('eval', 'evaluate')
         .description('Takes in any number of commands and executes them sequentially and returns the last executed command\'s return. Useful when you want to run multiple commands sequentially')
         .syntax('eval <cmd1> <cmd2> ... <cmdN>')
-        .example('eval (set x 10) (set y 30) (print (get x)) (print (get y))')
+        .example('eval (set x 10) (set y 30) (print x = (get x)) (print y = (get y))')
         .build()
     )
     .args(-1, DataType.any)
@@ -79,6 +79,3 @@ store.addCommand(builder
     })
     .build()
 );
-
-//eval (set x 10) (set y 20) (print (get x)) (print (get y))
-//eval (set x 10) (set y 3) (p (get x)) (p (get y))

@@ -59,7 +59,7 @@ export default class Parameters {
         if(num <= -1)
             this.isVariable = true;
 
-        this.lastParam = this.types[this.types.length - 1];
+        this.lastParam = this.types[this.types.length - 1] || DataType.any;
     }
 }
 
