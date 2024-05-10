@@ -10,17 +10,20 @@ class TestContextProvider extends BaseContextProvider {
 
 const as = new AssistScript(new TestContextProvider());
 
-const txt = `
-eval (print "Hello World")
-(print "Hi there")
 
-
-(print setting x = 10) (set x 10)
-
+sandboxRun(as, `print "hello" "world" What " is thus`);
+sandboxRun(as, `add 10 20 40 50 2 4 2 (sub 30 44 2) (mult 3 4 2 4`);
+sandboxRun(as, `add 10 20 40 50 2 4 2 (sub 30 44 2 mult 3 4 2 4`);
+sandboxRun(as, `add 10 20 40 50 2 4 2 (sub 30 44 2 (mult 3 4 (add 34 2 (fact2 2) 4 4 2) 4))`);
 
 
 
-(print x = (get x))
+const txt = `eval
+(set x 10)
+(set y 30)
+(print x = "get x")
+(print y = (get y))
+(print x + y = (add (get x) (get y)))
 `
 
 sandboxRun(as, txt);
@@ -30,28 +33,28 @@ sandboxRun(as, txt);
 
 
 
-const testScript = `
-(set n 5)
-(array input 3 5 7 9 1)
-
-(set key 9)
-(set found false)
-
-(for (set i 0) (lt (get i) (get n)) (incr i) (
-        if (is (get input (get i)) (get key)) (
-                        (set found true)
-                        (break)
-        )
-)
-
-if (get found) (
-        (p "Found key")
-) else (
-        (p "Key not found")
-)
-`
-
-sandboxRun(as, testScript);
+// const testScript = `
+// (set n 5)
+// (array input 3 5 7 9 1)
+//
+// (set key 9)
+// (set found false)
+//
+// (for (set i 0) (lt (get i) (get n)) (incr i) (
+//         if (is (get input (get i)) (get key)) (
+//                         (set found true)
+//                         (break)
+//         )
+// )
+//
+// if (get found) (
+//         (p "Found key")
+// ) else (
+//         (p "Key not found")
+// )
+// `
+//
+// sandboxRun(as, testScript);
 
 
 //
