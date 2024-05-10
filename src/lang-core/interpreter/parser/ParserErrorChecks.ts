@@ -7,7 +7,7 @@ import {RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
 import Stack from "../../../utils/Stack";
 
 /**
- * A grouping of basic or unnecessarily large error checking codes.
+ * A grouping of basic or unnecessary large error checking codes.
  * Allows the functions calling it to follow single responsibility and also reduces code cluttering
  */
 export namespace ParserErrorChecks {

@@ -20,8 +20,6 @@ export type T_InitialState = {
  */
 export function runCommand(inputTkn: CommandToken, context: AssistScript, initial: T_InitialState, lazyEval?: boolean): unknown {
     const commandDef = context.store.getCommand(inputTkn.commandName);
-    const actualParams = inputTkn.params;
-    const defParams = commandDef!.params;
 
     // Used to keep track of the current execution, for better errors.
     context.contextProvider.currentCommand = inputTkn;
@@ -33,6 +31,11 @@ export function runCommand(inputTkn: CommandToken, context: AssistScript, initia
             occurredCmd: inputTkn
         });
     }
+
+    const actualParams = inputTkn.params;
+    const defParams = commandDef.params;
+
+
     // Check if the command got the correct number of arguments
     if (!defParams.isVariable && actualParams.length !== defParams.num) {
         throw new ASRuntimeError(`The command '${inputTkn.commandName}' expects ${defParams.num} arguments, but found ${actualParams.length}.`, {
