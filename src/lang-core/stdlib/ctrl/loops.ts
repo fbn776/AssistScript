@@ -4,6 +4,7 @@ import DataType from "../../specs/tokens/DataType";
 import {DocsBuilder} from "../../specs/DocsBuilder";
 import ASGracefulExitError from "../../errors/ASGracefulExitError";
 import ASRuntimeError from "../../errors/ASRuntimeError";
+import ASInterrupt from "../../errors/ASInterrupt";
 
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
@@ -15,17 +16,65 @@ store.addCommand(builder
         .name('break')
         .description('Breaks out of the loop in which it is called.')
         .syntax('break')
-        .example('(set i 0) (while (TRUE)) ((print (get i) (if (gt (get i) 5) (break))) (set i (add (get i) 1)))')
+        .note('Internally it throws an `ASInterrupt` error to interrupt the execution, but is gracefully handled. When implementing your own commands, you should always handle this error')
+        .example(`
+(set i 0)
+(while (lt (get i) 10) (
+    (if (eq (get i) 5) (
+        (print i is 5)
+        (continue)
+    ))
+    
+    (print (get i))    
+    (incr i)    
+))`)
         .build()
     )
     .returnType(DataType.void)
     .run(_ => {
-        if(!_.isInLoop)
+        if (!_.isInLoop)
             throw new ASRuntimeError('`break` can only be used inside a loop.', {
                 state: _.currentState!,
                 occurredCmd: _.currentCommand!,
             })
         _.isBreakCalled = true;
+        throw new ASInterrupt('Continue called');
+    })
+    .build()
+)
+
+// CONTINUE
+store.addCommand(builder
+    .names('continue')
+    .args(0)
+    .docs(new DocsBuilder()
+        .name('continue')
+        .description('Skips the rest of the loop body and does the next iteration in which it is called.')
+        .note('Internally it throws an `ASInterrupt` error to interrupt the execution, but is gracefully handled. When implementing your own commands, you should always handle this error')
+        .syntax('continue')
+        .example(`
+(set i 0)
+(while (lt (get i) 10) (
+    (if (eq (get i) 5) (
+        (print i is 5)
+        (break)
+    ))
+    
+    (print (get i))    
+    (incr i)    
+))`)
+        .build()
+    )
+    .returnType(DataType.void)
+    .run(_ => {
+        if (!_.isInLoop)
+            throw new ASRuntimeError('`continue` can only be used inside a loop.', {
+                state: _.currentState!,
+                occurredCmd: _.currentCommand!,
+            })
+        _.isContinueCalled = true;
+
+        throw new ASInterrupt('Continue called');
     })
     .build()
 )
@@ -43,7 +92,6 @@ store.addCommand(builder
     )
     .returnType(DataType.void)
     .run((_, condition: () => boolean, command: () => unknown) => {
-        console.log('while: condition:', condition())
 
         let limit = 0;
         _.isInLoop = true;
@@ -53,19 +101,22 @@ store.addCommand(builder
                 break;
             }
 
-            if(_.isContinueCalled) {
-                _.isContinueCalled = false;
-                continue;
-            }
-
-            console.log('limit', limit)
-
             if ((limit++) >= _.LOOP_LIMIT) {
                 _.isInLoop = false;
                 throw new ASGracefulExitError(`Loop limit of ${_.LOOP_LIMIT} exceeded.`);
             }
 
-            command();
+            if (_.isContinueCalled) {
+                _.isContinueCalled = false;
+            } else {
+                try {
+                    command();
+                } catch (e) {
+                    if (!(e instanceof ASInterrupt)) {
+                        throw e;
+                    }
+                }
+            }
         }
         _.isInLoop = false;
     })

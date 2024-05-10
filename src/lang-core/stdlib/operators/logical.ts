@@ -53,3 +53,35 @@ store.addCommand(builder
     .run((_, a: boolean) => !a)
     .build()
 )
+
+// TRUE
+store.addCommand(builder
+    .names('TRUE', 'true')
+    .args(0)
+    .docs(new DocsBuilder()
+        .name('true')
+        .description('Returns true.')
+        .syntax('true')
+        .example('true')
+        .build()
+    )
+    .returnType(DataType.boolean)
+    .run(() => true)
+    .build()
+)
+
+// FALSE
+store.addCommand(builder
+    .names('FALSE')
+    .args(0)
+    .docs(new DocsBuilder()
+        .name('false')
+        .description('Returns false.')
+        .syntax('false')
+        .example('false')
+        .build()
+    )
+    .returnType(DataType.boolean)
+    .run(() => false)
+    .build()
+)
