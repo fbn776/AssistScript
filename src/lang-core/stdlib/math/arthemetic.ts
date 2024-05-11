@@ -2,76 +2,9 @@ import CommandStore from "../../interpreter/CommandStore";
 import {CommandBuilder} from "../../specs/CommandBuilder";
 import DataType from "../../specs/tokens/DataType";
 import {DocsBuilder} from "../../specs/DocsBuilder";
-import ASRuntimeError from "../../errors/ASRuntimeError";
-import BaseContextProvider from "../../services/BaseContextProvider";
 
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
-
-function checkForErrors(_: BaseContextProvider, variable: any) {
-    const value = _.storeService.getVariable(variable);
-
-    if (!value)
-        throw new ASRuntimeError(`Variable '${variable}' not found.`, {
-            state: _.currentState!,
-            occurredCmd: _.currentCommand!,
-        })
-
-    if (value.type !== DataType.number)
-        throw new ASRuntimeError(`Variable '${variable}' is not a number.`, {
-            state: _.currentState!,
-            occurredCmd: _.currentCommand!,
-        })
-
-    if (value.isArray)
-        throw new ASRuntimeError(`Variable '${variable}' is an array.`, {
-            state: _.currentState!,
-            occurredCmd: _.currentCommand!,
-        })
-    return value;
-}
-
-store.addCommand(builder
-    .names('incr', 'increment')
-    .docs(new DocsBuilder()
-        .name('incr')
-        .aliases('increment')
-        .description('Increments the given variable by 1.')
-        .syntax('incr <varname>')
-        .example('incr i')
-        .build()
-    )
-    .args(1, DataType.string)
-    .returnType(DataType.number)
-    .run((_, variable) => {
-        const value = checkForErrors(_, variable);
-
-        _.storeService.setVariable(variable, value.value as number + 1);
-        return value.value as number + 1;
-    })
-    .build()
-)
-
-store.addCommand(builder
-    .names('decr', 'decrement')
-    .docs(new DocsBuilder()
-        .name('decr')
-        .aliases('decrement')
-        .description('Decrements the given variable by 1.')
-        .syntax('decr <varname>')
-        .example('decr i')
-        .build()
-    )
-    .args(1, DataType.string)
-    .returnType(DataType.number)
-    .run((_, variable) => {
-        const value = checkForErrors(_, variable);
-
-        _.storeService.setVariable(variable, value.value as number - 1);
-        return value.value as number - 1;
-    })
-    .build()
-)
 
 // ADDITION
 store.addCommand(builder

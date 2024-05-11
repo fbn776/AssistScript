@@ -10,10 +10,15 @@
 
   ### Arrays
 
-    - [ ] Set arrays
-    - [ ] Get arrays
-    - [ ] Delete arrays
-    - [ ] Array operations
+    - [x] Set arrays
+    - [x] Get arrays
+    - [x] Get an element of an array
+    - [x] Array length
+    - [x] Update arrays
+    - [x] Delete arrays
+    - [x] Append
+    - [x] Pop
+    - [x] Insert
 
 ## LOOPS
 

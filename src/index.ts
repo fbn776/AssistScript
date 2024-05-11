@@ -22,46 +22,29 @@ const as = new AssistScript(new TestContextProvider());
 //     (print (get i))
 //     (incr i)
 // ))`);
-
-sandboxRun(as, `
-(set n 10)
-(repeat 5 (
-    (print "Hello, world!")
-))
-`);
-
-sandboxRun(as, `
-for (set i 0) (lt (get i) 10) (incr i) (    
-    (print i = (get i))
-)
-`)
-
-// console.log(as.store)
 //
-// const txt = `
-// (set n 5)
-// (set-arr arr 3 5 7 9 1)
+// sandboxRun(as, `
+// (set n 10)
+// (repeat 5 (
+//     (print "Hello, world!")
+// ))
+// `);
 //
-// `
-//
-// sandboxRun(as, txt);
-//
-//
-// const testScript = `
-// (set n 5)
-// (array input 3 5 7 9 1)
-//
-// (set key 9)
-// (set found false)
-//
-//
-//
-// if (get found) (
-//         (p "Found key")
-// ) else (
-//         (p "Key not found")
+// sandboxRun(as, `
+// for (set i 0) (lt (get i) 10) (incr i) (
+//     (print i = (get i))
 // )
-// `
-//
-// sandboxRun(as, testScript);
+// `)
+
+
+const testScript = `
+(set n 5)
+(array input 3 5 7 9 1)
+
+(print (index input 0))
+(print (index input 1))
+(print (index input 2))
+`
+
+sandboxRun(as, testScript);
 
