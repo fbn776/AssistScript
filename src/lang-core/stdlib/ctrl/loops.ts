@@ -9,6 +9,7 @@ import ASInterrupt from "../../errors/ASInterrupt";
 const store = CommandStore.getInstance();
 const builder = new CommandBuilder();
 
+// BREAK
 store.addCommand(builder
     .names('break')
     .args(0)

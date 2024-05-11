@@ -1,9 +1,9 @@
-# Control structures
+# How loops are implemented
 
-Control structures are commands that are used to control the flow of execution the program.
-They are used to make decisions, loop over commands, etc.
+Loops are control structures that are used to control the flow of execution the program.
+They are used to loop over some set of commands, do repetitive tasks, etc.
 
-In this readme, I will explain the following control structures:
+In this doc file, I will explain the following control structures:
 
 ## LOOPS
 
@@ -52,7 +52,9 @@ Whenever `AssitScript` encounters a loop, it will do the following;
     4. Goto step 1
 - After the loop is done, the context provider is updated to set `isInLoop = false`.
 
-## Handling Break and Continue
+<hr/>
+
+## BREAK and CONTINUE
 
 `break` and `continue` are used to break out of a loop or continue to the next iteration respectively.
 When `break` is called, `isBreakCalled` is set to true, and when `continue` is called, `isContinueCalled` is set to
@@ -99,7 +101,7 @@ at the call area. But this is not what happens.
 
 So to interrupt the current iteration, we need to throw an error, when `break` or `continue` is called. As errors in JS
 interrupt the current execution. So to do this, we use a special type of error called `ASInterrupt` in code (for
-source [see](../../errors/ASInterrupt.ts)).
+source [see](../../src/lang-core/errors/ASInterrupt.ts)).
 
 But this stops the whole execution, so we need to catch this error and handle it. This should be done inside the loop
 itself.
