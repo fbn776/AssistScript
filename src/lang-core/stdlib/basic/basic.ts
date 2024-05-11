@@ -29,16 +29,18 @@ store.addCommand(builder
         .build())
     .args(-2, DataType.string)
     .returnType(DataType.void)
-    .run((_, ...args) => args.join(' '))
+    .run((_, ...args) => {
+        _.stdout.log(args.join(' '));
+    })
     .build()
 )
 
 // HELP
 store.addCommand(builder
-    .names('help', 'h', '?')
+    .names('help', 'h')
     .docs(new DocsBuilder()
         .name('help')
-        .aliases('h', '?')
+        .aliases('h')
         .description('Displays the help message for the given command.')
         .syntax('help <command>')
         .example('help print')
@@ -53,8 +55,27 @@ store.addCommand(builder
 
         if(!cmd)
             return `Command '${command}' not found.`;
-        return prettyHelp(cmd);
+
+        _.stdout.log(prettyHelp(cmd));
     })
     .build()
 )
 
+// EVAL
+store.addCommand(builder
+    .names('exec', 'execute', 'eval', 'evaluate')
+    .docs(new DocsBuilder()
+        .name('execute')
+        .aliases('eval', 'evaluate')
+        .description('Takes in any number of commands and executes them sequentially and returns the last executed command\'s return. Useful when you want to run multiple commands sequentially')
+        .syntax('eval <cmd1> <cmd2> ... <cmdN>')
+        .example('eval (set x 10) (set y 30) (print x = (get x)) (print y = (get y))')
+        .build()
+    )
+    .args(-1, DataType.any)
+    .returnType(DataType.any)
+    .run((_, ...args: unknown[]) => {
+        return args[args.length - 1]
+    })
+    .build()
+);

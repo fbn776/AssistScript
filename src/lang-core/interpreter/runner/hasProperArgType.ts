@@ -9,6 +9,8 @@ import StringToken from "../../specs/tokens/lexmes/StringToken";
 type T_ArgCheck = {
     success: boolean,
     foundType?: DataType,
+    /** If the type is command, then don't execute; pass it forward as a function to call*/
+    lazyEval?: boolean
 }
 
 /**
@@ -24,7 +26,7 @@ export function hasProperArgType(token: LangTokenBase<unknown>, params: Paramete
     if (index > params.getParamsLen - 1)
         type = params.lastParam;
     else
-        type = params.types[index];
+        type = params.types[index]!;
 
     if (type === DataType.any)
         return {success: true}
@@ -36,9 +38,12 @@ export function hasProperArgType(token: LangTokenBase<unknown>, params: Paramete
             foundType: type,
         }
 
-    if (token instanceof CommandToken) {
-        // TODO
-        //type = token.
+    if (type === DataType.command && token instanceof CommandToken) {
+        return {
+            success: true,
+            foundType: type,
+            lazyEval: true
+        }
     }
 
     if (token instanceof NumberToken && type != DataType.number)

@@ -1,10 +1,6 @@
-import {CommandBuilder} from "./lang-core/specs/CommandBuilder";
-import {DocsBuilder} from "./lang-core/specs/DocsBuilder";
-import Parameters from "./lang-core/specs/lang-units/Parameters";
-import DataType from "./lang-core/specs/tokens/DataType";
-import AssistScript from "./AssistScript";
+import AssistScript from "./lang-core/AssistScript";
 import sandboxRun from "./utils/sandboxRun";
-import BaseContextProvider from "./lang-core/BaseContextProvider";
+import BaseContextProvider from "./lang-core/services/BaseContextProvider";
 
 class TestContextProvider extends BaseContextProvider {
     clear() {
@@ -14,22 +10,63 @@ class TestContextProvider extends BaseContextProvider {
 
 const as = new AssistScript(new TestContextProvider());
 
-sandboxRun(as, 'add 1 (add hi 32)');
-sandboxRun(as, 'sub');
-sandboxRun(as, 'add 12 (sub 34 (mult 23 43))');
-sandboxRun(as, 'add 12 (add 34 (add 23 43))');
-sandboxRun(as, 'add 12 (add 34 (add 23 43)');
-sandboxRun(as, 'print "hello" "hi');
-sandboxRun(as, 'print "hello" "hi" 2 4) 3344');
-sandboxRun(as, 'print "hello" "hi" 2 4 () 3344');
-sandboxRun(as, 'print :"hi" 2 4 3344');
-sandboxRun(as, 'print hello"  3344');
-sandboxRun(as, 'print "hello" "hi" 2 4)23 3344');
-sandboxRun(as, 'add 10 30 (sub 24 (add 24 13) (mult 2 4');
-sandboxRun(as, 'add 10 30 sub 24 add 24 13) 2 4');
+// sandboxRun(as, `
+// (set n 10)
+// (set i 0)
+// (while (lt (get i) 10) (
+//     (if (eq (get i) 5) (
+//         (print i is 5)
+//         (break)
+//     ))
+//
+//     (print (get i))
+//     (incr i)
+// ))`);
+//
+// sandboxRun(as, `
+// (set n 10)
+// (repeat 5 (
+//     (print "Hello, world!")
+// ))
+// `);
+//
+// sandboxRun(as, `
+// for (set i 0) (lt (get i) 10) (incr i) (
+//     (print i = (get i))
+// )
+// `)
 
 
-sandboxRun(as, 'add 30 3')
+const testScript = `
+(set n 5)
+(array input 3 5 7 9 1)
 
+(print (index input 0))
+(print (index input 1))
+(print (index input 2))
+`
 
+sandboxRun(as, testScript);
 
+const linearSearch = `
+(print Linear Search)
+
+(array input 3 5 7 9 1)
+(set key 9)
+(set found false)
+
+(for (set i 0) (lt (get i) (len input)) (incr i) (
+    (if (eq (index input (get i)) (get key)) (
+        (set found true)
+        (break)
+    ))
+))
+
+(ife (get found)
+    (print (get key) found at position (get i))
+else
+    (print (get key) not found)
+)
+`;
+
+sandboxRun(as, linearSearch);

@@ -35,7 +35,7 @@ export function parser(inputTxt: string): LangTokenBase<unknown>[] {
 
     // If the input string is empty, then throw an error.
     if (inputTxt === '')
-        throw new ASLangError({reason: "Empty string.", errorCode: ErrorCodes.FoundNullToken})
+        throw new ASLangError({reason: "Empty string.", source: inputTxt, errorCode: ErrorCodes.FoundNullToken})
 
     while (tokens.hasMoreTokens()) {
         let curr = tokens.nextToken() || '';
@@ -65,7 +65,7 @@ export function parser(inputTxt: string): LangTokenBase<unknown>[] {
             const quoteStartIndex = str.indexOf(startsWith);
             const quoteEndIndex = str.lastIndexOf(startsWith);
 
-            //ERROR Check: If the quote is not closed, then throw an error.
+            // ERROR Check: If the quote is not closed, then throw an error.
             ParserErrorChecks.hasUnclosedQuoteError_TK(quoteStartIndex, quoteEndIndex, startsWith, inputTxt, tokens, str);
 
             const beforeStr = str.substring(0, quoteStartIndex),

@@ -1,8 +1,11 @@
-import CommandStore from "../CommandStore";
 import generateSyntaxTree from "../parser/generateSyntaxTree";
 import {runCommand} from "./runCommand";
-import BaseContextProvider from "../../BaseContextProvider";
-import AssistScript from "../../../AssistScript";
+import AssistScript from "../../AssistScript";
+
+function prettifyString(str: string) {
+    /** Removes extra spaces and newlines from the string, but ignores spaces between quotes. Double quotes ONLY */
+    return str.trim().replace(/\s+/g, ' ');
+}
 
 /**
  * The command runner class.
@@ -13,7 +16,8 @@ export default class Runner {
     /** Takes in a string and runs it and returns the value of the command
      * @throws ASRuntimeError
      */
-    public static run<T extends  BaseContextProvider>(str: string, asInstance: AssistScript<T>): unknown {
+    public static run(str: string, asInstance: AssistScript): unknown {
+        str = prettifyString(str);
         const ast = generateSyntaxTree(str);
         return runCommand(ast, asInstance, {rootToken: ast, originalStr: str});
     }

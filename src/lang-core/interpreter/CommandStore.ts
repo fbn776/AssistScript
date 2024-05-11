@@ -1,8 +1,10 @@
 import Command from "../specs/lang-units/Command";
 import ASMakeError from "../errors/ASMakeError";
+import {isNameValid} from "../utils/lang_utils";
 
 /**
  * A singleton class that acts as the store for all the commands.
+ * @internal
  */
 export default class CommandStore {
     private static _instance: CommandStore;
@@ -19,7 +21,8 @@ export default class CommandStore {
         return CommandStore._instance;
     }
 
-    private constructor() {}
+    private constructor() {
+    }
 
     public hasCommand(name: string): boolean {
         return this._store.has(name);
@@ -30,9 +33,12 @@ export default class CommandStore {
     }
 
     public addCommand(cmd: Command) {
-        for(let name of cmd.names) {
-            if(this._store.has(name))
+        for (let name of cmd.names) {
+            if (this._store.has(name))
                 throw new ASMakeError(`The command name '${name}' already exists.`);
+
+            if (!isNameValid(name))
+                throw new ASMakeError(`The command name '${name}' is invalid. Command names should only include alphanumeric characters and underscores. And it should not start with a number.`);
 
             this._store.set(name, cmd);
         }

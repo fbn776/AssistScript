@@ -1,5 +1,5 @@
 import Command from "../../specs/lang-units/Command";
-import {ASCII_horizontal, ASCII_l_cross, ASCII_tl_corner, ASCII_vertical} from "../../../utils/ASCII_char";
+import {ASCII_horizontal, ASCII_l_cross, ASCII_tl_corner} from "../../../utils/ASCII_char";
 
 export function prettyHelp(cmd: Command) {
     const docs = cmd.docs;

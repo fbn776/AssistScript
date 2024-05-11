@@ -43,14 +43,30 @@ export default class ASLangError extends ASBaseError implements ASLangErrorOptio
 
 
     public prettify(): string {
+        const maxLen = 60;
+        const padding = 20;
+
+        const pos = (this.position || 0) - 1;
+        let effPos = pos;
+
         let str = this.name + '\n';
         str += `Reason: ${this.reason}\n`;
-        str += '\n> ' + this.source + '\n'
+        let src = String(this.source).trim();
 
-        const pos = (this.position || 0) - 1
-        str += '  ' + (pos > 0 ? '┌' : '│') + '─'.repeat(pos < 0 ? 0 : pos)  + (pos > 0 ? '┘' : '') + '\n'
+        console.log(src)
 
-        this.errorToken && (str += `  ├ error token: ${this.errorToken}\n`);
+        if(src.length > maxLen) {
+            let start = pos - padding;
+            let end = pos + padding;
+            src =  (start > 0 ? '... ' : '') + src.substring(start, end) + (end < src.length ? ' ...' : '');
+            effPos = (start > 0) ? padding + (start > 0 ? 4 : 0) : pos;
+        }
+
+        str += `\n> ${src}\n`
+
+        str += '  ' + (effPos > 0 ? '┌' : '│') + '─'.repeat(effPos < 0 ? 0 : effPos)  + (effPos > 0 ? '┘' : '') + '\n'
+
+        this.errorToken && (str += `  ├ error token: ${String(this.errorToken).trim()}\n`);
         (this.position != undefined) && (str += `  ├ position: ${this.position}\n`);
         this.fix && (str += `  ├ fix: ${this.fix}\n`);
         this.note && (str += `  ├ note: ${this.note}\n`);

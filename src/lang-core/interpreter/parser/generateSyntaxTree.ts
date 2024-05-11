@@ -3,10 +3,7 @@ import LangTokenBase from "../../specs/tokens/LangTokenBase";
 import {ArrayTokenizer} from "../../../utils/ArrayTokenizer";
 import {LeftBracketToken, RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
 import CommandToken from "../../specs/tokens/lexmes/CommandToken";
-import StringToken from "../../specs/tokens/lexmes/StringToken";
 import {parser} from "./parser";
-import ASLangError from "../../errors/ASLangError";
-import ErrorCodes from "../../errors/ErrorCodes";
 import {ParserErrorChecks} from "./ParserErrorChecks";
 import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
 
@@ -58,15 +55,19 @@ export default function generateSyntaxTree(str: string) {
             // ERROR Check: is the command empty?
             ParserErrorChecks.hasEmptyBracketError_ST(topCmd, str, tokens, token);
 
-            // TODO Check if the tempStack's top is a command, if then the `cmd` is an eval command;
-            if (!(topCmd instanceof StringToken))
-                throw new ASLangError({
-                    reason: "This is a TODO; The command name is taken as the first token inside brackets and they must be strings too",
-                    errorCode: ErrorCodes.PlaceholderError,
-                    source: str,
-                })
 
-            cmd.changeName(topCmd.value as string);
+            // TODO Check if the tempStack's top is a command, if then the `cmd` is an eval command;
+            // if (!(topCmd instanceof StringToken))
+            //     throw new ASLangError({
+            //         reason: "This is a TODO; The command name is taken as the first token inside brackets and they must be strings too",
+            //         errorCode: ErrorCodes.PlaceholderError,
+            //         source: str,
+            //     })
+            if (topCmd instanceof CommandToken)
+                cmd = new CommandToken("eval", [topCmd], true); // Internally generated command
+            else
+                cmd.changeName(topCmd!.value as string);
+
             while (!tempStack.isEmpty()) {
                 cmd.appendParam(tempStack.pop()!);
             }
@@ -81,10 +82,18 @@ export default function generateSyntaxTree(str: string) {
     ParserErrorChecks.hasRougeLeftBracketError_ST(bracketTrack, tokens, str);
 
     const arr = stack.toArray();
-    // TODO Check if the tempStack's top is a command, if then the `cmd` is an eval command;
-    const cmd = new CommandToken(arr[0].value as string, [])
+    const topCmd = arr[0];
+    let cmd;
+
+    // If the top most item is a command and not a string, then encapsulate it in an eval command;
+    if (topCmd instanceof CommandToken)
+        cmd = new CommandToken("eval", [topCmd], true); // Internally generated command
+    else
+        cmd = new CommandToken(arr[0]!.value as string, []);
+
+
     for (let i = 1; i < arr.length; i++) {
-        cmd.appendParam(arr[i]);
+        cmd.appendParam(arr[i]!);
     }
 
     return cmd;

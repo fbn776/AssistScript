@@ -3,6 +3,7 @@ enum DataType {
     string = "string",
     boolean = "boolean",
     command = "command",
+    array = "array",
     any = "any",
     void = "void",
 }

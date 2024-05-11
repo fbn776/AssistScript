@@ -5,9 +5,14 @@ import LangTokenBase, {TokenType} from "../LangTokenBase";
  */
 export default class CommandToken extends LangTokenBase<string> {
     readonly params: LangTokenBase<unknown>[];
-    constructor(name: string, params: LangTokenBase<unknown>[]) {
+
+    /** Used to denote is the command is an internally generated command or not*/
+    readonly isInternal: boolean;
+
+    constructor(name: string, params: LangTokenBase<unknown>[], isInternal?: boolean) {
         super(name, TokenType.COMMAND);
         this.params = params;
+        this.isInternal = isInternal || false;
     }
 
     changeName(name: string){

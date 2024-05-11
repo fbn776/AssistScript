@@ -8,7 +8,7 @@ import LangTokenBase from "../specs/tokens/LangTokenBase";
  * @constructor
  */
 function drawVerLine(level: number, sep: string = "  ") {
-    let str = '';
+    let str = ' ';
     for (let i = 0; i < level; i++)
         str +=  sep;
 
@@ -18,16 +18,16 @@ function drawVerLine(level: number, sep: string = "  ") {
 /**
  * Takes in a base token (the generated syntax tree) and then displays the AST with the error token highlighted.
  * @param base
- * @param errorAT
+ * @param errorAT If this is used to show the error token, then this is the tokenID of the error token.
  * @constructor
  */
-export function ASTErrorDisplay(base: LangTokenBase<unknown>, errorAT: string) {
+export function ASTDisplay(base: LangTokenBase<unknown>, errorAT?: string) {
     let str = ''
 
     function ASTErrorDisplay(base: LangTokenBase<unknown>, level: number = 0, sep: string = "  ") {
         const isError = base.tokenID === errorAT;
         if (base instanceof CommandToken) {
-            str += drawVerLine(level, sep) + (level > 0 ? '├>' : '└>') + base.value + (isError ? ' <-- Here' : '') + '\n';
+            str += drawVerLine(level, sep) + (level > 0 ? '├>' : '└> ') + base.value + (base.isInternal ? ` [internal]` : '') + (isError ? ' <-- Here' : '') + '\n';
 
             for (let i of base.params)
                 ASTErrorDisplay(i, level + 1, sep);
