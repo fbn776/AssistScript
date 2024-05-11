@@ -48,3 +48,25 @@ const testScript = `
 
 sandboxRun(as, testScript);
 
+const linearSearch = `
+(print Linear Search)
+
+(array input 3 5 7 9 1)
+(set key 9)
+(set found false)
+
+(for (set i 0) (lt (get i) (len input)) (incr i) (
+    (if (eq (index input (get i)) (get key)) (
+        (set found true)
+        (break)
+    ))
+))
+
+(ife (get found)
+    (print (get key) found at position (get i))
+else
+    (print (get key) not found)
+)
+`;
+
+sandboxRun(as, linearSearch);

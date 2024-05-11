@@ -201,7 +201,9 @@ store.addCommand(builder
                 _.isContinueCalled = false;
             } else {
                 runAndHandleError(command);
-                runAndHandleError(increment);
+                // Increment the loop in regular execution and continue call, but not on break call.
+                if (!_.isBreakCalled)
+                    runAndHandleError(increment);
             }
         }
         _.isInLoop = false;
