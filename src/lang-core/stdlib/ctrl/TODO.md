@@ -8,9 +8,23 @@
 - [x] Get variables
 - [x] Delete variables
 
-### Arrays
+  ### Arrays
 
-- [ ] Set arrays
-- [ ] Get arrays
-- [ ] Delete arrays
-- [ ] Array operations
+    - [ ] Set arrays
+    - [ ] Get arrays
+    - [ ] Delete arrays
+    - [ ] Array operations
+
+## LOOPS
+
+- [x] While loop
+- [x] For loop
+- [x] Repeat
+- [x] Break
+- [x] Continue
+
+## Conditional statements
+
+- [x] If
+- [x] If-Else
+ 

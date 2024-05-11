@@ -85,7 +85,7 @@ while (<condition>)
     if ctx.isBreakCalled
         break;
 
-    if(ctx.isContinueCalled)
+    if ctx.isContinueCalled
         continue
     
     <task1>
