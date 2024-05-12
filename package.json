@@ -1,18 +1,21 @@
 {
 	"name": "assistscript",
 	"version": "0.7.0",
-	"description": "AssistScript is a custom command language",
+	"description": "AssistScript is a custom command based language",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"files": [
 		"dist"
 	],
+	"bin" : {
+		"asrc" : "src/cli.js"
+	},
 	"scripts": {
 		"dev:repl:ts-node": "ts-node testing/repl.ts",
 		"dev:repl:bun": "bun testing/repl.ts",
-		"dev:ts-node": "npx ts-node testing/index.ts",
-		"dev:bun": "bun testing/index.ts",
+		"dev:ts-node": "npx ts-node testing/main.ts",
+		"dev:bun": "bun testing/main.ts",
 		"start": "npm run build && node build/index.js",
 		"test": "jest",
 		"build": "tsup"
@@ -23,7 +26,12 @@
 		"command",
 		"interpreter"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fbn776/AssistScript.git"
+	},
 	"author": "fbn776",
+	"url": "https://febinnelson.me",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/jest": "^29.5.12",
