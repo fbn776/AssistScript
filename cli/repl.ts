@@ -1,7 +1,7 @@
 import readline from "readline";
-import ASLangError from "./lang-core/errors/ASLangError";
-import AssistScript from "./lang-core/AssistScript";
-import sandboxRun from "./utils/sandboxRun";
+import ASLangError from "../src/lang-core/errors/ASLangError";
+import AssistScript from "../src/lang-core/AssistScript";
+import sandboxRun from "../src/utils/sandboxRun";
 
 const as = new AssistScript();
 

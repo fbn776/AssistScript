@@ -15,7 +15,7 @@ export default class BaseContextProvider {
     readonly stdout = console;
 
     /** No of times a loop can run */
-    readonly LOOP_LIMIT: number = 100;
+    readonly LOOP_LIMIT: number = 200;
     /** Used for loop controls*/
     isBreakCalled: boolean = false;
     isContinueCalled: boolean = false;
