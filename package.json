@@ -1,6 +1,6 @@
 {
 	"name": "assistscript",
-	"version": "0.6.0",
+	"version": "0.7.0",
 	"description": "AssistScript is a custom command language",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
