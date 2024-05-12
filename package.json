@@ -6,8 +6,7 @@
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"files": [
-		"dist",
-		"*"
+		"dist"
 	],
 	"bin": {
 		"aslangc": "./dist/cli.js"
