@@ -1,6 +1,6 @@
 {
 	"name": "assistscript",
-	"version": "0.7.0",
+	"version": "0.7.1",
 	"description": "AssistScript is a custom command based language",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
@@ -8,8 +8,8 @@
 	"files": [
 		"dist"
 	],
-	"bin" : {
-		"asrc" : "src/cli.js"
+	"bin": {
+		"asrc": "src/cli.js"
 	},
 	"scripts": {
 		"dev:repl:ts-node": "ts-node testing/repl.ts",
