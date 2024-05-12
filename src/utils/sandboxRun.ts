@@ -24,3 +24,4 @@ export default function sandboxRun(as: AssistScript, str: string) {
     console.timeEnd("Execution time");
     console.log('Done');
 }
+

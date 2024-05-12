@@ -6,7 +6,6 @@ import {DocsBuilder} from "./lang-core/specs/DocsBuilder";
 import DataType from "./lang-core/specs/tokens/DataType";
 
 /** The actual AssistScript class */
-export default AssistScript;
 
 /** Other useful classes */
-export {BaseContextProvider, CommandStore, CommandBuilder, DocsBuilder, DataType};
+export {AssistScript, BaseContextProvider, CommandStore, CommandBuilder, DocsBuilder, DataType};

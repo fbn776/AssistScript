@@ -9,12 +9,12 @@
 		"dist"
 	],
 	"bin": {
-		"asrc": "src/cli.js"
+		"aslangc": "./dist/cli.js"
 	},
 	"scripts": {
 		"dev:repl:ts-node": "ts-node testing/repl.ts",
 		"dev:repl:bun": "bun testing/repl.ts",
-		"dev:ts-node": "npx ts-node testing/main.ts",
+		"dev:ts-node": "ts-node testing/main.ts",
 		"dev:bun": "bun testing/main.ts",
 		"start": "npm run build && node build/index.js",
 		"test": "jest",
@@ -42,5 +42,8 @@
 		"ts-node": "^10.9.2",
 		"tsup": "^8.0.2",
 		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"commander": "^12.0.0"
 	}
 }
