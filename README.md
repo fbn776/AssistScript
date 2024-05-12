@@ -58,6 +58,32 @@ const as = new AssistScript();
 console.log(as.run('add 10 20 30'));
 ``` 
 
+## Demos
+
+Want to see what the language can do? Check out the [demos](./demos) directory for some examples.
+
+You can run the demos using the following command:
+
+```bash
+npx assistscript ./demos/<demo-name>.asrc
+```
+OR
+```bash
+aslangc ./demos/<demo-name>.asrc
+```
+
+For example, to run the `linear-search.asrc` demo:
+
+```bash
+aslangc ./demos/linear-search.asrc
+```
+OUTPUT:
+```text
+Linear Search
+9 found at position 3
+```
+
+
 ## Want to learn more?
 
 Check out the [documentation](./docs/README.md) for more information on the language and its features.
