@@ -1,4 +1,4 @@
-# AssistScript <img height="32" src="./docs/assets/AS.png" width="32" alt="AssistScript logo"/>
+# ✨AssistScript <img height="32" src="./docs/assets/AS.png" width="32" alt="AssistScript logo"/>
 
 AssistScript is a simple scripting(?) language that I made for fun.
 Not very useful, but it's fun to play around with.
