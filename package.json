@@ -12,13 +12,13 @@
 		"aslangc": "./dist/cli.js"
 	},
 	"scripts": {
-		"dev:repl:ts-node": "ts-node testing/repl.ts",
-		"dev:repl:bun": "bun testing/repl.ts",
-		"dev:ts-node": "ts-node testing/main.ts",
-		"dev:bun": "bun testing/main.ts",
-		"start": "npm run build && node build/index.js",
+		"dev:repl:ts-node": "ts-node sandbox/repl.ts",
+		"dev:repl:bun": "bun sandbox/repl.ts",
+		"dev:ts-node": "ts-node sandbox/main.ts",
+		"dev:bun": "bun sandbox/main.ts",
 		"test": "jest",
-		"build": "tsup"
+		"build": "tsup",
+		"start": "npm run build && node build/index.js"
 	},
 	"keywords": [
 		"language",
