@@ -53,17 +53,19 @@ OR
 # Once the package is installed
 aslangc
 ```
+The above commands, once executed, will show the help menu for the CLI.
 
-This will show the help menu for the CLI.
+> 📝 You can interchangeably use `aslangc` and `assistscript` in the terminal.
+
 You can run the REPL mode by using the `-r` or `--repl` flag.
 
 ```bash
-npx assistscript -r
+aslangc -r
 ```
 
 You can run AssistScript(.asrc) files using the CLI by providing the path to the file.
 ```bash
-npx assistscript <path-to-file>
+aslangc <path-to-file>
 ```
 
 ### Using the API
@@ -84,7 +86,7 @@ console.log(as.run('sub 100 20 (add 10 20)'));
 
 ## Demos
 
-Want to see what the language can do? Check out the [demos](./demos) directory for some examples.
+Want to see what the language can do? Check out the [demos🧪](./demos) directory for some examples.
 
 You can run the demos using the following command:
 
@@ -111,9 +113,9 @@ Linear Search
 9 found at position 3
 ```
 
-## Want to learn more?
+## Want to learn more? 
 
-Check out the [documentation](./docs/README.md) for more information on the language and its features.
+Check out the [documentation📃](./docs/README.md) for more information on the language and its features.
 
 ## License
 
