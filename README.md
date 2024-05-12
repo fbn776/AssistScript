@@ -27,7 +27,15 @@ You can install AssistScript using npm.
 npm install -g assistscript
 ```
 
+This installs the AssistScript CLI globally on your system,
+if you dont want AssistScript to be installed globally,
+you can omit the `-g` flag or use `npx` to run AssistScript without installing it.
+
 ## Usage
+
+AssistScript can be used in multiple ways.
+You can use it as a standalone program in the terminal using the AssistScript CLI, 
+or you can use it inside your JavaScript code.
 
 ### Using terminal
 
@@ -36,12 +44,26 @@ AssistScript files. It also has a REPL mode to run commands interactively.
 
 ```bash
 # Without installing the package
-npx assistscript;
+npx assistscript
 ```
+
 OR
+
 ```bash
 # Once the package is installed
 aslangc
+```
+
+This will show the help menu for the CLI.
+You can run the REPL mode by using the `-r` or `--repl` flag.
+
+```bash
+npx assistscript -r
+```
+
+You can run AssistScript(.asrc) files using the CLI by providing the path to the file.
+```bash
+npx assistscript <path-to-file>
 ```
 
 ### Using the API
@@ -50,12 +72,14 @@ You can also use AssistScript in your JavaScript code, for this AssistScript exp
 The `AssistScript` class is the main class that you can use run AssistScript code.
 
 ```ts
-import {AssistScript } from 'assistscript';
+import {AssistScript} from 'assistscript';
 
 const as = new AssistScript();
 
 // Prints 70
 console.log(as.run('add 10 20 30'));
+// Prints 50 <- (100 - 20 - (10 + 20))
+console.log(as.run('sub 100 20 (add 10 20)'));
 ``` 
 
 ## Demos
@@ -67,7 +91,9 @@ You can run the demos using the following command:
 ```bash
 npx assistscript ./demos/<demo-name>.asrc
 ```
+
 OR
+
 ```bash
 aslangc ./demos/<demo-name>.asrc
 ```
@@ -77,12 +103,13 @@ For example, to run the `linear-search.asrc` demo:
 ```bash
 aslangc ./demos/linear-search.asrc
 ```
+
 OUTPUT:
+
 ```text
 Linear Search
 9 found at position 3
 ```
-
 
 ## Want to learn more?
 
