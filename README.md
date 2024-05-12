@@ -1,4 +1,7 @@
-# ✨AssistScript <img height="32" src="./docs/assets/AS.png" width="32" alt="AssistScript logo"/>
+# <img height="40" src="./docs/assets/AS.png" width="40" alt="AssistScript logo"/> AssistScript
+
+![NPM License](https://img.shields.io/npm/l/assistscript)
+![NPM Version](https://img.shields.io/npm/v/assistscript)
 
 AssistScript is a simple scripting(?) language that I made for fun.
 Not very useful, but it's fun to play around with.
@@ -34,7 +37,7 @@ you can omit the `-g` flag or use `npx` to run AssistScript without installing i
 ## Usage
 
 AssistScript can be used in multiple ways.
-You can use it as a standalone program in the terminal using the AssistScript CLI, 
+You can use it as a standalone program in the terminal using the AssistScript CLI,
 or you can use it inside your JavaScript code.
 
 ### Using terminal
@@ -53,6 +56,7 @@ OR
 # Once the package is installed
 aslangc
 ```
+
 The above commands, once executed, will show the help menu for the CLI.
 
 > 📝 You can interchangeably use `aslangc` and `assistscript` in the terminal.
@@ -64,6 +68,7 @@ aslangc -r
 ```
 
 You can run AssistScript(.asrc) files using the CLI by providing the path to the file.
+
 ```bash
 aslangc <path-to-file>
 ```
@@ -113,7 +118,7 @@ Linear Search
 9 found at position 3
 ```
 
-## Want to learn more? 
+## Want to learn more?
 
 Check out the [documentation📃](./docs/README.md) for more information on the language and its features.
 
