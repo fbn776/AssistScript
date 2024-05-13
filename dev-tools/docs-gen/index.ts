@@ -130,10 +130,10 @@ let str = `# Language reference
 
 for(let [cat, cmds] of toc) {
     str += `
-- [${cat}](references/${cat}.md)`
+- [${cat}](references/${encodeURIComponent(cat)}.md)`
     for(let cmd of cmds) {
         str += `
-    - [${cmd}](references/${cat}.md#${cmd})`
+    - [${cmd}](references/${encodeURIComponent(cat)}.md#${encodeURIComponent(cmd)})`
     }
 }
 
