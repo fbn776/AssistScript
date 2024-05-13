@@ -3,23 +3,12 @@ import fs from "fs";
 import path from "node:path";
 
 console.time('TIME');
-console.log('STARTING\n');
+console.log('STARTING');
 
 
 let pathSrc = path.join(process.cwd(), 'docs/references/');
 
-console.warn("\nRemoving all files in the directory...");
-
-// Remove all files in the directory
-fs.readdir(pathSrc, (err, files) => {
-    if (err) throw err;
-
-    for (const file of files) {
-        fs.unlink(path.join(pathSrc, file), (err) => {
-            if (err) throw err;
-        });
-    }
-});
+console.warn("\nPLEASE MAKE SURE TO REMOVE ANY PREVIOUS FILES IN THE 'docs/references' DIRECTORY\n");
 
 class TestCtx extends BaseContextProvider {
     // To simulate the stdout, for taking the outputs of prints
