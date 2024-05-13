@@ -5,10 +5,10 @@
 
 AssistScript is a simple scripting(?) language that I made for fun.
 Not very useful, but it's fun to play around with.
-Initially started as a joke and as time passed it became a fun project to work on.
+Initially started as a joke, and as time passed it became a fun project to work on.
 
 The language is very simple, all you have to do is to specify a command and its arguments.
-And has a basic syntax as
+The basic syntax is:
 
 ```asrc
 <command> <arg1> <arg2> ... <argN>
@@ -30,8 +30,8 @@ You can install AssistScript using npm.
 npm install -g assistscript
 ```
 
-This installs the AssistScript CLI globally on your system,
-if you dont want AssistScript to be installed globally,
+This installs the AssistScript CLI globally on your system.
+If you don't want AssistScript to be installed globally,
 you can omit the `-g` flag or use `npx` to run AssistScript without installing it.
 
 ## Usage
