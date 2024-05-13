@@ -61,11 +61,15 @@ The above commands, once executed, will show the help menu for the CLI.
 
 > 📝 You can interchangeably use `aslangc` and `assistscript` in the terminal.
 
+#### REPL mode
+
 You can run the REPL mode by using the `-r` or `--repl` flag.
 
 ```bash
 aslangc -r
 ```
+
+#### File Mode
 
 You can run AssistScript(.asrc) files using the CLI by providing the path to the file.
 

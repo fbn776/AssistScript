@@ -6,109 +6,178 @@ AssistScript is a simple scripting language written in TypeScript as a fun proje
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-    - [Using JavaScript](#using-javascript)
-    - [Using terminal](#using-terminal)
-      - [REPL mode](#repl-mode)
-      - [File mode](#file-mode)
-- Language Reference
+- [Installation](../README.md#installation)
+- [Usage](../README.md#usage)
+    - [Using JavaScript](../README.md#using-the-api)
+    - [Using terminal](../README.md#using-terminal)
+        - [REPL mode](../README.md#repl-mode)
+        - [File mode](../README.md#file-mode)
+- [General Overview](#general-overview)
     - [Commands](#commands)
+    - [Chaining Commands](#chaining-commands)
+    - [Multiple commands](#multiple-commands)
+    - [Printing](#printing)
     - [Variables](#variables)
-    - [Comments](#comments)
-    - [Control Flow](#control-flow)
-    - [Functions](#functions)
-    - [Modules](#modules)
-    - [Standard Library](#standard-library)
-
+- [Language References](#language-references)
 ---
 
-## Installation
+## General Overview
 
-AssistScript can be installed locally using the node package manager (npm).
-The package is available at npm registry [here](https://www.npmjs.com/package/assistscript).
+AssistScript is a simple scripting language that is easy to learn and use.
+To use the language, you can need to learn the basic syntax of the language.
 
-To install AssistScript, run the following command in your terminal:
+The basic syntax of AssistScript is as follows:
 
-```bash
-npm i assistscript
+```asrc
+<command> [arg1] [arg2] ... [argN]
 ```
 
-This will install the package locally in your project.
+Here, `<command>` is the command you want to execute,
+and `[arg1]`, `[arg2]`, ... `[argN]` are the arguments for the command, they may or may not be optional.
 
-To remove the package, run the following command:
+For example:
 
-```bash
-npm uninstall assistscript
+```asrc
+add 10 20 30
 ```
 
-## Usage
+This command `add` will add the numbers `10`, `20`, and `30` and output the result `60`.
 
-AssistScript can be used in multiple ways.
-You can integrate the language in your JavaScript code or use it as a
-standalone program in the terminal.
+### Commands
 
-### Using JavaScript
+In general, all the commands are written in lowercase, and the arguments are separated by spaces.
+There are no operators like `+`, `-`, `*`, `/`, etc., for these you need to use commands.
 
-AssistScript exposes a simple API to run AssistScript code in your JavaScript code.
-The `AssistScript` class is exported from the package and can be used to run AssistScript code.
-In your JavaScript or TypeScript code, you can import the `AssistScript` class, which then needs to be instantiated to
-run the code. You can then use the `execute` method which takes in a string and returns the output.
+Everything you do using the language should be of the form commands and its arguments.
 
-```ts
-import {AssistScript} from 'assistscript';
+For arithmetic operations, you can use the following commands:
 
-const as = new AssistScript();
-const output = as.execute('add 10 20');
+| Maths | Commands |
+|-------|----------|
+| +     | add      |
+| -     | sub      |
+| *     | mult     |
+| /     | div      |
+| %     | mod      |
 
-console.log(output); // 30
+and more...
+
+For example:
+
+```asrc
+add 10 20 30
 ```
 
-### Using terminal
+translates to `10 + 20 + 30 = 60`.
 
-The AssistScript package comes with a command-line interface to run AssistScript codes.
+### Chaining Commands
 
-It provides two modes
+You can chain commands, i.e., you can use the output of one command as an input to another command.
+This is done by the use of parenthesis.
 
-- REPL mode
-- File mode
+In the language implementation, contents inside parenthesis are considered as command.
+And each command should be enclosed inside a parenthesis.
+By default, if there is only one command, then the bracket can be omitted.
+E.g.:
 
-#### REPL mode
-
-The REPL mode allows you to run commands interactively.
-To run the REPL mode, you use the `-r` or `--repl` flag.
-
-```bash
-npx assistscript -r
+```asrc
+add 10 20
 ```
 
-Example:
-```bash
-❯ npx assistscript -r
-
-REPL MODE: 
-> add 10 20
-30
-> exit
-REPL MODE END
+```asrc
+(add 10 20)
 ```
 
-#### File mode
+These both are equivalent to each other.
 
-The file mode allows you to run AssistScript files. AssistScript files have the `.asrc` extension.
-You can run the file mode by providing the path to the file.
+For example, let's say you want to implement the following expression:
 
-```bash
-npx assistscript <path-to-file>
+```
+(10 + 20) * 30
 ```
 
-Example:
-```bash
-❯ npx assistscript ./path/to/file.asrc
+Then you should use the `add` and `mult` commands.
+
+```asrc
+mult (add 10 20) 30
 ```
 
-## Language Reference
+Here `(add 10 20)` is identified as a command,
+and the command is taken as the first word that comes after the `(` and
+its output is used as an input to the `mult` command.
 
-To get started with AssistScript, you need to understand the basic concepts of the language.
+`(add 10 20)` gets executed and returns `30`,
+which is then used as an input to the `mult` command.
+now `mult 30 30` gets executed and returns `900`.
 
+You can chain any number of commands in this way.
 
+Eg:
+
+```text
+10 + (20 * (10 / 2))
+```
+
+Is implemented as:
+
+```asrc
+add 10 (mult 20 (div 10 2))
+```
+
+### Multiple commands
+
+By default, the language only supports one root command;
+this is due to the implementation of the language uses a tree like structure to parse the commands.
+To learn more about this, see [how the language works](../docs/implementations/Parsing%20and%20execution.md).
+
+To overcome this, you can enclose each command inside a parenthesis and then space separate them like this.
+
+```asrc
+(<command1> [arg1] [arg2] ... [argN])
+(<command2> [arg1] [arg2] ... [argN]) 
+...
+(<commandN> [arg1] [arg2] ... [argN])
+```
+
+Here each command is executed in the order they are written.
+The final executed command's output is the output of the whole program.
+
+The single root limitation is overcome by using the `eval` command.
+
+### Printing
+
+You can print values to the stdout using the `print` command.
+```asrc
+print <content>
+```
+For example:
+```asrc
+print hello there
+```
+Prints `hello there` to the stdout.
+
+### Variables
+
+You can use variables in the language. 
+To define a variable, you can use the `set` command.
+```asrc
+set <variable-name> <value>
+```
+
+For example:
+```asrc
+set x 10
+```
+This creates a new variable, named `x` and assigns `10` to it.
+
+To use the variable, you need to use the `get` command.
+```asrc
+get <variable-name>
+```
+For example:
+```asrc
+print x = (get x)
+```
+prints `x = 10` to stdout.
+
+## Language References
