@@ -2,11 +2,12 @@ import {AssistScript, BaseContextProvider} from "../../src";
 import fs from "fs";
 import path from "node:path";
 
+console.time('TIME');
+console.log('STARTING\n');
 
 class TestCtx extends BaseContextProvider {
+    // To simulate the stdout, for taking the outputs of prints
     buffer: any[] = [];
-
-    LOOP_LIMIT = 1000;
     stdout = {
         print: (...msg: string[]) => {
             this.buffer.push(msg.join(' '));
@@ -20,27 +21,34 @@ class TestCtx extends BaseContextProvider {
 
 let ctx = new TestCtx();
 let as = new AssistScript(ctx);
-
-console.log(as.sandboxRun('print help'))
-
-
 let store = as.store.getStore;
 
-let cmdSet = new Set<string>();
+console.log("Getting commands...");
 
+console.info("Total commands: ", store.size);
+
+// For not storing the duplicate command names
+let cmdSet = new Set<string>();
 for (let [_, cmd] of store) {
     let docs = cmd.docs;
-
-    cmdSet.add(docs.title)
+    cmdSet.add(docs.title); // For each command, only store its title from docs, this way we avoid alias duplication
 }
 
-let final = '';
+console.info("Total unique commands: ", cmdSet.size);
+
+// Used for categorizing the commands <category, markdown-string>
+let categories = new Map<string, string>();
+
 for (let name of cmdSet) {
     let cmd = as.store.getCommand(name);
+
     if (!cmd)
         continue;
+
     let docs = cmd.docs;
     let str = '';
+    let cat = docs.category || 'Uncategorized';
+    let final = categories.get(cat) || '';
 
     str += `## ${docs.title}\n`;
 
@@ -60,12 +68,14 @@ for (let name of cmdSet) {
 ${docs.example}
 \`\`\``;
 
+        // Simulate the stdout, run the code and get the output
         ctx.resetBuffer();
         ctx.buffer.push(as.sandboxRun(docs.example));
         let buffer = ctx.buffer;
-
+        // Filter out any undefined, null or empty strings
         buffer = buffer.filter((v) => v !== undefined && v !== null && v !== '');
 
+        // If output exists, add it to the markdown
         if (buffer.length > 0) {
             str += `\n\n**Result:**<br/>\n\n\`\`\`asrc
 ${buffer.join('\n')}
@@ -73,12 +83,35 @@ ${buffer.join('\n')}
         }
         ctx.resetBuffer();
     }
-
-
     str += '\n';
-
     final += str;
-    // console.log(str);
+
+    categories.set(cat, final);
 }
-let pwd = process.cwd();
-fs.writeFileSync(path.join(pwd, "output.md"), final, "utf-8");
+
+let pathSrc = path.join(process.cwd(), 'docs/references/');
+
+console.warn("\nRemoving all files in the directory...");
+
+// Remove all files in the directory
+fs.readdir(pathSrc, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+        fs.unlink(path.join(pathSrc, file), (err) => {
+            if (err) throw err;
+        });
+    }
+});
+
+console.warn("Writing the files...");
+// Write the files
+for (let [name, final] of categories) {
+    let src = path.join(pathSrc, `${name}.md`);
+    console.log("- ", src);
+    fs.writeFileSync(src, final, "utf-8");
+}
+
+
+console.log("Done!");
+console.timeEnd('TIME');
