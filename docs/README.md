@@ -6,12 +6,6 @@ AssistScript is a simple scripting language written in TypeScript as a fun proje
 
 ## Table of Contents
 
-- [Installation](../README.md#installation)
-- [Usage](../README.md#usage)
-    - [Using JavaScript](../README.md#using-the-api)
-    - [Using terminal](../README.md#using-terminal)
-        - [REPL mode](../README.md#repl-mode)
-        - [File mode](../README.md#file-mode)
 - [General Overview](#general-overview)
     - [Commands](#commands)
     - [Chaining Commands](#chaining-commands)
@@ -23,7 +17,7 @@ AssistScript is a simple scripting language written in TypeScript as a fun proje
 
 ## General Overview
 
-AssistScript is a simple scripting language that is easy to learn and use.
+AssistScript is a simple scripting language that is straightforward to learn and use.
 To use the language, you can need to learn the basic syntax of the language.
 
 The basic syntax of AssistScript is as follows:
@@ -138,11 +132,22 @@ To overcome this, you can enclose each command inside a parenthesis and then spa
 ...
 (<commandN> [arg1] [arg2] ... [argN])
 ```
-
 Here each command is executed in the order they are written.
 The final executed command's output is the output of the whole program.
-
 The single root limitation is overcome by using the `eval` command.
+
+Eg:
+```asrc
+(print hello) 
+(print 10 + 20 = (add 10 20))
+(print 10 * 20 = (mult 10 20))
+```
+Outputs:
+```text
+hello
+10 + 20 = 30
+10 * 20 = 200
+```
 
 ### Printing
 
@@ -180,4 +185,10 @@ print x = (get x)
 ```
 prints `x = 10` to stdout.
 
+
 ## Language References
+
+To learn more about the language,
+see the [Language References](references/README.md) section.
+
+The above has the basic syntax and usage of different commands of the language.
