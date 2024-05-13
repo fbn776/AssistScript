@@ -5,7 +5,7 @@ import {DocsBuilder} from "../../specs/DocsBuilder";
 import {prettyHelp} from "./utils";
 
 const store = CommandStore.getInstance();
-const builder = new CommandBuilder();
+const builder = new CommandBuilder("Basic Commands");
 
 // TEST
 store.addCommand(builder

@@ -7,7 +7,7 @@ import ASRuntimeError from "../../errors/ASRuntimeError";
 import ASInterrupt from "../../errors/ASInterrupt";
 
 const store = CommandStore.getInstance();
-const builder = new CommandBuilder();
+const builder = new CommandBuilder("Loops");
 
 /** Runs a given command, does nothing if an ASInterrupt is thrown else throws the error*/
 function runAndHandleError(command: () => unknown) {

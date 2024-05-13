@@ -8,6 +8,7 @@ export default class Documentation {
     readonly syntax;
     readonly example;
     readonly note;
+    category: string | null = null;
 
     constructor(title: string, aliases: string[], body: string, syntax: string, example?: string, note?: string) {
         this.title = title;

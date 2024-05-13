@@ -6,7 +6,7 @@ import {gcd} from "./utils";
 import ASRuntimeError from "../../errors/ASRuntimeError";
 
 const store = CommandStore.getInstance();
-const builder = new CommandBuilder();
+const builder = new CommandBuilder("Math Functions");
 
 // ABSOLUTE
 store.addCommand(builder

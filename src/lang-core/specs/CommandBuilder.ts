@@ -17,6 +17,14 @@ export class CommandBuilder {
     private _args: Parameters | null = null;
     private _returnType: DataType | null = null;
     private _exec: CmdExec | null = null;
+    private readonly _category: string | null = null;
+
+    /**
+     * @param category An optional param; used for categorizing the command
+     */
+    constructor(category?: string) {
+        this._category = category || null;
+    }
 
     /**Adds the name and aliases(if it exists); REQUIRED*/
     names(...names: string[]) {
@@ -88,6 +96,8 @@ export class CommandBuilder {
         if (!this._returnType)
             throw new ASMakeError('Command return type not specified.');
 
+        if (this._category)
+            this._docs.category = this._category;
 
         const cmd = new Command(this._names, this._docs, this._args, this._returnType, this._exec);
         this.reset();

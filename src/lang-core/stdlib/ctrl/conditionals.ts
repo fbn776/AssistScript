@@ -5,7 +5,7 @@ import {DocsBuilder} from "../../specs/DocsBuilder";
 import ASRuntimeError from "../../errors/ASRuntimeError";
 
 const store = CommandStore.getInstance();
-const builder = new CommandBuilder();
+const builder = new CommandBuilder("Conditionals");
 
 // IF
 store.addCommand(builder

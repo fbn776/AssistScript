@@ -8,7 +8,7 @@ import BaseContextProvider from "../../services/BaseContextProvider";
 import {I_Arr} from "../../services/VariableStore";
 
 const store = CommandStore.getInstance();
-const builder = new CommandBuilder();
+const builder = new CommandBuilder("Variables");
 
 function checkForNameError(name: string, _: BaseContextProvider) {
     if (!isNameValid(name))

@@ -4,7 +4,7 @@ import DataType from "../../specs/tokens/DataType";
 import {DocsBuilder} from "../../specs/DocsBuilder";
 
 const store = CommandStore.getInstance();
-const builder = new CommandBuilder();
+const builder = new CommandBuilder("Comparison");
 
 // LESS THAN
 store.addCommand(builder
