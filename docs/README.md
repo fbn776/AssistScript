@@ -189,6 +189,6 @@ prints `x = 10` to stdout.
 ## Language References
 
 To learn more about the language,
-see the [Language References](references/README.md) section.
+see the [Language References](Language%20references.md) section.
 
 The above has the basic syntax and usage of different commands of the language.

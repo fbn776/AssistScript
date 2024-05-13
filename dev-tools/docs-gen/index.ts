@@ -5,6 +5,22 @@ import path from "node:path";
 console.time('TIME');
 console.log('STARTING\n');
 
+
+let pathSrc = path.join(process.cwd(), 'docs/references/');
+
+console.warn("\nRemoving all files in the directory...");
+
+// Remove all files in the directory
+fs.readdir(pathSrc, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+        fs.unlink(path.join(pathSrc, file), (err) => {
+            if (err) throw err;
+        });
+    }
+});
+
 class TestCtx extends BaseContextProvider {
     // To simulate the stdout, for taking the outputs of prints
     buffer: any[] = [];
@@ -38,6 +54,7 @@ console.info("Total unique commands: ", cmdSet.size);
 
 // Used for categorizing the commands <category, markdown-string>
 let categories = new Map<string, string>();
+let toc = new Map<string, string[]>();
 
 for (let name of cmdSet) {
     let cmd = as.store.getCommand(name);
@@ -51,6 +68,12 @@ for (let name of cmdSet) {
     let final = categories.get(cat) || '';
 
     str += `## ${docs.title}\n`;
+
+    if(!toc.has(cat)) {
+        toc.set(cat, [docs.title]);
+    } else {
+        toc.get(cat)!.push(docs.title);
+    }
 
     if (docs.aliases.length > 0) {
         let als = '';
@@ -89,21 +112,6 @@ ${buffer.join('\n')}
     categories.set(cat, final);
 }
 
-let pathSrc = path.join(process.cwd(), 'docs/references/');
-
-console.warn("\nRemoving all files in the directory...");
-
-// Remove all files in the directory
-fs.readdir(pathSrc, (err, files) => {
-    if (err) throw err;
-
-    for (const file of files) {
-        fs.unlink(path.join(pathSrc, file), (err) => {
-            if (err) throw err;
-        });
-    }
-});
-
 console.warn("Writing the files...");
 // Write the files
 for (let [name, final] of categories) {
@@ -111,6 +119,25 @@ for (let [name, final] of categories) {
     console.log("- ", src);
     fs.writeFileSync(src, final, "utf-8");
 }
+
+console.log("\nWriting the language reference file...");
+
+let langRefFile = path.join(process.cwd(), 'docs/Language references.md');
+let str = `# Language reference
+
+## Table of contents
+`;
+
+for(let [cat, cmds] of toc) {
+    str += `
+- [${cat}](references/${cat}.md)`
+    for(let cmd of cmds) {
+        str += `
+    - [${cmd}](references/${cat}.md#${cmd})`
+    }
+}
+
+fs.writeFileSync(langRefFile, str, "utf-8");
 
 
 console.log("Done!");
