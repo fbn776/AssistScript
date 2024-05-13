@@ -56,10 +56,10 @@ store.addCommand(builder
 
 // TRUE
 store.addCommand(builder
-    .names('TRUE', 'true')
+    .names('TRUE')
     .args(0)
     .docs(new DocsBuilder()
-        .name('true')
+        .name('TRUE')
         .description('Returns true.')
         .syntax('true')
         .example('true')
@@ -75,7 +75,7 @@ store.addCommand(builder
     .names('FALSE')
     .args(0)
     .docs(new DocsBuilder()
-        .name('false')
+        .name('FALSE')
         .description('Returns false.')
         .syntax('false')
         .example('false')
