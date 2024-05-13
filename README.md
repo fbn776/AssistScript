@@ -22,7 +22,7 @@ add 10 20 40
 
 Outputs 70
 
-## Installation
+## Installation📲
 
 You can install AssistScript using npm.
 
@@ -34,7 +34,7 @@ This installs the AssistScript CLI globally on your system.
 If you don't want AssistScript to be installed globally,
 you can omit the `-g` flag or use `npx` to run AssistScript without installing it.
 
-## Demos
+## Demos ▶️
 
 Want to see what the language can do? Check out the [demos🧪](./demos) directory for some examples.
 
@@ -52,13 +52,13 @@ Linear Search
 9 found at position 3
 ```
 
-## Usage
+## Usage ✍
 
 AssistScript can be used in multiple ways.
 You can use it as a standalone program in the terminal using the AssistScript CLI,
 or you can use it inside your JavaScript code.
 
-### Using terminal
+### Using terminal 
 
 You can run AssistScript using the terminal. The AssistScript package comes with a command-line interface to run
 AssistScript files. It also has a REPL mode to run commands interactively.
@@ -111,7 +111,7 @@ console.log(as.run('add 10 20 30'));
 console.log(as.run('sub 100 20 (add 10 20)'));
 ``` 
 
-## Want to learn more?
+## Want to learn more? 🏫
 
 Check out the [documentation📃](./docs/README.md) for more information on the language and its features.
 
