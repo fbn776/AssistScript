@@ -5,6 +5,7 @@ declare class Documentation {
     readonly syntax: string;
     readonly example: string | null;
     readonly note: string | null;
+    category: string | null;
     constructor(title: string, aliases: string[], body: string, syntax: string, example?: string, note?: string);
 }
 
@@ -77,8 +78,11 @@ type T_InitialState = {
     originalStr: string;
 };
 
+interface STDOUT {
+    print: typeof console.log;
+}
 declare class BaseContextProvider {
-    readonly stdout: Console;
+    readonly stdout: STDOUT;
     readonly LOOP_LIMIT: number;
     isBreakCalled: boolean;
     isContinueCalled: boolean;
@@ -105,19 +109,21 @@ declare class Command {
 
 declare class CommandStore {
     private static _instance;
-    private _store;
+    private _getStore;
     static getInstance(): CommandStore;
     private constructor();
     hasCommand(name: string): boolean;
     getCommand(name: string): Command | null;
     addCommand(cmd: Command): void;
+    get getStore(): Map<string, Command>;
 }
 
 declare class AssistScript {
     contextProvider: BaseContextProvider;
     store: CommandStore;
     constructor(ctxProvider?: BaseContextProvider);
-    execute(str: string): unknown;
+    run(str: string): unknown;
+    sandboxRun(str: string): unknown;
 }
 
 declare class CommandBuilder {
@@ -126,6 +132,8 @@ declare class CommandBuilder {
     private _args;
     private _returnType;
     private _exec;
+    private readonly _category;
+    constructor(category?: string);
     names(...names: string[]): this;
     directDocs(title: string, aliases: string[] | null, body: string, syntax: string, example?: string, note?: string): this;
     docs(docs: Documentation): this;
