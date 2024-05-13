@@ -23,14 +23,14 @@ store.addCommand(builder
     .docs(new DocsBuilder()
         .name('print')
         .aliases('p', 'display', 'show', 'echo', 'log')
-        .description('Prints the given message to the console.')
+        .description('Prints the given message to the stdout')
         .syntax('print <message>')
         .example('print "Hello, world!"')
         .build())
     .args(-2, DataType.string)
     .returnType(DataType.void)
     .run((_, ...args) => {
-        _.stdout.log(args.join(' '));
+        _.stdout.print(args.join(' '));
     })
     .build()
 )
@@ -56,7 +56,7 @@ store.addCommand(builder
         if(!cmd)
             return `Command '${command}' not found.`;
 
-        _.stdout.log(prettyHelp(cmd));
+        _.stdout.print(prettyHelp(cmd));
     })
     .build()
 )

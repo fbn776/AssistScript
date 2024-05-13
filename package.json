@@ -18,7 +18,9 @@
 		"dev:bun": "bun sandbox/main.ts",
 		"test": "jest",
 		"build": "tsup",
-		"start": "npm run build && node build/index.js"
+		"start": "npm run build && node build/index.js",
+
+		"gen-docs": "bun dev-tools/docs-gen/index.ts"
 	},
 	"keywords": [
 		"language",

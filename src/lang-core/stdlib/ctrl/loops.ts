@@ -34,7 +34,7 @@ store.addCommand(builder
 (while (lt (get i) 10) (
     (if (eq (get i) 5) (
         (print i is 5)
-        (continue)
+        (break)
     ))
     
     (print (get i))    
@@ -99,7 +99,10 @@ store.addCommand(builder
         .name('while')
         .description('Loops while the condition is true.')
         .syntax('while <condition> <command>')
-        .example('while (TRUE) (p (get i))')
+        .example(`while (TRUE) (
+    (p (get i))
+    (break)
+)`)
         .build()
     )
     .returnType(DataType.void)
