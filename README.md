@@ -7,7 +7,7 @@ AssistScript is a simple scripting(?) language that I made for fun.
 Not very useful, but it's fun to play around with.
 Initially started as a joke, and as time passed it became a fun project to work on.
 
-The language is very simple, all you have to do is to specify a command and its arguments.
+The language is a straightforward, all you have to do is to specify a command and its arguments.
 The basic syntax is:
 
 ```asrc
@@ -33,6 +33,24 @@ npm install -g assistscript
 This installs the AssistScript CLI globally on your system.
 If you don't want AssistScript to be installed globally,
 you can omit the `-g` flag or use `npx` to run AssistScript without installing it.
+
+## Demos
+
+Want to see what the language can do? Check out the [demos🧪](./demos) directory for some examples.
+
+These demos are simple programs that demonstrate the language's features. You can run them using the CLI.
+
+
+For example, to run the `linear-search.asrc` demo:
+
+```bash
+aslangc ./demos/linear-search.asrc
+```
+Outputs
+```text
+Linear Search
+9 found at position 3
+```
 
 ## Usage
 
@@ -92,35 +110,6 @@ console.log(as.run('add 10 20 30'));
 // Prints 50 <- (100 - 20 - (10 + 20))
 console.log(as.run('sub 100 20 (add 10 20)'));
 ``` 
-
-## Demos
-
-Want to see what the language can do? Check out the [demos🧪](./demos) directory for some examples.
-
-You can run the demos using the following command:
-
-```bash
-npx assistscript ./demos/<demo-name>.asrc
-```
-
-OR
-
-```bash
-aslangc ./demos/<demo-name>.asrc
-```
-
-For example, to run the `linear-search.asrc` demo:
-
-```bash
-aslangc ./demos/linear-search.asrc
-```
-
-OUTPUT:
-
-```text
-Linear Search
-9 found at position 3
-```
 
 ## Want to learn more?
 
