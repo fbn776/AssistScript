@@ -16,7 +16,7 @@ random 5 10
 **Result:**<br/>
 
 ```asrc
-8.338382535573796
+5.966340321428821
 ```
 
 ## randomInt
@@ -58,7 +58,7 @@ randomBool
 **Result:**<br/>
 
 ```asrc
-false
+true
 ```
 
 ## randomChar
@@ -79,6 +79,6 @@ randomChar
 **Result:**<br/>
 
 ```asrc
-!
+'
 ```
 

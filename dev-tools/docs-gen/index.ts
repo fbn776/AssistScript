@@ -111,7 +111,7 @@ for (let [name, final] of categories) {
 
 console.log("\nWriting the language reference file...");
 
-let langRefFile = path.join(process.cwd(), 'docs/Language references.md');
+let langRefFile = path.join(process.cwd(), 'docs/references/README.md');
 let str = `# Language reference
 
 ## Table of contents
@@ -119,10 +119,10 @@ let str = `# Language reference
 
 for(let [cat, cmds] of toc) {
     str += `
-- [${cat}](references/${encodeURIComponent(cat)}.md)`
+- [${cat}](./${encodeURIComponent(cat)}.md)`
     for(let cmd of cmds) {
         str += `
-    - [${cmd}](references/${encodeURIComponent(cat)}.md#${encodeURIComponent(cmd)})`
+    - [${cmd}](./${encodeURIComponent(cat)}.md#${encodeURIComponent(cmd)})`
     }
 }
 
