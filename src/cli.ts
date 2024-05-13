@@ -32,7 +32,7 @@ const as = new AssistScript();
 
 function runAssistScript(str: string) {
     try {
-        const result = as.execute(str);
+        const result = as.run(str);
         if (result !== undefined)
             console.log(result);
     } catch (e) {

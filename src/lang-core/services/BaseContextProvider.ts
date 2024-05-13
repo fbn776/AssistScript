@@ -2,6 +2,10 @@ import VariableStore from "./VariableStore";
 import CommandToken from "../specs/tokens/lexmes/CommandToken";
 import {T_InitialState} from "../interpreter/runner/runCommand";
 
+interface STDOUT {
+    print: typeof console.log
+}
+
 /**
  * Context provider provides the provisions to access internal, external or custom services.
  *
@@ -12,7 +16,7 @@ import {T_InitialState} from "../interpreter/runner/runCommand";
  * @see [how to create custom commands](/docs/Create-custom-commands.md)
  */
 export default class BaseContextProvider {
-    readonly stdout = console;
+    readonly stdout: STDOUT = {print: console.log};
 
     /** No of times a loop can run */
     readonly LOOP_LIMIT: number = 200;
@@ -32,6 +36,7 @@ export default class BaseContextProvider {
     get currentCommand() {
         return this.currCmd;
     }
+
     set currentCommand(cmd) {
         this.currCmd = cmd;
     }

@@ -11,7 +11,7 @@ export default function sandboxRun(as: AssistScript, str: string) {
     console.log(`${ASCII_tl_corner}${ASCII_horizontal.repeat(maxLen - 1)}`);
 
     try {
-        const result = as.execute(str);
+        const result = as.run(str);
         if (result !== undefined)
             console.log(`${ASCII_bl_corner} RETURN >`, result);
     } catch (e) {

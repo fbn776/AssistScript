@@ -2,7 +2,8 @@ import CommandStore from "./interpreter/CommandStore";
 import Runner from "./interpreter/runner/Runner";
 import BaseContextProvider from "./services/BaseContextProvider";
 
-import "./stdlib"; // Import the standard library
+import "./stdlib";
+import ASBaseError from "./errors/ASBaseError"; // Import the standard library
 
 /**
  * The AssistScript class is the main entry point for the AssistScript language.
@@ -26,7 +27,23 @@ export default class AssistScript {
      * @param str The AssistScript code to execute.
      * @throws ASRuntimeError
      */
-    execute(str: string): unknown {
+    run(str: string): unknown {
         return Runner.run(str, this);
+    }
+
+    /**
+     * Executes a given AssistScript code and returns the result.
+     * Same as `execute` but catches any errors and returns them as a prettified string.
+     * @param str
+     */
+    sandboxRun(str: string): unknown {
+        try {
+            return this.run(str);
+        } catch (e) {
+            if (e instanceof ASBaseError)
+                return e.prettify();
+            else
+                console.error(e);
+        }
     }
 }
