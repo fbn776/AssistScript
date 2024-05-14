@@ -1,3 +1,10 @@
 # AssistScript Demos
 
-This folder contains some demos of AssistScript code. These are meant to be run in the AssistScript CLI.
+This folder contains some demos of AssistScript code.
+You can run these using the AssistScript CLI.
+
+## Running the Demos
+
+```bash
+aslangc <file>
+```

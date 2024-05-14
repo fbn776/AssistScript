@@ -12,7 +12,7 @@
 ))
 
 (ife (get found)
-    (print (get key) found at position (get i))
+    (print key (get key) found at position (get i))
 else
     (print (get key) not found)
 )
