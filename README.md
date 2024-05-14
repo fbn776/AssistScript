@@ -4,20 +4,20 @@
 ![NPM Version](https://img.shields.io/npm/v/assistscript)
 
 ## Table of Contents
-- [Introduction 📜](#introduction-)
+- [Introduction 📜](#introduction)
 - [Installation📲](#installation)
-- [Demos ▶️](#demos-)
-- [Usage ✍](#usage-)
-  - [Using terminal 💻](#using-terminal-)
-    - [REPL mode ⌨️](#repl-mode-)
-    - [File Mode 📂](#file-mode-)
-  - [Using the API 💻](#using-the-api-)
-- [Want to learn more? 🏫](#want-to-learn-more-)
+- [Demos ▶️](#demos)
+- [Usage ✍](#usage)
+  - [Using terminal 💻](#using-terminal)
+    - [REPL mode ⌨️](#repl-mode)
+    - [File Mode 📂](#file-mode)
+  - [Using the API 💻](#using-the-api)
+- [Want to learn more? 🏫](#want-to-learn-more)
 - [License](#license)
 
 ---
 
-## Introduction 📜
+## Introduction📜
 
 AssistScript is a simple scripting(?) language that I made for fun.
 Not very useful, but it's fun to play around with.
@@ -54,7 +54,7 @@ you can omit the `-g` flag or use `npx` to run AssistScript without installing i
 
 ---
 
-## Demos ▶️
+## Demos▶️
 
 Want to see what the language can do? Check out the [demos🧪](./demos) directory for some examples.
 
@@ -74,13 +74,13 @@ Linear Search
 
 ---
 
-## Usage ✍
+## Usage✍
 
 AssistScript can be used in multiple ways.
 You can use it as a standalone program in the terminal using the AssistScript CLI,
 or you can use it inside your JavaScript code.
 
-### Using terminal 💻
+### Using terminal💻
 
 You can run AssistScript using the terminal. The AssistScript package comes with a command-line interface to run
 AssistScript files. It also has a REPL mode to run commands interactively.
@@ -101,7 +101,7 @@ The above commands, once executed, will show the help menu for the CLI.
 
 > 📝 You can interchangeably use `aslangc` and `assistscript` in the terminal.
 
-#### REPL mode ⌨️
+#### REPL mode⌨️
 
 You can run the REPL mode by using the `-r` or `--repl` flag.
 
@@ -109,7 +109,7 @@ You can run the REPL mode by using the `-r` or `--repl` flag.
 aslangc -r
 ```
 
-#### File Mode 📂
+#### File Mode📂
 
 You can run AssistScript(.asrc) files using the CLI by providing the path to the file.
 
@@ -117,7 +117,7 @@ You can run AssistScript(.asrc) files using the CLI by providing the path to the
 aslangc <path-to-file>
 ```
 
-### Using the API 💻
+### Using the API💻
 
 You can also use AssistScript in your JavaScript code, for this AssistScript exposes a simple API.
 The `AssistScript` class is the main class that you can use run AssistScript code.
@@ -135,7 +135,7 @@ console.log(as.run('sub 100 20 (add 10 20)'));
 
 ---
 
-## Want to learn more? 🏫
+## Want to learn more?🏫
 
 Check out the [documentation📃](./docs/README.md) for more information on the language and its features.
 
