@@ -11,7 +11,7 @@ import ASBaseError from "./errors/ASBaseError"; // Import the standard library
  */
 export default class AssistScript {
     contextProvider: BaseContextProvider;
-    store: CommandStore = CommandStore.getInstance();
+    readonly store: CommandStore = CommandStore.getInstance();
 
     /**
      * Creates a new AssistScript instance.

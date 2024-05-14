@@ -1,6 +1,7 @@
 import AssistScript from "../src/lang-core/AssistScript";
 import sandboxRun from "../src/utils/sandboxRun";
 import BaseContextProvider from "../src/lang-core/services/BaseContextProvider";
+import {CommandBuilder, DataType, DocsBuilder} from "../src";
 
 class TestContextProvider extends BaseContextProvider {
     clear() {
@@ -9,6 +10,23 @@ class TestContextProvider extends BaseContextProvider {
 }
 
 const as = new AssistScript(new TestContextProvider());
+
+const store = as.store;
+
+store.addCommand(new CommandBuilder()
+    .names("haha")
+    .args(2, DataType.string)
+    .docs(new DocsBuilder()
+        .name("haha")
+        .description("Prints the given string")
+        .example("haha \"Hello, world!\"")
+        .build()
+    )
+    .run((_, ...args) => {
+        console.log(args[1]);
+    })
+    .build()
+)
 
 // sandboxRun(as, `
 // (set n 10)

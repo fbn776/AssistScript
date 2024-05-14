@@ -60,41 +60,6 @@ export default class VariableStore {
         return this.array_store.get(name);
     }
 
-    // /**
-    //  * Updates an array if it exists.
-    //  * Does
-    //  *  - Check if the array exists
-    //  *  - Check if the index is within bounds
-    //  *  - Update the array
-    //  * @param name The name of the variable
-    //  * @param index The index of the array to be updated
-    //  * @param value The new value
-    //  */
-    // updateArray(name: string, index: number, value: unknown): { success: boolean, message?: string } {
-    //     if (!this.array_store.has(name))
-    //         return {
-    //             success: false,
-    //             message: `Array ${name} does not exist.`,
-    //         }
-    //
-    //     const arr = this.array_store.get(name)!;
-    //     if(index < 0 || index >= arr.value.length)
-    //         return {
-    //             success: false,
-    //             message: `Index ${index} is out of bounds.`,
-    //         }
-    //
-    //     arr.value[index] = value;
-    //     this.array_store.set(name, {
-    //         value: arr.value,
-    //         type: getRoughArrayType(arr.value),
-    //     })
-    //
-    //     return {
-    //         success: true,
-    //     }
-    // }
-
     /**
      * Appends a value to the end of an array if it exists.
      * Does
