@@ -115,6 +115,11 @@ console.log(as.run('sub 100 20 (add 10 20)'));
 
 Check out the [documentation📃](./docs/README.md) for more information on the language and its features.
 
+- To learn more about the implementations, check out the [implementation](./docs/implementations/README.md).
+- For additional information, check out the [additional info](./docs/additionals/README.md).
+- To get started with creating custom commands, check out the [custom commands](./docs/additionals/Create-custom-commands.md).
+- To create custom context, check out the [custom context](./docs/additionals/Create-custom-context.md).
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.

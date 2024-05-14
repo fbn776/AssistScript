@@ -13,6 +13,8 @@ AssistScript is a simple scripting language written in TypeScript as a fun proje
     - [Printing](#printing)
     - [Variables](#variables)
 - [Language References](#language-references)
+- [Implementations](../docs/implementations/README.md)
+- [Additional info](../docs/additionals/README.md)
 ---
 
 ## General Overview
