@@ -20,8 +20,7 @@
 		"test": "jest",
 		"build": "tsup",
 		"start": "npm run build && node build/index.js",
-		"gen-docs": "bun dev-tools/docs-gen/index.ts",
-		"publish": "npm run build ; npm publish"
+		"gen-docs": "bun dev-tools/docs-gen/index.ts"
 	},
 	"keywords": [
 		"language",
