@@ -5,7 +5,7 @@ import LangTokenBase from "../../specs/tokens/LangTokenBase";
 import StringToken from "../../specs/tokens/lexmes/StringToken";
 import {LeftBracketToken, RightBracketToken} from "../../specs/tokens/lexmes/ContainerToken";
 import {ParserErrorChecks} from "./ParserErrorChecks";
-import postprocessor from "./postprocessor";
+import preprocessor from "./preprocessor";
 
 
 /**
@@ -93,5 +93,5 @@ export function parser(inputTxt: string): LangTokenBase<unknown>[] {
         }
     }
 
-    return postprocessor(parsedTokens);
+    return preprocessor(parsedTokens);
 }
