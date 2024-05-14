@@ -15,7 +15,7 @@ interface STDOUT {
  *
  * @see [how to create custom commands](/docs/Create-custom-commands.md)
  */
-export default class BaseContextProvider {
+export default class    BaseContextProvider {
     readonly stdout: STDOUT = {print: console.log};
 
     /** No of times a loop can run */

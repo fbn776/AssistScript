@@ -22,6 +22,7 @@ import I_BracketTrack = ParserErrorChecks.I_BracketTrack;
  */
 export default function generateSyntaxTree(str: string) {
     const tk = parser(str);
+
     const tokens = new ArrayTokenizer<LangTokenBase<unknown>>(tk);
     const stack = new Stack<LangTokenBase<unknown>>();
 
