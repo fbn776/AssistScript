@@ -120,7 +120,7 @@ declare class CommandStore {
 
 declare class AssistScript {
     contextProvider: BaseContextProvider;
-    store: CommandStore;
+    readonly store: CommandStore;
     constructor(ctxProvider?: BaseContextProvider);
     run(str: string): unknown;
     sandboxRun(str: string): unknown;
