@@ -93,14 +93,14 @@ store.addCommand(builder
 
 // NOT EQUALS
 store.addCommand(builder
-    .names('ne', 'not-equals', 'not-is')
+    .names('neq', 'not-equals', 'not-is')
     .args(2, DataType.any, DataType.any)
     .docs(new DocsBuilder()
-        .name('ne')
+        .name('neq')
         .aliases('not-equals', 'not-is')
         .description('Checks if the two values are not equal.')
-        .syntax('ne <value> <value>')
-        .example('ne 2 3') // true
+        .syntax('neq <value> <value>')
+        .example('neq 2 3') // true
         .build()
     )
     .returnType(DataType.boolean)
