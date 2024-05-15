@@ -1,0 +1,23 @@
+(print While Loops in AssistScript)
+(print ---------------------------)
+
+
+(set i 0)
+(while (lt (get i) 10) (
+    (print i = (get i))
+
+    (incr i)
+))
+
+(print While loop with break, breaks at i = 5)
+
+(set j 0)
+(while (lt (get j) 10) (
+    (print j = (get j))
+
+    (if (eq (get j) 5)
+        (break)
+    )
+
+    (incr j)
+))

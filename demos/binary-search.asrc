@@ -1,0 +1,36 @@
+(print Binary Search)
+(print -------------)
+
+
+(array arr 1 3 4 6 6 8 9 9)
+(set key 8)
+
+(set low 0)
+(set high (sub (len arr) 1))
+(set found -1)
+
+(while (lt (get low) (get high)) (
+    (set mid (floor (div
+        (add (get low) (get high))
+        2
+    )))
+
+    (set elm (index arr (get mid)))
+
+    (if (eq (get elm) (get key)) (
+        (set found (get mid))
+        (break)
+    ))
+
+    (ife (gt (get key) (get elm)) (
+        (set low (add (get mid) 1))
+    ) else (
+        (set high (sub (get mid) 1))
+    ))
+))
+
+(ife (neq (get found) -1) (
+    (print Found key at (get found))
+) else (
+    (print Key not found)
+))

@@ -1,0 +1,16 @@
+(print Arrays in AssistScript)
+(print ----------------------)
+
+
+(print Creating an array name arr)
+(array arr 10 2 4 63 2 5 6 7)
+(print arr = (get-arr arr))
+
+(print elm at index 3 = (index arr 3))
+
+(print length of array = (len arr))
+
+(print Traversing through the array)
+(for (set i 0) (lt (get i) (len arr)) (incr i) (
+    (print arr[ (get i) ] = (index arr (get i)))
+))

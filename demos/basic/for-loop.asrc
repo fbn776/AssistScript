@@ -1,0 +1,14 @@
+(print For Loops in AssistScript)
+(print -------------------------)
+
+(for (set i 0) (lt (get i) 10) (incr i) (
+    (print i = (get i))
+))
+
+(print For loops with continue, continues at i = 5)
+(for (set i 0) (lt (get i) 10) (incr i) (
+    (if (eq (get i) 5)
+        (continue)
+    )
+    (print i = (get i))
+))

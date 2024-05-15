@@ -1,0 +1,13 @@
+(print Variables in AssistScript)
+
+(set var1 Hello)
+(set var2 There)
+
+(print var1 = (get var1))
+(print var2 = (get var2))
+
+(print changing the value of var1 to 'You')
+(set var1 You)
+
+(print var1 = (get var1))
+(print var2 = (get var2))

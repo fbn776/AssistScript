@@ -1,0 +1,17 @@
+(print If statements in AssistScript)
+(print -----------------------------)
+
+(print simple if)
+(set x 10)
+(if (lt (get x) 15) (
+    (print x is less than 15)
+))
+
+(print if-else)
+
+(set y 20)
+(ife (eq (get y) (get x)) (
+    (print x is equal to y)
+) else (
+    (print x is not equal to y)
+))
