@@ -19,7 +19,7 @@
     - [gt](./Comparison.md#gt)
     - [gte](./Comparison.md#gte)
     - [equals](./Comparison.md#equals)
-    - [ne](./Comparison.md#ne)
+    - [neq](./Comparison.md#neq)
 - [Arithmetics](./Arithmetics.md)
     - [add](./Arithmetics.md#add)
     - [sub](./Arithmetics.md#sub)

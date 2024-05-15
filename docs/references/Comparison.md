@@ -103,19 +103,19 @@ equals 2 3
 false
 ```
 
-## ne
+## neq
 `not-equals` `not-is`<br/><br/>
 **Description:** <br/>Checks if the two values are not equal.<br/>
 
 **Syntax:**<br/>
 
-`ne <value> <value>`<br/>
+`neq <value> <value>`<br/>
 
 
 **Example:**<br/>
 
 ```asrc
-ne 2 3
+neq 2 3
 ```
 
 **Result:**<br/>
