@@ -8,10 +8,12 @@ import readline from "readline";
 
 const program = new Command();
 
+const version = process.env.npm_package_version || require('../package.json').version || 1.0;
+
 program
     .name('aslangc')
     .description('The ASLang(AssistScript) runner')
-    .version('1.0')
+    .version(version)
     .option('-r, --repl', 'Run the REPL mode')
     .argument('[file]', 'The AssistScript file to run')
     .action(async (file, options) => {
