@@ -24,6 +24,7 @@ export default class ASRuntimeError extends ASBaseError {
     constructor(message: string, data: I_ErrorData | null) {
         super(message);
         this.data = data;
+        this.name = 'ASRuntimeError';
     }
 
     public prettify(): string {

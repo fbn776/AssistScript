@@ -5,6 +5,10 @@ import ASBaseError from "./ASBaseError";
  * For example, thrown when the loop limit is exceeded.
  */
 export default class ASGracefulExitError extends ASBaseError {
+    constructor(message: string) {
+        super(message);
+        this.name = 'ASGracefulExitError'
+    }
     prettify(): string {
         return `Gracefully exited: ${this.message}`;
     }
