@@ -4,7 +4,7 @@ export default defineConfig({
     entry: {
         index: "src/index.ts",
         cli: "src/cli.ts",
-        errors: "src/errors.ts"
+        errors: "src/index.ts"
     },
     format: ["cjs", "esm"], // Build for commonJS and ESmodules
     dts: true, // Generate declaration file (.d.ts)
