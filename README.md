@@ -7,6 +7,7 @@
 - [Introduction 📜](#introduction)
 - [Installation📲](#installation)
 - [Demos ▶️](#demos)
+  - [Sample Program - Bubble Sort 🔢](#sample-program---bubble-sort)
 - [Usage ✍](#usage)
   - [Using terminal 💻](#using-terminal)
     - [REPL mode ⌨️](#repl-mode)
@@ -60,18 +61,42 @@ Want to see what the language can do? Check out the [demos🧪](./demos) directo
 
 These demos are simple programs that demonstrate the language's features. You can run them using the CLI.
 
+### Sample Program - Bubble Sort🔢
 
-For example, to run the `linear-search.asrc` demo:
+Here is bubble sort in AssistScript:
+```asrc
+(array arr 4 5 2 4 5 6 7 1)
 
-```bash
-aslangc ./demos/linear-search.asrc
+(for (set i 0) (lt (get i) (len arr)) (incr i) (
+    (for (set j 0) (lt (get j) (sub (len arr) (get i) 1)) (incr j) (
+        (if (gt
+                (index arr (get j))
+                (index arr (add (get j) 1))
+        ) (
+            (set temp (index arr (get j)))
+
+            (set-arr arr (get j) (index arr (add (get j) 1)))
+            (set-arr arr (add (get j) 1) (get temp))
+        ))
+    ))
+))
+
+(for (set i 0) (lt (get i) (len arr)) (incr i) (
+    (print (index arr (get i)))
+))
 ```
-Outputs
+
+Output:
 ```text
-Linear Search
-9 found at position 3
+1
+2
+4
+4
+5
+5
+6
+7
 ```
-
 ---
 
 ## Usage✍
