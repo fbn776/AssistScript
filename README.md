@@ -29,14 +29,14 @@ The basic syntax is:
 ```asrc
 <command> <arg1> <arg2> ... <argN>
 ```
-
 eg:
-
 ```asrc
 add 10 20 40
 ```
-
 Outputs 70
+
+
+>✨ Want to try out the language? Check out the [AssistScript Runner](https://asrc-online.vercel.app/)
 
 ---
 
