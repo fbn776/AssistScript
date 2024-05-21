@@ -117,17 +117,22 @@ let str = `# Language reference
 ## Table of contents
 `;
 
+let langTkns = ''
 for(let [cat, cmds] of toc) {
+
+
     str += `
 - [${cat}](./${encodeURIComponent(cat)}.md)`
     for(let cmd of cmds) {
+        langTkns += `${cmd}|`
+
         str += `
     - [${cmd}](./${encodeURIComponent(cat)}.md#${encodeURIComponent(cmd)})`
     }
 }
 
 fs.writeFileSync(langRefFile, str, "utf-8");
-
+console.log(langTkns);
 
 console.log("Done!");
 console.timeEnd('TIME');
